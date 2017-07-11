@@ -3,34 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <title>Yu-Gi-Oh!</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/yugioh_sky.css">
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src='js/filter.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+    <script src="js/yugioh_sky.js"></script>
 </head>
 <body>
-<div id="card_sorter">
+<div class="container">
+    <h1 class="title">Yu-Gi-Oh!.JS</h1>
+    <div class="sidebar col-md-3">
+        <div>
+            <h4 class='col-md-12'>Cartes (<span id="cards_number">0</span>)</h4>
+        </div>
+        <div>
+            <label class="sr-only" for="searchbox">Search</label>
+            <input type="text" class="form-control" id="searchbox" placeholder="Search &hellip;">
+            <span class="glyphicon glyphicon-search search-icon"></span>
+        </div>
+        <br>
+        <div class="well">
+            <fieldset id="deck_criteria">
+                <legend>Decks</legend>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="all_decks" id="all_decks">
+                        <span>Tous</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Perso">
+                        <span>Deck Perso</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Cyber Dragon">
+                        <span>Deck Cyber Dragon</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Héros Elementaire">
+                        <span>Héros Elementaire</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Jaden">
+                        <span>Jaden</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Zane">
+                        <span>Zane</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Bandit Keith">
+                        <span>Bandit Keith</span>
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+    </div>
 
+    <div class="col-md-9">
+        <div class="content row" id="cards_table"></div>
+    </div>
 </div>
 
-<div id="cards" class="container">
 
-</div>
+<script id="card_template" type="text/html">
+    <div class="col-md-3 card">
+    </div>
+</script>
 
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-        crossorigin="anonymous"></script>
-<script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-<script src='js/filter.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
-<script src="js/yugioh_sky.js"></script>
 </body>
 </html>

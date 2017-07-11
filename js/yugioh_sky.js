@@ -7,6 +7,8 @@ var cards_table;
 var cards_stats;
 var cards_are_retrieved = false;
 var card_name_fr = "Nom";
+var card_decks = "Decks";
+var fjs;
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -15,13 +17,21 @@ function init() {
     init_suite();
 }
 
-function init_suite(){
+function init_suite() {
     if (!cards_are_retrieved) {
         setTimeout(init_suite, 100);
         return;
     }
-    display_card_images();
-    //create_filters();
+    initEvents();
+    add_multi_deck_support();
+    create_filters();
+}
+
+function add_multi_deck_support() {
+    for (var i = 0; i < cards_table.length; i++) {
+        cards_table[i][card_decks] = cards_table[i][card_decks].split(',');
+    }
+    // console.dir(cards_table);
 }
 
 function retrieve_and_parse_csv() {
@@ -36,19 +46,14 @@ function retrieve_and_parse_csv() {
     });
 }
 
-function display_card_images() {
-    cards_table.forEach(function (element) {
-        var img = create_img(IMG_API_URL+element[card_name_fr],element[card_name_fr],element[card_name_fr] );
-        document.getElementById("cards").appendChild(img);
-    });
-}
 
 function create_img(src, alt, title) {
     var img = detectIE ? new Image() : document.createElement('img');
     img.className = "yugioh_card";
     img.src = src;
-    img.onerror = function() {
+    img.onerror = function () {
         img.src = img_card_404;
+        img.className = "yugioh_card missing";
     };
     if (alt !== null) img.alt = alt;
     if (title !== null) img.title = title;
@@ -82,16 +87,40 @@ function detectIE() {
 }
 
 function create_filters() {
-    var FJS = FilterJS(cards_table, '#cards', {
-        template: '#movie-template',
+    fjs = FilterJS(cards_table, '#cards_table', {
+        template: '#card_template',
+        search: {ele: '#searchbox', fields: ['Nom']},
+        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox', all: 'all_decks'}],
         filter_on_init: true, // Default filter_on_init is false
         callbacks: {
-            afterFilter: function(result){
-                $('#total_movies').text(result.length);
+            afterFilter: function (result) {
+                $('#cards_number').text(result.length);
+            },
+            afterAddRecords: function () {
+                display_card_images();
             }
         }
     });
 }
+
+function display_card_images() {
+    for (var i = 0; i < cards_table.length; i++) {
+        var id = i + 1;
+        var element = cards_table[i];
+        var img = create_img(IMG_API_URL + element[card_name_fr], element[card_name_fr], element[card_name_fr]);
+        document.getElementById("fjs_" + id).appendChild(img);
+    }
+
+}
+
+function initEvents() {
+
+    $('#deck_criteria :checkbox').prop('checked', true);
+    $('#all_decks').on('click', function () {
+        $('#deck_criteria :checkbox').prop('checked', $(this).is(':checked'));
+    });
+}
+
 
 
 
