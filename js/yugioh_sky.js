@@ -55,6 +55,7 @@ function create_img(src, alt, title) {
         img.src = img_card_404;
         img.className = "yugioh_card missing";
     };
+    img.onclick = function() {window.open(this.src);};
     if (alt !== null) img.alt = alt;
     if (title !== null) img.title = title;
     return img;
