@@ -7,6 +7,7 @@ var cards_table;
 var cards_stats;
 var cards_are_retrieved = false;
 var card_name_fr = "Nom";
+var card_name_en = "Nom Anglais";
 var card_decks = "Decks";
 var fjs;
 
@@ -108,7 +109,7 @@ function display_card_images() {
     for (var i = 0; i < cards_table.length; i++) {
         var id = i + 1;
         var element = cards_table[i];
-        var img = create_img(IMG_API_URL + element[card_name_fr], element[card_name_fr], element[card_name_fr]);
+        var img = create_img(IMG_API_URL + element[card_name_en], element[card_name_fr], element[card_name_fr]);
         document.getElementById("fjs_" + id).appendChild(img);
     }
 
