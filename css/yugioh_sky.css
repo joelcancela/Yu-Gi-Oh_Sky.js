@@ -1,6 +1,7 @@
 .yugioh_card {
     max-width: 150px;
-    max-height: 217px;
+    min-height: 215px;
+    max-height: 215px;
 }
 
 .title {
@@ -13,8 +14,10 @@
 
 @media only screen and (max-device-width: 480px) {
     .yugioh_card {
-        max-width: none;
-        max-height: none;
+        min-width: 345px;
+        min-height: 495px;
+        max-width: 345px;
+        max-height: 495px;
     }
 
     .title {
