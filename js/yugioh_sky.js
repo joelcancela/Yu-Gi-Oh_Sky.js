@@ -30,7 +30,7 @@ function init_suite() {
 
 function add_multi_deck_support() {
     for (var i = 0; i < cards_table.length; i++) {
-        cards_table[i][card_decks] = cards_table[i][card_decks].split(',');
+        cards_table[i][card_decks] = cards_table[i][card_decks].split(', ');
     }
     // console.dir(cards_table);
 }
