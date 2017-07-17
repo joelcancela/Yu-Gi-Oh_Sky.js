@@ -91,7 +91,7 @@ function detectIE() {
 function create_filters() {
     fjs = FilterJS(cards_table, '#cards_table', {
         template: '#card_template',
-        search: {ele: '#searchbox', fields: ['Nom']},
+        search: {ele: '#searchbox', fields: ['Nom', 'Nom Anglais'], start_length: 1, timeout: 100},
         criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox', all: 'all_decks'}],
         filter_on_init: true, // Default filter_on_init is false
         callbacks: {
@@ -117,10 +117,7 @@ function display_card_images() {
 
 function initEvents() {
 
-    $('#deck_criteria :checkbox').prop('checked', true);
-    $('#all_decks').on('click', function () {
-        $('#deck_criteria :checkbox').prop('checked', $(this).is(':checked'));
-    });
+    $('#deck_criteria :checkbox').prop('checked', false); //All checkboxes are set to false
 }
 
 
