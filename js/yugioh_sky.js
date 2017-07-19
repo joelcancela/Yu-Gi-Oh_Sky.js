@@ -1,15 +1,32 @@
-var CSV_URL = "https://docs.google.com/spreadsheets/d/1WEsIrHSEmGXQYVAUw1rqFhTqllE6n-am9mx15FuhUNo/pubhtml";
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
+//Spreadsheet settings
+var CSV_URL = "https://docs.google.com/spreadsheets/d/1WEsIrHSEmGXQYVAUw1rqFhTqllE6n-am9mx15FuhUNo/pubhtml";
 var yu_gi_oh_sheet = "Yu-Gi-Oh";
 var yu_gi_oh_sheet_stats = "Yu-Gi-Oh Stats";
 var img_card_404 = "./img/yugioh_404.png";
 var cards_table;
 var cards_stats;
 var cards_are_retrieved = false;
-var card_name_fr = "Nom";
-var card_name_en = "Nom Anglais";
-var card_decks = "Decks";
-var fjs;
+// JSON cards array keys
+var cards_table__key_name_fr = "Nom";
+var cards_table__key_name_en = "Nom Anglais";
+var cards_table__key_decks_array = "Decks";
+var cards_table__key_quantity = "Qte";
+var cards_table__key_card_type = "Type";
+// JSON cards stats keys
+var cards_stats__key_fusion_nb = "Fusion";
+var cards_stats__key_token_nb = "Jeton";
+var cards_stats__key_magic_nb = "Magie";
+var cards_stats__key_monster_nb = "Monstre";
+var cards_stats__key_total_cards_nb = "Nb de cartes";
+var cards_stats__key_total_unique_cards_nb = "Nb de cartes uniques";
+var cards_stats__key_trap_nb = "Piège";
+var cards_stats__key_ritual_nb = "Rituel";
+var cards_stats__key_synchro_nb = "Synchro";
+var cards_stats__key_xyz_nb = "XYZ";
+// Other variables
+var isIE; // Checks if IE is the browser
+var filterJS; // List.js instance
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -23,6 +40,7 @@ function init_suite() {
         setTimeout(init_suite, 100);
         return;
     }
+    isIE = detectIE();
     initEvents();
     add_multi_deck_support();
     create_filters();
@@ -30,7 +48,7 @@ function init_suite() {
 
 function add_multi_deck_support() {
     for (var i = 0; i < cards_table.length; i++) {
-        cards_table[i][card_decks] = cards_table[i][card_decks].split(', ');
+        cards_table[i][cards_table__key_decks_array] = cards_table[i][cards_table__key_decks_array].split(', ');
     }
     // console.dir(cards_table);
 }
@@ -49,7 +67,7 @@ function retrieve_and_parse_csv() {
 
 
 function create_img(src, alt, title) {
-    var img = detectIE ? new Image() : document.createElement('img');
+    var img = isIE ? new Image() : document.createElement('img');
     img.className = "yugioh_card";
     img.src = src;
     img.onerror = function () {
@@ -89,9 +107,9 @@ function detectIE() {
 }
 
 function create_filters() {
-    fjs = FilterJS(cards_table, '#cards_table', {
+    filterJS = FilterJS(cards_table, '#cards_table', {
         template: '#card_template',
-        search: {ele: '#searchbox', fields: ['Nom', 'Nom Anglais'], start_length: 1, timeout: 100},
+        search: {ele: '#searchbox', fields: [cards_table__key_name_fr, cards_table__key_name_en], start_length: 1, timeout: 100},
         criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox', all: 'all_decks'}],
         filter_on_init: true, // Default filter_on_init is false
         callbacks: {
@@ -109,7 +127,7 @@ function display_card_images() {
     for (var i = 0; i < cards_table.length; i++) {
         var id = i + 1;
         var element = cards_table[i];
-        var img = create_img(IMG_API_URL + element[card_name_en], element[card_name_fr], element[card_name_fr]);
+        var img = create_img(IMG_API_URL + element[cards_table__key_name_en], element[cards_table__key_name_fr], element[cards_table__key_name_fr]);
         document.getElementById("fjs_" + id).appendChild(img);
     }
 
@@ -117,7 +135,7 @@ function display_card_images() {
 
 function initEvents() {
 
-    $('#deck_criteria :checkbox').prop('checked', false); //All checkboxes are set to false
+    $('#deck_criteria').find(':checkbox').prop('checked', false); //All checkboxes are set to false
 }
 
 

@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Yu-Gi-Oh!</title>
-    <link rel="stylesheet" href="css/bootstrap-theme.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <!--CSS-->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/yugioh_sky.css">
-    <script
-            src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script>
-    <script src='js/filter.js'></script>
+    <!--Scripts-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+    <script src='js/filter.min.js'></script>
     <script src="js/yugioh_sky.js"></script>
+
 </head>
 <body>
 <div class="container">
     <h1 class="title">Yu-Gi-Oh!.JS</h1>
     <div class="sidebar col-md-3 col-xs-12">
         <div>
-            <h4 class='col-md-12 col-xs-12'>Cartes (<span id="cards_number">0</span>)</h4>
+            <h4>Cartes (<span id="cards_number">0</span>)</h4>
         </div>
         <div>
             <label class="sr-only" for="searchbox">Search</label>
-            <input type="text" class="form-control" id="searchbox" placeholder="Search &hellip;">
+            <input class="form-control" id="searchbox" placeholder="Search &hellip;">
             <span class="glyphicon glyphicon-search search-icon"></span>
         </div>
         <br>
@@ -62,10 +65,27 @@
                 </div>
             </fieldset>
         </div>
+        <div class="well">
+            <fieldset id="type_criteria">
+                <legend>Trier par:</legend>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Nom A-Z">
+                        <span>Nom A-Z</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Type">
+                        <span>Type</span>
+                    </label>
+                </div>
+            </fieldset>
+        </div>
     </div>
 
-    <div class="col-md-9 container-fluid">
-        <div class="content row" id="cards_table"></div>
+    <div class="col-md-9">
+        <div class="content" id="cards_table"></div>
     </div>
 </div>
 
