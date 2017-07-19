@@ -27,6 +27,7 @@ var cards_stats__key_xyz_nb = "XYZ";
 // Other variables
 var isIE; // Checks if IE is the browser
 var filterJS; // List.js instance
+var sortOptions; //Sorting
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -74,7 +75,9 @@ function create_img(src, alt, title) {
         img.src = img_card_404;
         img.className = "yugioh_card missing";
     };
-    img.onclick = function() {window.open(this.src);};
+    img.onclick = function () {
+        window.open(this.src);
+    };
     if (alt !== null) img.alt = alt;
     if (title !== null) img.title = title;
     return img;
@@ -109,13 +112,19 @@ function detectIE() {
 function create_filters() {
     filterJS = FilterJS(cards_table, '#cards_table', {
         template: '#card_template',
-        search: {ele: '#searchbox', fields: [cards_table__key_name_fr, cards_table__key_name_en], start_length: 1, timeout: 100},
+        search: {
+            ele: '#searchbox',
+            fields: [cards_table__key_name_fr, cards_table__key_name_en],
+            start_length: 1,
+            timeout: 100
+        },
         criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox', all: 'all_decks'}],
         filter_on_init: true, // Default filter_on_init is false
         callbacks: {
             afterFilter: function (result) {
                 $('#cards_number').text(result.length);
             },
+            shortResult: shortResult,
             afterAddRecords: function () {
                 display_card_images();
             }
@@ -136,8 +145,31 @@ function display_card_images() {
 function initEvents() {
 
     $('#deck_criteria').find(':checkbox').prop('checked', false); //All checkboxes are set to false
+    $("#l-sort-by").on('change', function (e) {
+        sortOptions = buildSortOptions($(this).val());
+        filterJS.filter();
+        e.preventDefault();
+    });
 }
 
+//Beta sort
+
+
+function shortResult(query) {
+    if (sortOptions) {
+        query.order(sortOptions);
+    }
+}
+
+function buildSortOptions(name) {
+    if (name === 'name_asc') {
+        return {'Nom': 'asc'}
+    }
+
+    if (name === 'name_desc') {
+        return {'Nom': 'desc'}
+    }
+}
 
 
 

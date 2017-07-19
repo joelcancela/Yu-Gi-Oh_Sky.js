@@ -12,10 +12,6 @@
     width: 150px;
 }
 
-.sidebar{
-     padding-left: 0;
-}
-
 @media only screen and (max-device-width: 480px) {
     .yugioh_card {
         min-width: 345px;
@@ -55,7 +51,7 @@ body {
 
 .card {
     margin-bottom: 20px;
-    padding-right: 5px;
+    padding-left: 0 !important;
 }
 
 .search-icon {
@@ -70,4 +66,17 @@ body {
     font-size: 20px;
     color: #222;
     float: right;
+}
+
+.well_legend {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: inherit;
+    color: #333;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+    font-weight: normal;
 }
