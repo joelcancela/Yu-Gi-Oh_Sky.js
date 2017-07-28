@@ -1,11 +1,24 @@
+/*
+ * YuGiOh.js
+ * 1.0.0 (2017-07-28)
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ * Copyright 2017 Joël CANCELA VAZ[joel.cancelavaz@gmail.com]
+ * This is not affiliated with Konami.
+ */
+
+// Card API
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
-//Spreadsheet settings
+// Spreadsheet settings
 var CSV_URL = "https://docs.google.com/spreadsheets/d/1WEsIrHSEmGXQYVAUw1rqFhTqllE6n-am9mx15FuhUNo/pubhtml";
 var yu_gi_oh_sheet = "Yu-Gi-Oh";
 var yu_gi_oh_sheet_stats = "Yu-Gi-Oh Stats";
 var img_card_404 = "./img/yugioh_404.png";
-var cards_table;
-var cards_stats;
+var cards_table; // Card sheet
+var cards_stats; // Card stats sheet
+// Events
 var cards_are_retrieved = false;
 // JSON cards array keys
 var cards_table__key_name_fr = "Nom";
@@ -13,6 +26,7 @@ var cards_table__key_name_en = "Nom Anglais";
 var cards_table__key_decks_array = "Decks";
 var cards_table__key_quantity = "Qte";
 var cards_table__key_card_type = "Type";
+var cards_table__key_picture_link = "Image";
 // JSON cards stats keys
 var cards_stats__key_fusion_nb = "Fusion";
 var cards_stats__key_token_nb = "Jeton";
@@ -25,9 +39,7 @@ var cards_stats__key_ritual_nb = "Rituel";
 var cards_stats__key_synchro_nb = "Synchro";
 var cards_stats__key_xyz_nb = "XYZ";
 // Other variables
-var isIE; // Checks if IE is the browser
-var filterJS; // List.js instance
-var sortOptions; //Sorting
+var sortOptions = {'Nom': 'asc'}; //Sorting
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -41,18 +53,21 @@ function init_suite() {
         setTimeout(init_suite, 100);
         return;
     }
-    isIE = detectIE();
     initEvents();
-    add_multi_deck_support();
+    add_multi_deck_support_and_images_links();
+    update_cards_number(cards_table);
+    JsonQuery(cards_table);
     create_filters();
 }
 
-function add_multi_deck_support() {
+function add_multi_deck_support_and_images_links() {
     for (var i = 0; i < cards_table.length; i++) {
-        cards_table[i][cards_table__key_decks_array] = cards_table[i][cards_table__key_decks_array].split(', ');
+        var element = cards_table[i];
+        element[cards_table__key_decks_array] = element[cards_table__key_decks_array].split(', ');
+        element[cards_table__key_picture_link] = IMG_API_URL + element[cards_table__key_name_en].replace(/"/g, "_");
     }
-    // console.dir(cards_table);
 }
+
 
 function retrieve_and_parse_csv() {
     Tabletop.init({
@@ -67,50 +82,9 @@ function retrieve_and_parse_csv() {
 }
 
 
-function create_img(src, alt, title) {
-    var img = isIE ? new Image() : document.createElement('img');
-    img.className = "yugioh_card";
-    img.src = src;
-    img.onerror = function () {
-        img.src = img_card_404;
-        img.className = "yugioh_card missing";
-    };
-    img.onclick = function () {
-        window.open(this.src);
-    };
-    if (alt !== null) img.alt = alt;
-    if (title !== null) img.title = title;
-    return img;
-}
-
-function detectIE() {
-    var ua = window.navigator.userAgent;
-
-    var msie = ua.indexOf('MSIE ');
-    if (msie > 0) {
-        // IE 10 or older => return version number
-        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
-    }
-
-    var trident = ua.indexOf('Trident/');
-    if (trident > 0) {
-        // IE 11 => return version number
-        var rv = ua.indexOf('rv:');
-        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
-    }
-
-    var edge = ua.indexOf('Edge/');
-    if (edge > 0) {
-        // Edge (IE 12+) => return version number
-        return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
-    }
-
-    // other browser
-    return false;
-}
-
 function create_filters() {
-    filterJS = FilterJS(cards_table, '#cards_table', {
+
+    var FJS = FilterJS(cards_table, '#cards_table', {
         template: '#card_template',
         search: {
             ele: '#searchbox',
@@ -119,55 +93,66 @@ function create_filters() {
             timeout: 100
         },
         criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox', all: 'all_decks'}],
-        filter_on_init: true, // Default filter_on_init is false
-        callbacks: {
-            afterFilter: function (result) {
-                $('#cards_number').text(result.length);
-            },
-            shortResult: shortResult,
-            afterAddRecords: function () {
-                display_card_images();
+        pagination: {
+            container: '#pagination',
+            paginationView: "#pagination_template",
+            visiblePages: 5,
+            perPage: {
+                values: [15, 30, 60, 'All'],
+                container: '#per_page'
             }
+        },
+        callbacks: {
+            afterFilter: update_cards_number,
+            shortResult: shortResult
         }
     });
+
+    window.FJS = FJS;
+    FJS.filter();
 }
 
-function display_card_images() {
-    for (var i = 0; i < cards_table.length; i++) {
-        var id = i + 1;
-        var element = cards_table[i];
-        var img = create_img(IMG_API_URL + element[cards_table__key_name_en], element[cards_table__key_name_fr], element[cards_table__key_name_fr]);
-        document.getElementById("fjs_" + id).appendChild(img);
-    }
+function update_cards_number(result) {
+    $('#cards_number').text(result.length);
+}
 
+function imgError(image) {
+    image.onerror = "";
+    image.src = img_card_404;
+    return true;
 }
 
 function initEvents() {
 
-    $('#deck_criteria').find(':checkbox').prop('checked', false); //All checkboxes are set to false
+    $('#deck_criteria').find(':checkbox').prop('checked', false);
     $("#l-sort-by").on('change', function (e) {
         sortOptions = buildSortOptions($(this).val());
-        filterJS.filter();
-        e.preventDefault();
+        FJS.filter();
+        // e.preventDefault();
     });
 }
-
-//Beta sort
 
 
 function shortResult(query) {
     if (sortOptions) {
-        query.order(sortOptions);
+        query.order(sortOptions).exec();
     }
 }
 
 function buildSortOptions(name) {
     if (name === 'name_asc') {
-        return {'Nom': 'asc'}
+        console.log("name_asc/default");
+        return {'Nom': 'asc'};
     }
 
     if (name === 'name_desc') {
-        return {'Nom': 'desc'}
+        console.log("name desc");
+        return {'Nom': 'desc'};
+    }
+
+    if (name === 'type') {
+        console.log("type asc");
+        return {'Type': 'asc'};
     }
 }
 

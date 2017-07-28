@@ -10,12 +10,13 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/yugioh_sky.css">
     <!--Scripts-->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
-    <script src='js/filter.min.js'></script>
-    <script src="js/yugioh_sky.js"></script>
-
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script type="text/javascript"
+            src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <script type="text/javascript"
+            src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+    <script type="text/javascript" src='js/filter.js'></script>
+    <script type="text/javascript" src="js/yugioh_sky.js"></script>
 </head>
 <body>
 <div class="container">
@@ -71,21 +72,42 @@
                 <select name="Sort_By" id="l-sort-by" class="corners">
                     <option value="name_asc">Nom A&rarr;Z</option>
                     <option value="name_desc">Nom Z&rarr;A</option>
+                    <option value="type">Type</option>
                 </select>
             </div>
         </div>
     </div>
-
+    <div>
+        <div id="pagination"></div>
+    </div>
+    <div>
+        <label for="per_page">View:</label>
+        <span id="per_page"></span>
+    </div>
     <div class="col-md-9">
         <div class="content" id="cards_table"></div>
     </div>
 </div>
-
-
 <script id="card_template" type="text/html">
-    <div class="col-md-3 col-xs-6 card">
+    <div class="card">
+        <img class="col-md-3 col-xs-6 yugioh_card" src="<%= Image %>" alt="<%= Nom %>" title="<%= Nom %>"
+             onerror="imgError(this);">
     </div>
 </script>
-
+<script id="pagination_template" type="text/html">
+    <span class="page-links-container">
+  <strong class="semibold">Pages:</strong>
+  <% if(currentPage > 1) { %>
+  <a href="#" data-page="first">First</a>
+  <% } %>
+  <% for(var i = 0, l = pages.length; i < l; i++ ){ %>
+  <a href="#" data-page="<%= pages[i] %>"
+     class="<%= pages[i] == currentPage ? 'page-links-active' : 'page-links-inactive' %>"><%= pages[i] %></a>
+  <% } %>
+  <% if( currentPage < totalPages ) { %>
+  <a href="#" data-page="last"><span>Last</span></a>
+    <% } %>
+    </span>
+</script>
 </body>
 </html>
