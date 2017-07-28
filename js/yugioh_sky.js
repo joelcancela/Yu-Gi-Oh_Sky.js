@@ -58,7 +58,6 @@ function init_suite() {
     add_multi_deck_support_and_images_links();
     update_cards_number(cards_table);
     create_filters();
-    console.log(cards_table);
 }
 
 function add_multi_deck_support_and_images_links() {
@@ -93,7 +92,7 @@ function create_filters() {
             start_length: 1
         },
 
-        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox'}, {field: 'Qte', type: 'range'}],
+        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox'}, {field: 'Qte', ele: '#input_default', type: 'range'}],
         pagination: {
             container: '#pagination',
             paginationView: "#pagination_template",
@@ -133,7 +132,7 @@ function initEvents() {
 
 function shortResult(query) {
     if (sortOptions) {
-        query.order(sortOptions).exec();
+        query.order(sortOptions);
     }
 }
 
@@ -144,17 +143,14 @@ function cleanUpSpecialChars(str) {
 
 function buildSortOptions(name) {
     if (name === 'name_asc') {
-        console.log("name_asc/default");
         return {'Nom_FR_Sort': 'asc'};
     }
 
     if (name === 'name_desc') {
-        console.log("name desc");
         return {'Nom_FR_Sort': 'desc'};
     }
 
     if (name === 'type') {
-        console.log("type asc");
         return {'Type': 'asc'};
     }
 }
