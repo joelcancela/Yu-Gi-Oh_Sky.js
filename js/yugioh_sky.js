@@ -22,6 +22,7 @@ var cards_stats; // Card stats sheet
 var cards_are_retrieved = false;
 // JSON cards array keys
 var cards_table__key_name_fr = "Nom";
+var cards_table__key_name_fr_sort = "Nom_FR_Sort";
 var cards_table__key_name_en = "Nom Anglais";
 var cards_table__key_decks_array = "Decks";
 var cards_table__key_quantity = "Qte";
@@ -39,7 +40,7 @@ var cards_stats__key_ritual_nb = "Rituel";
 var cards_stats__key_synchro_nb = "Synchro";
 var cards_stats__key_xyz_nb = "XYZ";
 // Other variables
-var sortOptions = {'Nom': 'asc'}; //Sorting
+var sortOptions = {}; //Sorting
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -56,8 +57,8 @@ function init_suite() {
     initEvents();
     add_multi_deck_support_and_images_links();
     update_cards_number(cards_table);
-    JsonQuery(cards_table);
     create_filters();
+    console.log(cards_table);
 }
 
 function add_multi_deck_support_and_images_links() {
@@ -65,6 +66,7 @@ function add_multi_deck_support_and_images_links() {
         var element = cards_table[i];
         element[cards_table__key_decks_array] = element[cards_table__key_decks_array].split(', ');
         element[cards_table__key_picture_link] = IMG_API_URL + element[cards_table__key_name_en].replace(/"/g, "_");
+        element[cards_table__key_name_fr_sort] = cleanUpSpecialChars(element[cards_table__key_name_fr]);
     }
 }
 
@@ -84,15 +86,14 @@ function retrieve_and_parse_csv() {
 
 function create_filters() {
 
-    var FJS = FilterJS(cards_table, '#cards_table', {
+    window.FJS = FilterJS(cards_table, '#cards_table', {
         template: '#card_template',
         search: {
-            ele: '#searchbox',
-            fields: [cards_table__key_name_fr, cards_table__key_name_en],
-            start_length: 1,
-            timeout: 100
+            ele: '#searchbox', fields: ['Nom'],
+            start_length: 1
         },
-        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox', all: 'all_decks'}],
+
+        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox'}, {field: 'Qte', type: 'range'}],
         pagination: {
             container: '#pagination',
             paginationView: "#pagination_template",
@@ -107,9 +108,6 @@ function create_filters() {
             shortResult: shortResult
         }
     });
-
-    window.FJS = FJS;
-    FJS.filter();
 }
 
 function update_cards_number(result) {
@@ -124,11 +122,11 @@ function imgError(image) {
 
 function initEvents() {
 
-    $('#deck_criteria').find(':checkbox').prop('checked', false);
+    $('#deck_criteria').find(':checkbox').prop('checked', true);
     $("#l-sort-by").on('change', function (e) {
         sortOptions = buildSortOptions($(this).val());
         FJS.filter();
-        // e.preventDefault();
+        e.preventDefault();
     });
 }
 
@@ -139,15 +137,20 @@ function shortResult(query) {
     }
 }
 
+function cleanUpSpecialChars(str) {
+    str = str.replace(/[ÀÁÂÃÄÅ]/g, "A");
+    return str.replace(/[ÈÉÊË]/g, "E");
+}
+
 function buildSortOptions(name) {
     if (name === 'name_asc') {
         console.log("name_asc/default");
-        return {'Nom': 'asc'};
+        return {'Nom_FR_Sort': 'asc'};
     }
 
     if (name === 'name_desc') {
         console.log("name desc");
-        return {'Nom': 'desc'};
+        return {'Nom_FR_Sort': 'desc'};
     }
 
     if (name === 'type') {

@@ -510,9 +510,7 @@
     }
   
     if(this.criteria['order']){
-        console.log("callback oN");
       result = execOrder.call(this, this.criteria['order'], result || this.records);
-      console.log(result);
     }
   
     if(this.criteria['uniq']){
@@ -604,6 +602,7 @@
     for(field in criteria){
       this.criteria['order'].push({field: field, direction: criteria[field].toLowerCase()});
     }
+  
     return this;
   };
   
@@ -1209,7 +1208,7 @@
   };
   
   F.lastSearchResult = function(){
-    if (this.search_text.length > this.opts.search.start_length){
+    if (this.search_text.length >= this.opts.search.start_length){ //Enhanced search to make it work with sort
       return this.search_result;
     }else{
       return this.lastResult();
