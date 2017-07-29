@@ -58,6 +58,7 @@ function init_suite() {
     add_multi_deck_support_and_images_links();
     update_cards_number(cards_table);
     create_filters();
+    console.log(cards_table);
 }
 
 function add_multi_deck_support_and_images_links() {
@@ -92,7 +93,11 @@ function create_filters() {
             start_length: 1
         },
 
-        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox'}, {field: 'Qte', ele: '#input_default', type: 'range'}],
+        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox'}, {
+            field: 'Qte',
+            ele: '#input_default',
+            type: 'range'
+        }],
         pagination: {
             container: '#pagination',
             paginationView: "#pagination_template",
@@ -151,7 +156,13 @@ function buildSortOptions(name) {
     }
 
     if (name === 'type') {
-        return {'Type': 'asc'};
+        return {
+            'Type': 'custom',
+            'custom_order': ['Monstre', 'Rituel', 'Fusion', 'Synchro', 'XYZ', 'Jeton', 'Magie', 'Piège'],
+            'sort_function': function (a, b, ordering) {
+                return (ordering[a.Type] - ordering[b.Type]) || a.Nom.localeCompare(b.Nom);
+            }
+        };
     }
 }
 
