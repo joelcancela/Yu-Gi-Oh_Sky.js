@@ -93,7 +93,7 @@ function create_filters() {
             start_length: 1
         },
 
-        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox'}, {
+        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox'},{field: 'Type', ele: '#type_criteria input:checkbox'}, {
             field: 'Qte',
             ele: '#input_default',
             type: 'range'
@@ -127,6 +127,7 @@ function imgError(image) {
 function initEvents() {
 
     $('#deck_criteria').find(':checkbox').prop('checked', true);
+    $('#type_criteria').find(':checkbox').prop('checked', true);
     $("#l-sort-by").on('change', function (e) {
         sortOptions = buildSortOptions($(this).val());
         FJS.filter();
