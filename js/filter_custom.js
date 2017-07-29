@@ -426,9 +426,8 @@
     };
 
     var execOrder = function (orders, records) { //Only one order, Added possibility to do custom ordering
-
         if (orders.length == 0) {
-            return;
+            return records.slice(0);
         }
 
         var fn,
@@ -1594,7 +1593,7 @@
             $(opts.container).on(event_type, '[data-perpage]', function (e) {
                 var value = $(this).val() || $(this).data('value');
 
-                if (value == 'All') {
+                if (value == 'Toutes') {
                     value = 100000;
                 }
 

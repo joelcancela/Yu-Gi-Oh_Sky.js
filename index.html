@@ -26,8 +26,8 @@
             <h4>Cartes (<span id="cards_number">0</span>)</h4>
         </div>
         <div>
-            <label class="sr-only" for="searchbox">Search</label>
-            <input class="form-control" id="searchbox" placeholder="Search &hellip;">
+            <label class="sr-only" for="searchbox">Rechercher une carte</label>
+            <input class="form-control" id="searchbox" placeholder="Rechercher une carte &hellip;">
             <span class="glyphicon glyphicon-search search-icon"></span>
         </div>
         <br>
@@ -141,7 +141,7 @@
         <div id="pagination"></div>
     </div>
     <div>
-        <label for="per_page">View:</label>
+        <label for="per_page">Cartes par page:</label>
         <span id="per_page"></span>
     </div>
     <div class="col-md-9">
@@ -158,14 +158,14 @@
     <span class="page-links-container">
   <strong class="semibold">Pages:</strong>
   <% if(currentPage > 1) { %>
-  <a href="#" data-page="first">First</a>
+  <a href="#" data-page="first"><<</a>
   <% } %>
   <% for(var i = 0, l = pages.length; i < l; i++ ){ %>
   <a href="#" data-page="<%= pages[i] %>"
      class="<%= pages[i] == currentPage ? 'page-links-active' : 'page-links-inactive' %>"><%= pages[i] %></a>
   <% } %>
   <% if( currentPage < totalPages ) { %>
-  <a href="#" data-page="last"><span>Last</span></a>
+  <a href="#" data-page="last"><span>>></span></a>
     <% } %>
     </span>
 </script>

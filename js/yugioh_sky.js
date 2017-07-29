@@ -103,7 +103,7 @@ function create_filters() {
             paginationView: "#pagination_template",
             visiblePages: 5,
             perPage: {
-                values: [15, 30, 60, 'All'],
+                values: [15, 30, 60, 'Toutes'],
                 container: '#per_page'
             }
         },
