@@ -11,6 +11,8 @@
 
 // Card API
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
+var CARD_DATA_API_URL = "https://yugiohprices.com/api/card_data/";
+var CORS_BYPASS_URL = "http://yugioh.joelcancela.fr/cors.php?card=";
 // Spreadsheet settings
 var CSV_URL = "https://docs.google.com/spreadsheets/d/1WEsIrHSEmGXQYVAUw1rqFhTqllE6n-am9mx15FuhUNo/pubhtml";
 var yu_gi_oh_sheet = "Yu-Gi-Oh";
@@ -58,7 +60,20 @@ function init_suite() {
     add_multi_deck_support_and_images_links();
     update_cards_number(cards_table);
     create_filters();
-    console.log(cards_table);
+    //for (var i = 0; i < cards_table.length; i++) {
+        //get_card_data_and_merge(cards_table[i][cards_table__key_name_en]);
+   // }
+
+}
+
+function get_card_data_and_merge(card_name) {
+    $.getJSON(CORS_BYPASS_URL + card_name, function (data) {
+        // console.log(card_name);
+        arr.push(data);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log(card_name);
+        console.log(errorThrown);
+    });
 }
 
 function add_multi_deck_support_and_images_links() {
@@ -93,7 +108,10 @@ function create_filters() {
             start_length: 1
         },
 
-        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox'},{field: 'Type', ele: '#type_criteria input:checkbox'}, {
+        criterias: [{field: 'Decks', ele: '#deck_criteria input:checkbox'}, {
+            field: 'Type',
+            ele: '#type_criteria input:checkbox'
+        }, {
             field: 'Qte',
             ele: '#input_default',
             type: 'range'
