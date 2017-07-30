@@ -151,7 +151,7 @@
 <script id="card_template" type="text/html">
     <!--suppress HtmlUnknownTarget -->
     <img class="col-md-3 col-xs-6 yugioh_card" src="<%= Image %>" alt="<%= Nom %>" title="<%= Nom %>"
-         onerror="imgError(this);">
+         onerror="imgError(this);" onclick="window.open(this.src)">
 </script>
 <script id="pagination_template" type="text/html">
     <span class="page-links-container">
