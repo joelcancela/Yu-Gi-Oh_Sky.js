@@ -1,56 +1,18 @@
-.yugioh_card {
-    max-width: 150px;
-    min-height: 215px;
-    max-height: 215px;
-}
-
-.title {
-    padding: 5px 0 0 15px;
-    color: #222;
-    font-size: 25px;
-    font-weight: 600;
-}
-
-@media only screen and (max-device-width: 480px) {
-    .yugioh_card {
-        min-width: 345px;
-        min-height: 495px;
-        max-width: 345px;
-        max-height: 495px;
-    }
-
-    .title {
-        width: inherit;
-        font-size: 70px;
-    }
-
-    .sidebar legend, .sidebar h4 {
-        font-size: 50px !important;
-    }
-
-    .checkbox label, input {
-        font-size: 35px !important;
-    }
-
-    input[type=checkbox] {
-        /* Double-sized Checkboxes */
-        -ms-transform: scale(2) !important; /* IE */
-        -moz-transform: scale(2) !important; /* FF */
-        -webkit-transform: scale(2) !important; /* Safari and Chrome */
-        -o-transform: scale(2) !important; /* Opera */
-        margin: 20px;
-        margin-left: -25px !important;
-    }
-
-}
-
 body {
     font-family: "Open Sans", sans-serif;
 }
 
-.card {
-    margin-bottom: 20px;
-    padding-left: 0 !important;
+.checkbox {
+    margin-top: 0;
+}
+
+.page-links-active {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.pagination {
+    margin-left: 25px;
 }
 
 .search-icon {
@@ -67,6 +29,17 @@ body {
     float: right;
 }
 
+.semibold {
+    font-weight: 600;
+}
+
+.title {
+    padding: 5px 0 0 15px;
+    color: #222;
+    font-size: 25px;
+    font-weight: 600;
+}
+
 .well_legend {
     display: block;
     width: 100%;
@@ -79,3 +52,58 @@ body {
     border-bottom: 1px solid #e5e5e5;
     font-weight: normal;
 }
+
+.yugioh_card {
+    max-width: 200px;
+    max-height: 260px;
+    padding-bottom: 20px;
+}
+
+@media only screen and (max-device-width: 480px) {
+
+    .checkbox label, input, .page-links-container, .label_card_pages {
+        font-size: 35px !important;
+    }
+
+    input[type=checkbox] {
+        margin-left: -25px !important;
+    }
+
+    input[type=checkbox], select {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(2) !important; /* IE */
+        -moz-transform: scale(2) !important; /* FF */
+        -webkit-transform: scale(2) !important; /* Safari and Chrome */
+        -o-transform: scale(2) !important; /* Opera */
+        margin: 20px;
+    }
+
+    select {
+        margin-left: 40px;
+    }
+
+    .sidebar legend, .sidebar h4, .sidebar label {
+        font-size: 50px !important;
+    }
+
+    .title {
+        width: inherit;
+        font-size: 70px;
+    }
+
+    .yugioh_card {
+        min-width: 345px;
+        min-height: 495px;
+        max-width: 345px;
+        max-height: 495px;
+    }
+
+}
+
+
+
+
+
+
+
+

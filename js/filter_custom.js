@@ -32,12 +32,12 @@
 
     window.JsonQuery = JsonQuery;
 
-    JsonQuery.VERSION = '0.0.2'
+    JsonQuery.VERSION = '0.0.2';
 
     JsonQuery.Config = {
         id: 'id',
         date_regx: /^\d{4}-\d{2}-\d{2}$/
-    }
+    };
 
     JsonQuery.blankClone = function (jq, records) {
         return new _JsonQuery(records, {
@@ -45,7 +45,7 @@
             schema: jq.schema,
             id: jq.id
         })
-    }
+    };
 
     var Config = JsonQuery.Config;
 
@@ -135,7 +135,7 @@
         } else {
             return value
         }
-    }
+    };
 
     var buildSchema = function (obj, parentField) {
         var field, dataType, fullPath, fieldValue;
@@ -587,7 +587,7 @@
         }
 
         return result;
-    }
+    };
 
     var addToCriteria = function (type, query) {
         var c;
@@ -699,7 +699,7 @@
             if (out = fn(r)) {
                 result.push(out);
             }
-        })
+        });
         return result;
     };
 
@@ -789,8 +789,7 @@
 
 })(this);
 
-;(function ($, window, document) {
-
+(function ($, window, document) {
     "use strict";
 
 
@@ -837,9 +836,7 @@
         return data ? func(data) : function (data) {
             return func(data)
         };
-    };
-
-
+    }
     function each(objs, callback, context) {
         for (var i = 0, l = objs.length; i < l; i++) {
             callback.call(context, objs[i], i);
@@ -946,7 +943,7 @@
             fid;
 
         for (var i = records.length - 1; i > -1; i--) {
-            fid = records[i]._fid
+            fid = records[i]._fid;
 
             if (ids.indexOf(fid) > -1) {
                 records.splice(i, 1);
@@ -1064,7 +1061,7 @@
         criteria = setDefaultCriteriaOpts(criteria);
         this.bindEvent(criteria.ele, criteria.event);
 
-        criteria._q = criteria.field + (criteria.type == 'range' ? '.$bt' : '')
+        criteria._q = criteria.field + (criteria.type == 'range' ? '.$bt' : '');
         criteria.active = true;
 
         this.criterias.push(criteria);
@@ -1272,7 +1269,7 @@
         } else {
             return this.lastResult();
         }
-    }
+    };
 
     F.searchFilter = function (records) {
         if (!this.has_search) {
@@ -1394,7 +1391,7 @@
 
         $.each(this.criterias, function () {
             $(document).off(this.event, this.ele);
-        })
+        });
 
         if (this.opts.search) {
             $(document).off('keyup', this.opts.search.ele);
@@ -1403,7 +1400,7 @@
         if (this.filterTimeoutId) {
             clearTimeout(this.filterTimeoutId);
         }
-    }
+    };
 
     F.initPagination = function () {
         var self = this,
@@ -1420,14 +1417,14 @@
 
         this.paginator = new Paginator(this.lastResult().length, this.opts.pagination, function (currentPage, perPage) {
             //console.log(currentPage, this.currentPage, perPage, this.perPageCount)
-            self.page = {currentPage: currentPage, perPage: perPage}
+            self.page = {currentPage: currentPage, perPage: perPage};
 
             if (self.has_search) {
                 self.show(self.lastSearchResult())
             } else {
                 self.show(self.lastResult())
             }
-        })
+        });
 
         this.filter();
     };
@@ -1445,7 +1442,6 @@
         var paginationView;
 
         this.recordsCount = recordsCount;
-        ;
         this.opts = opts;
         this.$container = $(this.opts.container);
 
@@ -1480,7 +1476,7 @@
     };
 
     P.setCurrentPage = function (page) {
-        page = this.toPage(page)
+        page = this.toPage(page);
         this.prevCurrentPage = this.currentPage;
         this.currentPage = page;
         this.paginate(page);
@@ -1489,7 +1485,7 @@
     P.setRecordCount = function (total) {
         this.recordsCount = total;
         this.setCurrentPage(this.currentPage);
-    }
+    };
 
     P.toPage = function (page) {
         if (page == 'first') {
@@ -1587,7 +1583,7 @@
             html = templateBuilder(template)({values: opts.values});
             $(opts.container).html(html);
 
-            ele = $(opts.container).find('[data-perpage]')
+            ele = $(opts.container).find('[data-perpage]');
             event_type = ele.get(0).tagName == 'SELECT' ? 'change' : 'click';
 
             $(opts.container).on(event_type, '[data-perpage]', function (e) {
@@ -1597,7 +1593,7 @@
                     value = 100000;
                 }
 
-                self.setPerPage(parseInt(value))
+                self.setPerPage(parseInt(value));
                 e.preventDefault();
             });
         };
@@ -1605,7 +1601,7 @@
     P.setPerPage = function (value) {
         this.perPageCount = value;
         this.setCurrentPage(this.currentPage);
-    }
+    };
 
 
     $.fn.filterjs = function (records, options) {

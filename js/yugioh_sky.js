@@ -11,7 +11,6 @@
 
 // Card API
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
-var CARD_DATA_API_URL = "https://yugiohprices.com/api/card_data/";
 var CORS_BYPASS_URL = "http://yugioh.joelcancela.fr/cors.php?card=";
 // Spreadsheet settings
 var CSV_URL = "https://docs.google.com/spreadsheets/d/1WEsIrHSEmGXQYVAUw1rqFhTqllE6n-am9mx15FuhUNo/pubhtml";
@@ -61,20 +60,20 @@ function init_suite() {
     update_cards_number(cards_table);
     create_filters();
     //for (var i = 0; i < cards_table.length; i++) {
-        //get_card_data_and_merge(cards_table[i][cards_table__key_name_en]);
-   // }
+    //get_card_data_and_merge(cards_table[i][cards_table__key_name_en]);
+    // }
 
 }
 
-function get_card_data_and_merge(card_name) {
-    $.getJSON(CORS_BYPASS_URL + card_name, function (data) {
-        // console.log(card_name);
-        arr.push(data);
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        console.log(card_name);
-        console.log(errorThrown);
-    });
-}
+// function get_card_data_and_merge(card_name) {
+//     $.getJSON(CORS_BYPASS_URL + card_name, function (data) {
+//         // console.log(card_name);
+//         //arr.push(data);
+//     }).fail(function (jqXHR, textStatus, errorThrown) {
+//         console.log(card_name);
+//         console.log(errorThrown);
+//     });
+// }
 
 function add_multi_deck_support_and_images_links() {
     for (var i = 0; i < cards_table.length; i++) {
@@ -179,7 +178,7 @@ function buildSortOptions(name) {
             'Type': 'custom',
             'custom_order': ['Monstre', 'Rituel', 'Fusion', 'Synchro', 'XYZ', 'Jeton', 'Magie', 'Piège'],
             'sort_function': function (a, b, ordering) {
-                return (ordering[a.Type] - ordering[b.Type]) || a.Nom.localeCompare(b.Nom);
+                return (ordering[a.Type] - ordering[b.Type]) || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
             }
         };
     }
