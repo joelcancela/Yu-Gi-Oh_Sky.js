@@ -42,6 +42,7 @@ var cards_stats__key_synchro_nb = "Synchro";
 var cards_stats__key_xyz_nb = "XYZ";
 // Other variables
 var sortOptions = {}; //Sorting
+var currentIteration;
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -59,21 +60,30 @@ function init_suite() {
     add_multi_deck_support_and_images_links();
     update_cards_number(cards_table);
     create_filters();
-    //for (var i = 0; i < cards_table.length; i++) {
-    //get_card_data_and_merge(cards_table[i][cards_table__key_name_en]);
-    // }
-
+    //get_cards_data_and_merge();
 }
 
-// function get_card_data_and_merge(card_name) {
-//     $.getJSON(CORS_BYPASS_URL + card_name, function (data) {
-//         // console.log(card_name);
-//         //arr.push(data);
-//     }).fail(function (jqXHR, textStatus, errorThrown) {
-//         console.log(card_name);
-//         console.log(errorThrown);
-//     });
-// }
+function get_cards_data_and_merge() {
+
+    // var requests_limit = 150;
+
+    for (currentIteration = 0; currentIteration < cards_table.length; currentIteration++) {
+        var card_name = cards_table[currentIteration][cards_table__key_name_en];
+        // setTimeout(function () {
+            $.getJSON(CORS_BYPASS_URL + card_name, function (data) {
+                console.log(cards_table[currentIteration]);
+                console.log(data["data"]);
+                $.extend(cards_table[currentIteration], data["data"]);
+
+            }).fail(function () {
+                console.log("Fail XHR " + card_name);
+            });
+        // }, 50);
+
+    }
+
+    console.dir(cards_table);
+}
 
 function add_multi_deck_support_and_images_links() {
     for (var i = 0; i < cards_table.length; i++) {
