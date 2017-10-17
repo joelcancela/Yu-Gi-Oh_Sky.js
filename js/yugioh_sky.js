@@ -11,7 +11,7 @@
 
 // Card API
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
-var CORS_BYPASS_URL = "http://yugioh.joelcancela.fr/cors.php?card=";
+var CORS_BYPASS_URL = "http://joelcancela.fr/services/cors_yugioh_cards?card=";
 // Spreadsheet settings
 var CSV_URL = "https://docs.google.com/spreadsheets/d/1WEsIrHSEmGXQYVAUw1rqFhTqllE6n-am9mx15FuhUNo/pubhtml";
 var yu_gi_oh_sheet = "Yu-Gi-Oh";
