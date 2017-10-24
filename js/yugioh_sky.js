@@ -113,7 +113,7 @@ function create_filters() {
     window.FJS = FilterJS(cards_table, '#cards_table', {
         template: '#card_template',
         search: {
-            ele: '#searchbox', fields: ['Nom'],
+            ele: '#searchbox', fields: ['Nom', 'Nom Anglais'],
             start_length: 1
         },
 
