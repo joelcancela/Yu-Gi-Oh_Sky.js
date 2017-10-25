@@ -405,7 +405,6 @@
 
     var execWhere = function (query, records) {
         var q, criteria, result;
-
         for (q in query) {
             criteria = this.jQ.getCriteria(q);
             result = this.jQ._findAll(result || records, criteria.field, query[q], criteria.operator);
@@ -837,6 +836,7 @@
             return func(data)
         };
     }
+
     function each(objs, callback, context) {
         for (var i = 0, l = objs.length; i < l; i++) {
             callback.call(context, objs[i], i);
@@ -1011,7 +1011,6 @@
     var setDefaultCriteriaOpts = function (criteria) {
         var ele = criteria.$ele,
             eleType = criteria.$ele.attr('type');
-
         if (!criteria.selector) {
             if (ele.get(0).tagName == 'INPUT') {
                 criteria.selector = (eleType == 'checkbox' || eleType == 'radio') ? ':checked' : ':input';
@@ -1041,7 +1040,6 @@
         } else {
             addFilterCriteria.call(self, criterias);
         }
-
         return true;
     };
 
@@ -1065,7 +1063,6 @@
         criteria.active = true;
 
         this.criterias.push(criteria);
-
         return true;
     };
 
@@ -1149,7 +1146,6 @@
         $.each(this.criterias, function () {
             if (this.active) {
                 vals = self.getSelectedValues(this, self);
-
                 if (vals && vals.length) {
                     _q = ($.isArray(vals) && !this.type) ? (this._q + '.$in') : this._q;
                     query[_q] = vals;
@@ -1161,7 +1157,6 @@
         var query = count ? this.Model.where(query) : this.Model;
         this.execCallback('shortResult', query);
         this.last_result = query.all;
-
         if (this.searchFilter(this.last_result)) {
             return query;
         }
