@@ -8,6 +8,8 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/yugioh_sky.css">
     <!--Scripts-->
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
@@ -15,6 +17,7 @@
             src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
     <script type="text/javascript"
             src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+    <script type="text/javascript" src='js/jquery-ui.min.js'></script>
     <script type="text/javascript" src='js/filter_custom.js'></script>
     <script type="text/javascript" src="js/yugioh_sky.js"></script>
 </head>
@@ -70,7 +73,6 @@
                         <span>Pas de deck attribué</span>
                     </label>
                 </div>
-                <input type="hidden" id="input_default" value="1-99">
             </fieldset>
         </div>
         <div class="well">
@@ -78,25 +80,25 @@
                 <legend class="well_legend">Types de cartes</legend>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" value="monster">
+                        <input id="monster" type="checkbox" value="monster">
                         <span>Monstres</span>
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" value="spell">
+                        <input id="spell" type="checkbox" value="spell">
                         <span>Magies</span>
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" value="trap">
+                        <input id="trap" type="checkbox" value="trap">
                         <span>Pièges</span>
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" value="token">
+                        <input id="token" type="checkbox" value="token">
                         <span>Autres (Jeton)</span>
                     </label>
                 </div>
@@ -255,6 +257,152 @@
                         <span>Zombie</span>
                     </label>
                 </div>
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset id="family_criteria">
+                <legend class="well_legend">Element</legend>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="water">
+                        <span>Eau</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="fire">
+                        <span>Feu</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="light">
+                        <span>Lumière</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="earth">
+                        <span>Terre</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="dark">
+                        <span>Ténèbres</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="wind">
+                        <span>Vent</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="divine">
+                        <span>Divin</span>
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset id="atk_criteria">
+                <legend>ATK</legend>
+                <span id="atk_range_label" class="slider-label">0 - 16000 ATK</span>
+                <div id="atk_slider"
+                     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                     aria-disabled="false">
+                    <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div>
+                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a><a
+                        class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
+                <input type="hidden" id="atk_filter" value="0-16000">
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset id="def_criteria">
+                <legend>DEF</legend>
+                <span id="def_range_label" class="slider-label">0 - 16000 DEF</span>
+                <div id="def_slider"
+                     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                     aria-disabled="false">
+                    <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div>
+                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a><a
+                        class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
+                <input type="hidden" id="def_filter" value="0-16000">
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset id="level_criteria">
+                <legend>Niveau</legend>
+                <span id="level_range_label" class="slider-label">Niveau 0 - 12</span>
+                <div id="level_slider"
+                     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                     aria-disabled="false">
+                    <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div>
+                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a><a
+                        class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
+                <input type="hidden" id="level_filter" value="0-12">
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset id="property_criteria">
+                <legend class="well_legend">Propriétés</legend>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Normal">
+                        <span>Normal</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Continuous">
+                        <span>Continu</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Counter">
+                        <span>Contre</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Quick-Play">
+                        <span>Jeu-Rapide</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Ritual">
+                        <span>Rituel</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Field">
+                        <span>Terrain</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Equip">
+                        <span>Équipement</span>
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset id="quantity_criteria">
+                <legend>Exemplaires</legend>
+                <span id="quantity_range_label" class="slider-label">1 - 10 Exemplaires</span>
+                <div id="quantity_slider"
+                     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                     aria-disabled="false">
+                    <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div>
+                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a><a
+                        class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
+                <input type="hidden" id="quantity_filter" value="1-10">
             </fieldset>
         </div>
         <div class="well">

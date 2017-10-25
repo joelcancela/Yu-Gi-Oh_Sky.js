@@ -1,7 +1,4 @@
-Types de monstres
-
-
-Types de cartes
+Types de cartes (type)
 
 Normal
 Effet
@@ -33,44 +30,3 @@ Tuner
 Toon
 Union
 Xyz
-
-
-
-
-
-
-Property
-	
-Normal  
-Continu
-Contre
-Jeu-Rapide
-Rituel
-Terrain
-Équipement
-
-Normal
-Continuous
-Counter
-Quick-Play
-Ritual
-Field
-Equip
-
-Element
-
-Divin
-Eau
-Feu
-Lumière
-Terre
-Ténèbres
-Vent
-
-divine
-water
-fire
-light
-earth
-dark
-wind

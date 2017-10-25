@@ -88,10 +88,15 @@ function get_cards_data_and_merge() {
     $.getJSON(DATABASE_CARDS, function (data) {
         for (var currentIteration = 0; currentIteration < cards_table.length; currentIteration++) {
             $.extend(cards_table[currentIteration], data[currentIteration]);
+            cards_table[currentIteration][cards_table__key_quantity] = parseInt(cards_table[currentIteration][cards_table__key_quantity]);
             var current_card_type = cards_table[currentIteration][cards_table__key_monster_type];
+            var current_card_atk = cards_table[currentIteration][cards_table__key_atk];
+            if (current_card_atk === null) {
+                cards_table[currentIteration][cards_table__key_atk] = -1;
+            }
             if (current_card_type !== null) {
                 cards_table[currentIteration][cards_table__key_monster_type] = current_card_type.split(" / ");
-            } else{
+            } else {
                 cards_table[currentIteration][cards_table__key_monster_type] = [];
             }
         }
@@ -144,8 +149,7 @@ function create_filters() {
         criterias: [
             {field: cards_table__key_decks_array, ele: '#deck_criteria input:checkbox'},
             {field: cards_table__key_card_type, ele: '#card_type_criteria input:checkbox'},
-            {field: cards_table__key_monster_type, ele: '#type_criteria input:checkbox'},
-            {field: cards_table__key_quantity, ele: '#input_default', type: 'range'}],//TODO Slider quantity
+            {field: cards_table__key_quantity, ele: '#quantity_filter', type: 'range'}],
         pagination: {
             container: '#pagination',
             paginationView: "#pagination_template",
@@ -172,7 +176,128 @@ function imgError(image) {
     return true;
 }
 
+function enable_monster_criterias() {
+    FJS.addCriteria({field: cards_table__key_atk, ele: '#atk_filter', type: 'range'});
+    FJS.addCriteria({field: cards_table__key_def, ele: '#def_filter', type: 'range'});
+    FJS.addCriteria({field: cards_table__key_monster_type, ele: '#type_criteria input:checkbox'});
+    FJS.addCriteria({field: cards_table__key_family, ele: '#family_criteria input:checkbox'});
+    FJS.addCriteria({field: cards_table__key_level, ele: '#level_filter', type: 'range'});
+}
+
+function disable_monster_criterias() {
+    FJS.removeCriteria(cards_table__key_atk);
+    FJS.removeCriteria(cards_table__key_def);
+    FJS.removeCriteria(cards_table__key_monster_type);
+    FJS.removeCriteria(cards_table__key_family);
+    FJS.removeCriteria(cards_table__key_level);
+}
+
+function enable_spell_traps_criterias() {
+    FJS.addCriteria({field: cards_table__key_property, ele: '#property_criteria input:checkbox'});
+}
+
+
+function disable_spell_traps_criterias() {
+    FJS.removeCriteria(cards_table__key_property);
+}
+
 function initEvents() {
+
+    $("#monster").change(function () {
+        if (this.checked) {
+            enable_monster_criterias();
+            disable_spell_traps_criterias();
+        } else {
+            disable_monster_criterias();
+        }
+    });
+
+
+    $("#spell").change(function () {
+        if (this.checked) {
+            enable_spell_traps_criterias();
+            disable_monster_criterias();
+        } else {
+            if ($("#trap").checked && $("#token").checked) {
+                enable_monster_criterias();
+            }
+            disable_spell_traps_criterias();
+        }
+    });
+
+    $("#token").change(function () {
+        if (this.checked) {
+            disable_monster_criterias();
+            disable_spell_traps_criterias();
+        } else {
+            if ($("#trap").checked && $("#spell").checked) {
+                enable_monster_criterias();
+            }
+        }
+    });
+
+    $("#trap").change(function () {
+        if (this.checked) {
+            enable_spell_traps_criterias();
+            disable_monster_criterias();
+        } else {
+            disable_spell_traps_criterias();
+            if ($("#token").checked && $("#spell").checked) {
+                enable_monster_criterias();
+            }
+        }
+    });
+
+
+    $("#atk_slider").slider({
+        min: 0,
+        max: 16000,
+        values: [0, 16000],
+        step: 100,
+        range: true,
+        slide: function (event, ui) {
+            $("#atk_range_label").html(ui.values[0] + '-' + ui.values[1] + ' ATK');
+            $('#atk_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
+        }
+    });
+
+    $("#def_slider").slider({
+        min: 0,
+        max: 16000,
+        values: [0, 16000],
+        step: 100,
+        range: true,
+        slide: function (event, ui) {
+            $("#def_range_label").html(ui.values[0] + '-' + ui.values[1] + ' DEF');
+            $('#def_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
+        }
+    });
+
+    $("#level_slider").slider({
+        min: 0,
+        max: 12,
+        values: [0, 12],
+        step: 1,
+        range: true,
+        slide: function (event, ui) {
+            $("#level_range_label").html('Niveau ' + ui.values[0] + '-' + ui.values[1]);
+            $('#level_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
+        }
+    });
+
+    $("#quantity_slider").slider({
+        min: 1,
+        max: 10,
+        values: [1, 10],
+        step: 1,
+        range: true,
+        slide: function (event, ui) {
+            $("#quantity_range_label").html(ui.values[0] + '-' + ui.values[1] + ' exemplaires');
+            $('#quantity_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
+        }
+    });
+
+
     $("#l-sort-by").on('change', function (e) {
         sortOptions = buildSortOptions($(this).val());
         FJS.filter();
