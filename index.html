@@ -78,35 +78,120 @@
         <div class="well">
             <fieldset id="card_type_criteria">
                 <legend class="well_legend">Types de cartes</legend>
-                <div class="checkbox">
+                <div class="radio">
                     <label>
-                        <input id="monster" type="checkbox" value="monster">
+                        <input id="all_types" type="radio" value="all" name="type">
+                        <span>Tous</span>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input id="monster" type="radio" value="monster" name="type">
                         <span>Monstres</span>
                     </label>
                 </div>
-                <div class="checkbox">
+                <div class="radio">
                     <label>
-                        <input id="spell" type="checkbox" value="spell">
-                        <span>Magies</span>
+                        <input id="spell" type="radio" value="spell" name="type">
+                        <span>Magies </span><img class="icon" src="img/card_type/spell.svg" onerror="this.src=''">
                     </label>
                 </div>
-                <div class="checkbox">
+                <div class="radio">
                     <label>
-                        <input id="trap" type="checkbox" value="trap">
-                        <span>Pièges</span>
+                        <input id="trap" type="radio" value="trap" name="type">
+                        <span>Pièges </span><img class="icon" src="img/card_type/trap.svg" onerror="this.src=''">
                     </label>
                 </div>
-                <div class="checkbox">
+                <div class="radio">
                     <label>
-                        <input id="token" type="checkbox" value="token">
+                        <input id="token" type="radio" value="token" name="type">
                         <span>Autres (Jeton)</span>
                     </label>
                 </div>
             </fieldset>
         </div>
-        <div class="well">
+        <div id="monster_type" class="well" style="display: none">
             <fieldset id="type_criteria">
                 <legend class="well_legend">Types de monstres</legend>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Normal">
+                        <span>Normal</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Effect">
+                        <span>Effet</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Flip">
+                        <span>Flip</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Fusion">
+                        <span>Fusion</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Gemini">
+                        <span>Gémeau</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Link">
+                        <span>Lien</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Pendulum">
+                        <span>Pendule</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Ritual">
+                        <span>Rituel</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Spirit">
+                        <span>Spirit</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Synchro">
+                        <span>Synchro</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Tuner">
+                        <span>Syntoniseur</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Union">
+                        <span>Union</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="Xyz">
+                        <span>XYZ</span>
+                    </label>
+                </div>
+                <hr>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="Aqua">
@@ -259,54 +344,61 @@
                 </div>
             </fieldset>
         </div>
-        <div class="well">
+        <div id="monster_family" class="well" style="display: none">
             <fieldset id="family_criteria">
                 <legend class="well_legend">Element</legend>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="water">
-                        <span>Eau</span>
+                        <span>Eau </span><img class="icon" src="img/attribute/water.svg"
+                                              onerror="this.src='img/attribute/water.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="fire">
-                        <span>Feu</span>
+                        <span>Feu </span><img class="icon" src="img/attribute/fire.svg"
+                                              onerror="this.src='img/attribute/fire.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="light">
-                        <span>Lumière</span>
+                        <span>Lumière </span><img class="icon" src="img/attribute/light.svg"
+                                                  onerror="this.src='img/attribute/light.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="earth">
-                        <span>Terre</span>
+                        <span>Terre </span><img class="icon" src="img/attribute/earth.svg"
+                                                onerror="this.src='img/attribute/earth.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="dark">
-                        <span>Ténèbres</span>
+                        <span>Ténèbres </span><img class="icon" src="img/attribute/dark.svg"
+                                                   onerror="this.src='img/attribute/dark.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="wind">
-                        <span>Vent</span>
+                        <span>Vent </span><img class="icon" src="img/attribute/wind.svg"
+                                               onerror="this.src='img/attribute/wind.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="divine">
-                        <span>Divin</span>
+                        <span>Divin </span><img class="icon" src="img/attribute/divine.svg"
+                                                onerror="this.src='img/attribute/divine.png'">
                     </label>
                 </div>
             </fieldset>
         </div>
-        <div class="well">
+        <div id="monster_atk" class="well" style="display: none">
             <fieldset id="atk_criteria">
                 <legend>ATK</legend>
                 <span id="atk_range_label" class="slider-label">0 - 16000 ATK</span>
@@ -319,7 +411,7 @@
                 <input type="hidden" id="atk_filter" value="0-16000">
             </fieldset>
         </div>
-        <div class="well">
+        <div id="monster_def" class="well" style="display: none">
             <fieldset id="def_criteria">
                 <legend>DEF</legend>
                 <span id="def_range_label" class="slider-label">0 - 16000 DEF</span>
@@ -332,10 +424,11 @@
                 <input type="hidden" id="def_filter" value="0-16000">
             </fieldset>
         </div>
-        <div class="well">
+        <div id="monster_level" class="well" style="display: none">
             <fieldset id="level_criteria">
                 <legend>Niveau</legend>
                 <span id="level_range_label" class="slider-label">Niveau 0 - 12</span>
+                <img class="icon" src="img/level/level.svg" onerror="this.src='img/level/level.png'">
                 <div id="level_slider"
                      class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
                      aria-disabled="false">
@@ -345,49 +438,55 @@
                 <input type="hidden" id="level_filter" value="0-12">
             </fieldset>
         </div>
-        <div class="well">
+        <div id="properties" class="well" style="display: none">
             <fieldset id="property_criteria">
                 <legend class="well_legend">Propriétés</legend>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="Normal">
-                        <span>Normal</span>
+                        <span>Normal </span><img class="icon" src="img/property/normal.svg" onerror="this.src=''">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="Continuous">
-                        <span>Continu</span>
+                        <span>Continu </span><img class="icon" src="img/property/continuous.svg"
+                                                  onerror="this.src='img/property/continuous.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="Counter">
-                        <span>Contre</span>
+                        <span>Contre </span><img class="icon" src="img/property/counter.svg"
+                                                 onerror="this.src='img/property/counter.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="Quick-Play">
-                        <span>Jeu-Rapide</span>
+                        <span>Jeu-Rapide </span><img class="icon" src="img/property/quick-play.svg"
+                                                     onerror="this.src='img/property/quick-play.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="Ritual">
-                        <span>Rituel</span>
+                        <span>Rituel </span><img class="icon" src="img/property/ritual.svg"
+                                                 onerror="this.src='img/property/effect_icon_ritual.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="Field">
-                        <span>Terrain</span>
+                        <span>Terrain </span><img class="icon" src="img/property/field.svg"
+                                                  onerror="this.src='img/property/effect_icon_field.png'">
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="Equip">
-                        <span>Équipement</span>
+                        <span>Équipement </span><img class="icon" src="img/property/equip.svg"
+                                                     onerror="this.src='img/property/effect_icon_equip.png'">
                     </label>
                 </div>
             </fieldset>

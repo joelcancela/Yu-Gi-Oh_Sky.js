@@ -69,6 +69,7 @@ function init() {
 
 function setCheckboxesStatus() {
     $('#deck_criteria').find(':checkbox').prop('checked', true);
+    $('#all_types').prop("checked", true);
 }
 
 function init_suite() {
@@ -148,14 +149,14 @@ function create_filters() {
         },
         criterias: [
             {field: cards_table__key_decks_array, ele: '#deck_criteria input:checkbox'},
-            {field: cards_table__key_card_type, ele: '#card_type_criteria input:checkbox'},
+            {field: cards_table__key_card_type, ele: '#card_type_criteria input:radio', all: 'all'},
             {field: cards_table__key_quantity, ele: '#quantity_filter', type: 'range'}],
         pagination: {
             container: '#pagination',
             paginationView: "#pagination_template",
             visiblePages: 5,
             perPage: {
-                values: [15, 30, 60, 'Toutes'],
+                values: [12, 24, 48, 'Toutes'],
                 container: '#per_page'
             }
         },
@@ -182,6 +183,11 @@ function enable_monster_criterias() {
     FJS.addCriteria({field: cards_table__key_monster_type, ele: '#type_criteria input:checkbox'});
     FJS.addCriteria({field: cards_table__key_family, ele: '#family_criteria input:checkbox'});
     FJS.addCriteria({field: cards_table__key_level, ele: '#level_filter', type: 'range'});
+    $('#monster_level').show();
+    $('#monster_def').show();
+    $('#monster_atk').show();
+    $('#monster_family').show();
+    $('#monster_type').show();
 }
 
 function disable_monster_criterias() {
@@ -190,18 +196,33 @@ function disable_monster_criterias() {
     FJS.removeCriteria(cards_table__key_monster_type);
     FJS.removeCriteria(cards_table__key_family);
     FJS.removeCriteria(cards_table__key_level);
+    $('#monster_level').hide();
+    $('#monster_def').hide();
+    $('#monster_atk').hide();
+    $('#monster_family').hide();
+    $('#monster_type').hide();
 }
 
 function enable_spell_traps_criterias() {
     FJS.addCriteria({field: cards_table__key_property, ele: '#property_criteria input:checkbox'});
+    $('#properties').show();
 }
 
 
 function disable_spell_traps_criterias() {
     FJS.removeCriteria(cards_table__key_property);
+    $('#properties').hide();
 }
 
 function initEvents() {
+
+    $("#all_types").change(function () {
+        if (this.checked) {
+            disable_monster_criterias();
+            disable_spell_traps_criterias();
+        }
+    });
+
 
     $("#monster").change(function () {
         if (this.checked) {
@@ -218,21 +239,7 @@ function initEvents() {
             enable_spell_traps_criterias();
             disable_monster_criterias();
         } else {
-            if ($("#trap").checked && $("#token").checked) {
-                enable_monster_criterias();
-            }
             disable_spell_traps_criterias();
-        }
-    });
-
-    $("#token").change(function () {
-        if (this.checked) {
-            disable_monster_criterias();
-            disable_spell_traps_criterias();
-        } else {
-            if ($("#trap").checked && $("#spell").checked) {
-                enable_monster_criterias();
-            }
         }
     });
 
@@ -242,9 +249,14 @@ function initEvents() {
             disable_monster_criterias();
         } else {
             disable_spell_traps_criterias();
-            if ($("#token").checked && $("#spell").checked) {
-                enable_monster_criterias();
-            }
+        }
+    });
+
+
+    $("#token").change(function () {
+        if (this.checked) {
+            disable_monster_criterias();
+            disable_spell_traps_criterias();
         }
     });
 
@@ -256,7 +268,7 @@ function initEvents() {
         step: 100,
         range: true,
         slide: function (event, ui) {
-            $("#atk_range_label").html(ui.values[0] + '-' + ui.values[1] + ' ATK');
+            $("#atk_range_label").html(ui.values[0] + ' - ' + ui.values[1] + ' ATK');
             $('#atk_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
         }
     });
@@ -268,7 +280,7 @@ function initEvents() {
         step: 100,
         range: true,
         slide: function (event, ui) {
-            $("#def_range_label").html(ui.values[0] + '-' + ui.values[1] + ' DEF');
+            $("#def_range_label").html(ui.values[0] + ' - ' + ui.values[1] + ' DEF');
             $('#def_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
         }
     });
@@ -280,7 +292,7 @@ function initEvents() {
         step: 1,
         range: true,
         slide: function (event, ui) {
-            $("#level_range_label").html('Niveau ' + ui.values[0] + '-' + ui.values[1]);
+            $("#level_range_label").html('Niveau ' + ui.values[0] + ' - ' + ui.values[1]);
             $('#level_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
         }
     });
@@ -292,7 +304,7 @@ function initEvents() {
         step: 1,
         range: true,
         slide: function (event, ui) {
-            $("#quantity_range_label").html(ui.values[0] + '-' + ui.values[1] + ' exemplaires');
+            $("#quantity_range_label").html(ui.values[0] + ' - ' + ui.values[1] + ' exemplaires');
             $('#quantity_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
         }
     });

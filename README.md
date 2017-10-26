@@ -14,12 +14,6 @@ The data displayed by the script is purely informational and may not always be a
 
 The data is provided as received from the Yu-Gi-Oh! Prices and the owner of this application takes no responsibility for any issues that may arise from its users taking this information for granted.
 
-## TODO
-
-- Add card data (ATK/DEF/etc.)
-    - Add more sorting criterias
-- Clean up javascript
-
 ## Mentions
 
 This project uses the following libraries:

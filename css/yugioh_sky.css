@@ -6,6 +6,15 @@ body {
     margin-top: 0;
 }
 
+hr {
+    border-top: 1px solid #777;
+}
+
+.icon {
+    max-height: 25px;
+    max-width: 25px;
+}
+
 .page-links-active {
     font-weight: 600;
     text-decoration: underline;
