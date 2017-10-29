@@ -57,8 +57,15 @@ var sortOptions = {}; // Sorting
 //// Sorting types
 var sorting__name_asc = "name_asc";
 var sorting__name_desc = "name_desc";
+var sorting__atk_asc = "atk_asc";
+var sorting__atk_desc = "atk_desc";
+var sorting__def_asc = "def_asc";
+var sorting__def_desc = "def_desc";
+var sorting__level_asc = "level_asc";
+var sorting__level_desc = "level_desc";
+var sorting__quantity_asc = "quantity_asc";
+var sorting__quantity_desc = "quantity_desc";
 var sorting__card_type = "card_type";
-
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -91,10 +98,6 @@ function get_cards_data_and_merge() {
             $.extend(cards_table[currentIteration], data[currentIteration]);
             cards_table[currentIteration][cards_table__key_quantity] = parseInt(cards_table[currentIteration][cards_table__key_quantity]);
             var current_card_type = cards_table[currentIteration][cards_table__key_monster_type];
-            var current_card_atk = cards_table[currentIteration][cards_table__key_atk];
-            if (current_card_atk === null) {
-                cards_table[currentIteration][cards_table__key_atk] = -1;
-            }
             if (current_card_type !== null) {
                 cards_table[currentIteration][cards_table__key_monster_type] = current_card_type.split(" / ");
             } else {
@@ -118,7 +121,6 @@ function add_multi_deck_support_and_images_links() {
     }
 }
 
-
 function retrieve_and_parse_csv() {
     // noinspection JSUnusedGlobalSymbols
     Tabletop.init({
@@ -131,7 +133,6 @@ function retrieve_and_parse_csv() {
         simpleSheet: false
     });
 }
-
 
 function create_filters() {
 
@@ -207,7 +208,6 @@ function enable_spell_traps_criterias() {
     FJS.addCriteria({field: cards_table__key_property, ele: '#property_criteria input:checkbox'});
     $('#properties').show();
 }
-
 
 function disable_spell_traps_criterias() {
     FJS.removeCriteria(cards_table__key_property);
@@ -317,7 +317,6 @@ function initEvents() {
     });
 }
 
-
 function shortResult(query) {
     if (sortOptions) {
         query.order(sortOptions);
@@ -331,6 +330,7 @@ function cleanUpSpecialChars(str) {
 
 function buildSortOptions(name) {
     var sort = {};
+    var custom_order = [];
     if (name === sorting__name_asc) {
         sort[cards_table__key_name_fr_sort] = 'asc';
         return sort;
@@ -341,9 +341,165 @@ function buildSortOptions(name) {
         return sort;
     }
 
+    if (name === sorting__atk_asc) {
+        sort[cards_table__key_atk] = 'custom';
+        sort['sort_function'] = function (a, b) {
+            if (a[cards_table__key_name_fr] === "Jeton" || a[cards_table__key_atk] === null) {
+                if (b[cards_table__key_atk] === a[cards_table__key_atk]) {
+                    return a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);//0-0 null-null
+                } else {
+                    if (b[cards_table__key_atk] === null) //0-null
+                        return -1;
+                    return 1;//0-else
+                }
+            }
+            //else-null else-0
+            if (b[cards_table__key_atk] === "Jeton" || b[cards_table__key_atk] === null) {
+                return -1;
+            }
+            return (a[cards_table__key_atk] - b[cards_table__key_atk]) ||
+                a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+        };
+        return sort;
+    }//FIXME
+
+    if (name === sorting__atk_desc) {
+        sort[cards_table__key_atk] = 'custom';
+        sort['sort_function'] = function (a, b) {
+            if (a[cards_table__key_name_fr] === "Jeton" || a[cards_table__key_atk] === null) {
+                if (b[cards_table__key_atk] === a[cards_table__key_atk] && a[cards_table__key_name_fr] !== "Jeton") {
+                    return (a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]));//0-0 null-null
+                } else {
+                    if (b[cards_table__key_atk] === null) //0-null
+                        return -1;
+                    return 1;//0-else
+                }
+            }
+            //else-null else-0
+            if (b[cards_table__key_name_fr] === "Jeton" || b[cards_table__key_atk] === null) {
+                return -1;
+            }
+            return ((a[cards_table__key_atk] - b[cards_table__key_atk]) ) * -1 ||
+                a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+        };
+        return sort;
+    }//FIXME
+
+    if (name === sorting__def_asc) {
+        sort[cards_table__key_def] = 'custom';
+        sort['sort_function'] = function (a, b) {
+            console.log(a[cards_table__key_name_fr] + "" + b[cards_table__key_name_fr]);
+            if (a[cards_table__key_name_fr] === "Jeton" || a[cards_table__key_def] === null) {
+                if (b[cards_table__key_def] === a[cards_table__key_def] && a[cards_table__key_name_fr] !== "Jeton") {
+                    console.log("398 normal compare");
+                    return a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);//0-0 null-null
+                } else {
+                    // if (b[cards_table__key_name_fr] === "Jeton") { //null-
+                    //     console.log("401 -1");
+                    //     return -1;
+                    // }
+                    if (b[cards_table__key_def] === null) { //0-null
+                        console.log("405 -1");
+                        return -1;
+                    }
+                    console.log("409 1");
+                    return 1;//0-else
+                }
+            }
+            //else-null else-0
+            if (b[cards_table__key_name_fr] === "Jeton" || b[cards_table__key_def] === null) {
+                console.log("415 -1");
+                return -1;
+            }
+            console.log("else return");
+            return (a[cards_table__key_def] - b[cards_table__key_def]) ||
+                a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+        };
+        return sort;
+    }//FIXME
+
+    if (name === sorting__def_desc) {
+        sort[cards_table__key_def] = 'custom';
+        sort['sort_function'] = function (a, b) {
+            if (a[cards_table__key_name_fr] === "Jeton" || a[cards_table__key_def] === null) {
+                if (b[cards_table__key_def] === a[cards_table__key_def] && a[cards_table__key_name_fr] !== "Jeton") {
+                    return (a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]));//0-0 null-null
+                } else {
+                    if (b[cards_table__key_def] === null) //0-null
+                        return -1;
+                    return 1;//0-else
+                }
+            }
+            //else-null else-0
+            if (b[cards_table__key_name_fr] === "Jeton" || b[cards_table__key_def] === null) {
+                return -1;
+            }
+            return ((a[cards_table__key_def] - b[cards_table__key_def]) ) * -1 ||
+                a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+        };
+        return sort;
+    }//FIXME
+
+    if (name === sorting__level_asc) {
+        sort[cards_table__key_level] = 'custom';
+        sort['sort_function'] = function (a, b) {
+            if (a[cards_table__key_level] === 0 || a[cards_table__key_level] === null) {
+                if (b[cards_table__key_level] === a[cards_table__key_level]) {
+                    return a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);//0-0 null-null
+                } else {
+                    if (b[cards_table__key_level] === 0) //null-0
+                        return -1;
+                    if (b[cards_table__key_level] === null) //0-null
+                        return -1;
+                    return 1;//0-else
+                }
+            }
+            //else-null else-0
+            if (b[cards_table__key_level] === 0 || b[cards_table__key_level] === null) {
+                return -1;
+            }
+            return (a[cards_table__key_level] - b[cards_table__key_level]) ||
+                a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+        };
+        return sort;
+    }//FIXME
+
+    if (name === sorting__level_desc) {
+        sort[cards_table__key_level] = 'custom';
+        sort['sort_function'] = function (a, b) {
+            if (a[cards_table__key_level] === 0 || a[cards_table__key_level] === null) {
+                if (b[cards_table__key_level] === a[cards_table__key_level]) {
+                    return (a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]));//0-0 null-null
+                } else {
+                    if (b[cards_table__key_level] === 0) //null-0
+                        return -1;
+                    if (b[cards_table__key_level] === null) //0-null
+                        return -1;
+                    return 1;//0-else
+                }
+            }
+            //else-null else-0
+            if (b[cards_table__key_level] === 0 || b[cards_table__key_level] === null) {
+                return -1;
+            }
+            return ((a[cards_table__key_level] - b[cards_table__key_level]) ) * -1 ||
+                a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+        };
+        return sort;
+    }//FIXME
+
+    if (name === sorting__quantity_asc) {
+        sort[cards_table__key_quantity] = 'asc';
+        return sort;
+    }
+
+    if (name === sorting__quantity_desc) {
+        sort[cards_table__key_quantity] = 'desc';
+        return sort;
+    }
+
     if (name === sorting__card_type) {
         sort[cards_table__key_card_type] = 'custom';
-        var custom_order = [];
         custom_order.push(cards_stats__key_monster, cards_stats__key_spell, cards_stats__key_trap, cards_stats__key_token_lowercase);
         sort['custom_order'] = custom_order;
         sort['sort_function'] = function (a, b, ordering) {
