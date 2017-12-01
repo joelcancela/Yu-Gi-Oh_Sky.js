@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/rust-lang/rust.svg)]() [![Project Status](https://img.shields.io/badge/status-WIP-blue.svg)]() [![Language](https://img.shields.io/badge/language-javascript-yellow.svg)]()
 
-Yu-Gi-Oh_Sky.js is a JS script used to display the Yu-Gi-Oh! cards that I own listed on a [google spreadsheet](https://docs.google.com/spreadsheets/d/1WEsIrHSEmGXQYVAUw1rqFhTqllE6n-am9mx15FuhUNo/edit?usp=sharing).
+Yu-Gi-Oh_Sky.js is a JS script used to display the Yu-Gi-Oh! cards that I own listed on a MySQL database.
 
 ## Disclaimer
 
@@ -17,8 +17,7 @@ The data is provided as received from the Yu-Gi-Oh! Prices and the owner of this
 ## Mentions
 
 This project uses the following libraries:
-- [tabletop](https://github.com/jsoma/tabletop) by jsoma (MIT License)
-- [filter.js](https://github.com/jiren/filter.js) by jiren (MIT License)
+- [filter.js](https://github.com/jiren/filter.js) by jiren (MIT License) (Slightly Edited)
 
 The Yu-Gi-Oh! Cards information are provided via the [Yu-Gi-Oh! Prices](https://yugiohprices.com/) [Public API](http://docs.yugiohprices.apiary.io/#).
 

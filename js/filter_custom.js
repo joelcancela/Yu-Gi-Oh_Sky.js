@@ -163,7 +163,7 @@
     var parseDate = function (dates) {
         if (dates.constructor.name == 'Array') {
             return dates.map(function (d) {
-                return (d ? new Date(d) : null )
+                return (d ? new Date(d) : null)
             });
         }
         return (dates ? new Date(dates) : null);
@@ -424,7 +424,7 @@
         return result;
     };
 
-    var execOrder = function (orders, records) { //Only one order, Added possibility to do custom ordering
+    var execOrder = function (orders, records) { //Had only one order, EDITED to add possibility to do custom ordering
         if (orders.length == 0) {
             return records.slice(0);
         }
