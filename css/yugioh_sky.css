@@ -15,6 +15,11 @@ hr {
     max-width: 25px;
 }
 
+.icon_level {
+    max-height: 17px;
+    max-width: 17px;
+}
+
 .page-links-active {
     font-weight: 600;
     text-decoration: underline;

@@ -10,18 +10,13 @@
  */
 
 // Card API & Database links
+var DATABASE_CARDS = "http://www.joelcancela.fr/services/database_yugiohjs_json";
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
-var DATABASE_CARDS = "../res/database.json";
-// Spreadsheet settings
-var CSV_URL = "https://docs.google.com/spreadsheets/d/1WEsIrHSEmGXQYVAUw1rqFhTqllE6n-am9mx15FuhUNo/pubhtml";
-var yu_gi_oh_sheet = "Yu-Gi-Oh";
-var yu_gi_oh_sheet_stats = "Yu-Gi-Oh Stats";
 var img_card_404 = "./img/yugioh_404.png";
-var cards_table; // Card sheet
-var cards_stats; // Card stats sheet
+var cards_table = [];
 // Events
-var cards_are_retrieved = false;
-var all_infos_merged = false;
+var cards_table_is_ready = false;
+var cards_table_is_created = false;
 // JSON cards table keys
 var cards_table__key_atk = "atk";
 var cards_table__key_card_type = "card_type"; // Monster, Spell, Trap or Token
@@ -36,22 +31,13 @@ var cards_table__key_name_fr_sort = "name_fr_sorting";
 var cards_table__key_property = "property"; // Spell or Trap type
 var cards_table__key_quantity = "quantity";
 var cards_table__key_text = "text"; // Description text (english)
-var cards_table__key_monster_type = "type"; // Monster type, Effect, Fusion, Ritual, Synchro, Token, XYZ
+var cards_table__key_monster_type = "types"; // Monster type, Effect, Fusion, Ritual, Synchro, Token, XYZ
 // JSON cards stats keys
 //// card_type
 var cards_stats__key_monster = "monster";
 var cards_stats__key_spell = "spell";
 var cards_stats__key_trap = "trap";
 var cards_stats__key_token_lowercase = "token";
-//// type
-var cards_stats__key_fusion = "Fusion";
-var cards_stats__key_ritual = "Ritual";
-var cards_stats__key_synchro = "Synchro";
-var cards_stats__key_token = "Token";
-var cards_stats__key_xyz = "XYZ";
-//// stats
-var cards_stats__key_total_cards_nb = "cards_number";
-var cards_stats__key_total_unique_cards_nb = "unique_cards_number";
 // Other variables
 var sortOptions = {}; // Sorting
 //// Sorting types
@@ -70,76 +56,63 @@ var sorting__card_type = "card_type";
 window.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    retrieve_and_parse_csv();//Google spreadsheet
-    init_suite();
-}
-
-function setCheckboxesStatus() {
-    $('#deck_criteria').find(':checkbox').prop('checked', true);
-    $('#all_types').prop("checked", true);
-}
-
-function init_suite() {
-    if (!cards_are_retrieved) {
-        setTimeout(init_suite, 100);
-        return;
-    }
-    setCheckboxesStatus();
-    add_multi_deck_support_and_images_links();
-    get_cards_data_and_merge();
+    get_cards_data();
+    edit_cards_data();
     update_cards_number(cards_table);
     create_filters();
-    initEvents();
 }
 
-function get_cards_data_and_merge() {
+
+function get_cards_data() {
     $.getJSON(DATABASE_CARDS, function (data) {
-        for (var currentIteration = 0; currentIteration < cards_table.length; currentIteration++) {
-            $.extend(cards_table[currentIteration], data[currentIteration]);
-            cards_table[currentIteration][cards_table__key_quantity] = parseInt(cards_table[currentIteration][cards_table__key_quantity]);
-            var current_card_type = cards_table[currentIteration][cards_table__key_monster_type];
-            if (current_card_type !== null) {
-                cards_table[currentIteration][cards_table__key_monster_type] = current_card_type.split(" / ");
-            } else {
-                cards_table[currentIteration][cards_table__key_monster_type] = [];
-            }
-        }
-        all_infos_merged = true;
+        cards_table = data;
+        cards_table_is_created = true;
     }).fail(function () {
         console.log("Can't retrieve JSON cards database");
     });
-
-    console.dir(cards_table);
 }
 
-function add_multi_deck_support_and_images_links() {
-    for (var i = 0; i < cards_table.length; i++) {
-        var element = cards_table[i];
-        element[cards_table__key_decks_array] = element[cards_table__key_decks_array].split(', ');// Split decks
-        element[cards_table__key_picture_link] = IMG_API_URL + element[cards_table__key_name].replace(/"/g, "_");// Create img_link
-        element[cards_table__key_name_fr_sort] = cleanUpSpecialChars(element[cards_table__key_name_fr]);// Create name_fr_sorting
+function edit_cards_data() {
+    if (!cards_table_is_created) {
+        setTimeout(edit_cards_data, 100);
+        return;
     }
-}
+    for (var currentIteration = 0; currentIteration < cards_table.length; currentIteration++) {
+        cards_table[currentIteration][cards_table__key_quantity] = parseInt(cards_table[currentIteration][cards_table__key_quantity]);
+        cards_table[currentIteration][cards_table__key_atk] = parseInt(cards_table[currentIteration][cards_table__key_atk]);
+        cards_table[currentIteration][cards_table__key_def] = parseInt(cards_table[currentIteration][cards_table__key_def]);
+        cards_table[currentIteration][cards_table__key_level] = parseInt(cards_table[currentIteration][cards_table__key_level]);
+        var current_card_types = cards_table[currentIteration][cards_table__key_monster_type];
+        var current_card_decks = cards_table[currentIteration][cards_table__key_decks_array];
+        if (!current_card_decks) {
+            cards_table[currentIteration][cards_table__key_decks_array] = [""];
+        } else {
+            cards_table[currentIteration][cards_table__key_decks_array] = cards_table[currentIteration][cards_table__key_decks_array].split(",");
+        }
+        if (!current_card_types) {
+            cards_table[currentIteration][cards_table__key_monster_type] = [""];
+        }
+        else {
+            cards_table[currentIteration][cards_table__key_monster_type] = cards_table[currentIteration][cards_table__key_monster_type].split(",");
+        }
+        if (cards_table[currentIteration][cards_table__key_name] === "Level Down!?") {
+            cards_table[currentIteration][cards_table__key_picture_link] = IMG_API_URL + "Level_Down_%3F";// Level Down?!  //API Screw this up
+        } else {
+            cards_table[currentIteration][cards_table__key_picture_link] = IMG_API_URL + cards_table[currentIteration][cards_table__key_name].replace(/"/g, "_");// Create img_link
+        }
 
-function retrieve_and_parse_csv() {
-    // noinspection JSUnusedGlobalSymbols
-    Tabletop.init({
-        key: CSV_URL,
-        callback: function (data) {
-            cards_table = data[yu_gi_oh_sheet].elements;
-            cards_stats = data[yu_gi_oh_sheet_stats].elements[0];
-            cards_are_retrieved = true;
-        },
-        simpleSheet: false
-    });
+        cards_table[currentIteration][cards_table__key_name_fr_sort] = cleanUpSpecialChars(cards_table[currentIteration][cards_table__key_name_fr]);// Create name_fr_sorting FIXME TO MAKE IT LANGUAGE DEPENDANT
+    }
+    cards_table_is_ready = true;
 }
 
 function create_filters() {
 
-    if (!all_infos_merged) {
+    if (!cards_table_is_ready) {
         setTimeout(create_filters, 100);
         return;
     }
+    console.dir(cards_table);
 
 
     window.FJS = FilterJS(cards_table, '#cards_table', {
@@ -166,7 +139,16 @@ function create_filters() {
             shortResult: shortResult
         }
     });
+    initEvents();
+    setCheckboxesStatus();
+
 }
+
+function setCheckboxesStatus() {
+    $('#deck_criteria').find(':checkbox').prop('checked', true);
+    $('#all_types').prop("checked", true);
+}
+
 
 function update_cards_number(result) {
     $('#cards_number').text(result.length);
@@ -189,6 +171,7 @@ function enable_monster_criterias() {
     $('#monster_atk').show();
     $('#monster_family').show();
     $('#monster_type').show();
+    FJS.filter();
 }
 
 function disable_monster_criterias() {
@@ -379,7 +362,7 @@ function buildSortOptions(name) {
             if (b[cards_table__key_name_fr] === "Jeton" || b[cards_table__key_atk] === null) {
                 return -1;
             }
-            return ((a[cards_table__key_atk] - b[cards_table__key_atk]) ) * -1 ||
+            return ((a[cards_table__key_atk] - b[cards_table__key_atk])) * -1 ||
                 a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
         };
         return sort;
@@ -434,7 +417,7 @@ function buildSortOptions(name) {
             if (b[cards_table__key_name_fr] === "Jeton" || b[cards_table__key_def] === null) {
                 return -1;
             }
-            return ((a[cards_table__key_def] - b[cards_table__key_def]) ) * -1 ||
+            return ((a[cards_table__key_def] - b[cards_table__key_def])) * -1 ||
                 a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
         };
         return sort;
@@ -482,7 +465,7 @@ function buildSortOptions(name) {
             if (b[cards_table__key_level] === 0 || b[cards_table__key_level] === null) {
                 return -1;
             }
-            return ((a[cards_table__key_level] - b[cards_table__key_level]) ) * -1 ||
+            return ((a[cards_table__key_level] - b[cards_table__key_level])) * -1 ||
                 a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
         };
         return sort;
@@ -509,5 +492,86 @@ function buildSortOptions(name) {
     }
 }
 
+/**
+ *  MODAL
+ */
+
+
+
+function traduce(element) {//FIXME
+    if (element === "monster") {
+        return "Monstre";
+    } else if (element === "spell") {
+        return "Magie";
+    }
+    else if (element === "trap") {
+        return "Piège";
+    } else if (element === "token") {
+        return "Jeton";
+    } else if (element === "earth") {
+        return "Terre";
+    }
+}
+
+function display_card_modal(card_fid) {
+    var card_modal = cards_table[card_fid - 1];
+    var html = '<div id="cardModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true">';
+    html += '<div class="modal-dialog modal-lg">';
+    html += '<div class="modal-content">';
+    html += '<div class="modal-header">';
+    html += '<a class="close" data-dismiss="modal">×</a>';
+    html += '<h4>' + card_modal[cards_table__key_name_fr] + '</h4>';
+    html += '</div>';
+    html += '<div class="modal-body">';
+    html += '<div class="row center-block">';
+    html += '<div class="col-md-5">';// col1
+    html += "<img class='img-responsive' src=\"" + card_modal[cards_table__key_picture_link] + "\"" + " onerror='imgError(this);'>";//TODO
+    html += '</div>'; // col 1
+    html += '<div class="col-md-6">'; //col 2
+    html += "<br><strong>" + "Nom anglais: " + "</strong>";
+    html += "<span>" + card_modal[cards_table__key_name] + "</span><br><br>";
+    html += "<strong>" + "Type de carte: " + "</strong>";
+    html += "<span>" + traduce(card_modal[cards_table__key_card_type]) + " </span>";
+    if (card_modal[cards_table__key_card_type] === "monster") {//Monster
+        html += "<br><br><strong>" + "Niveau: " + "</strong>";
+        for (var i = 0; i < parseInt(card_modal[cards_table__key_level]); i++) {
+            html += "</span><img class='icon_level' src='/img/level/level.svg' onerror='this.src=''>";
+        }
+        html += "<br><br><strong>" + "ATK: " + "</strong>";
+        html += "<span>" + card_modal[cards_table__key_atk] + "</span><br><br>";
+        html += "<strong>" + "DEF: " + "</strong>";
+        html += "<span>" + card_modal[cards_table__key_def] + "</span><br><br>";
+        html += "<strong>" + "Type(s): " + "</strong>";
+        html += "<span>" + card_modal[cards_table__key_monster_type].join("/") + "</span><br><br>";
+        html += "<strong>" + "Élement: " + "</strong>";
+        html += "<span>" + traduce(card_modal[cards_table__key_family]) + " </span><img class='icon' src='img/attribute/" + card_modal[cards_table__key_family] + ".svg' onerror='this.src=''><br><br>";
+        html += "<strong>" + "Texte: " + "</strong>";
+        html += "<span>" + card_modal[cards_table__key_text] + "</span>";
+    } else if (card_modal[cards_table__key_card_type] !== "token") {//Spells and Traps
+        html += "<img class='icon' src='img/card_type/" + card_modal[cards_table__key_card_type] + ".svg' onerror='this.src=''><br><br>";
+        html += "<strong>" + "Propriété: " + "</strong>";
+        html += "<span>" + card_modal[cards_table__key_property] + " </span><img class='icon' src='img/property/" + card_modal[cards_table__key_property] + ".svg' onerror='this.src=''><br><br>";
+        html += "<strong>" + "Texte: " + "</strong>";
+        html += "<span>" + card_modal[cards_table__key_text] + "</span>";
+    }
+    html += "<br><br><strong>" + "Quantité: " + "</strong>";
+    html += "<span>" + card_modal[cards_table__key_quantity] + "</span>";
+    html += '</div>'; // col 2
+    html += '</div>'; // container
+    html += '</div>'; // modal body
+    html += '<div class="modal-footer">';
+    html += '<span class="btn btn-primary" data-dismiss="modal">Fermer</span>';
+    html += '</div>';  // content
+    html += '</div>';  // dialog
+    html += '</div>';  // footer
+    html += '</div>';  // modalWindow
+    $('body').append(html);
+    var cardModalSelector = $("#cardModal");
+    cardModalSelector.modal();
+    cardModalSelector.modal('show');
+    cardModalSelector.on('hidden.bs.modal', function () {
+        $(this).remove();
+    });
+}
 
 
