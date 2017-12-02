@@ -57,7 +57,6 @@ var sorting__quantity_asc = "quantity_asc";
 var sorting__quantity_desc = "quantity_desc";
 var sorting__card_type = "card_type";
 
-
 /**
  * Init
  */
@@ -134,7 +133,6 @@ function create_filters() {
         console.dir(cards_table);
     }
 
-
     window.FJS = FilterJS(cards_table, '#cards_table', {
         template: '#card_template',
         search: {
@@ -160,16 +158,13 @@ function create_filters() {
         }
     });
 
-
 }
-
 
 function shortResult(query) {
     if (sortOptions) {
         query.order(sortOptions);
     }
 }
-
 
 /**
  * Events
@@ -180,7 +175,6 @@ function setCheckboxesStatus() {
     $('#all_types').prop("checked", true);
 }
 
-
 function initEvents() {
 
     $("#all_types").change(function () {
@@ -190,7 +184,6 @@ function initEvents() {
         }
     });
 
-
     $("#monster").change(function () {
         if (this.checked) {
             enable_monster_criterias();
@@ -199,7 +192,6 @@ function initEvents() {
             disable_monster_criterias();
         }
     });
-
 
     $("#spell").change(function () {
         if (this.checked) {
@@ -219,14 +211,12 @@ function initEvents() {
         }
     });
 
-
     $("#token").change(function () {
         if (this.checked) {
             disable_monster_criterias();
             disable_spell_traps_criterias();
         }
     });
-
 
     $("#atk_slider").slider({
         min: 0,
@@ -275,7 +265,6 @@ function initEvents() {
             $('#quantity_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
         }
     });
-
 
     $("#l-sort-by").on('change', function (e) {
         sortOptions = buildSortOptions($(this).val());
@@ -579,7 +568,6 @@ function buildSortOptions(name) {
         return sort;
     }
 
-
     if (name === sorting__quantity_asc) {
         sort[cards_table__key_quantity] = 'asc';
         return sort;
@@ -693,6 +681,8 @@ function traduce(element) {//TODO: Trad related
         return "Jeton";
     } else if (element === "earth") {
         return "Terre";
+    } else {
+        return element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
     }
 }
 
