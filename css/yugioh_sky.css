@@ -53,6 +53,10 @@ hr {
     font-weight: 600;
 }
 
+.well {
+    padding: 10px !important;
+}
+
 .well_legend {
     display: block;
     width: 100%;
