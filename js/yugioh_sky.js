@@ -5,6 +5,8 @@
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
+ * https://github.com/joelcancela/Yu-Gi-Oh_Sky.js
+ *
  * Copyright 2017 Joël CANCELA VAZ[joel.cancelavaz@gmail.com]
  * This is not affiliated with Konami.
  */

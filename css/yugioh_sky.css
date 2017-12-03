@@ -6,6 +6,10 @@ body {
     margin-top: 0;
 }
 
+.devicon-github-plain {
+    font-size: 1.5em;
+}
+
 hr {
     border-top: 1px solid #777;
 }
