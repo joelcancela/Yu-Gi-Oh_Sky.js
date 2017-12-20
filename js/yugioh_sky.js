@@ -15,7 +15,7 @@
  * Globals
  */
 // Card image API & Database links
-var DATABASE_CARDS = "http://www.joelcancela.fr/services/database_yugiohjs_json";
+var DATABASE_CARDS = "https://www.joelcancela.fr/services/database_yugiohjs_json";
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
 var img_card_404 = "./img/yugioh_404.png";
 var cards_table = [];
