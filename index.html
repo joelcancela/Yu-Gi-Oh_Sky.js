@@ -563,8 +563,11 @@
 </div>
 <script id="card_template" type="text/html">
     <!--suppress HtmlUnknownTarget -->
-    <img class="col-md-3 col-xs-6 yugioh_card" src="<%= img_link %>" alt="<%= name_fr %>" title="<%= name_fr %>"
-         onerror="imgError(this);" onclick="display_card_modal('<%= _fid %>')">
+    <div class="col-md-3 col-xs-6">
+            <img class="yugioh_card" src="<%= img_link %>"
+                 alt="<%= name_fr %>" title="<%= name_fr %>"
+                 onerror="imgError(this);" onclick="display_card_modal('<%= _fid %>')">
+    </div>
 </script>
 <script id="pagination_template" type="text/html">
     <span class="page-links-container">
