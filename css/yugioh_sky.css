@@ -29,8 +29,27 @@ hr {
     text-decoration: underline;
 }
 
-.pagination {
-    margin-left: 25px;
+.pagination, .pagination_cards {
+    margin-left: 15px;
+}
+
+.pagination_cards, .page-links-container {
+    display: inline-block;
+}
+
+.page-links-container a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.page-links-container a.page-links-active {
+    background-color: #009cdd;
+    color: white;
+}
+
+.page-links-container a:hover:not(.active) {
+    background-color: #ddd;
 }
 
 .search-icon {
@@ -55,6 +74,10 @@ hr {
     color: #222;
     font-size: 25px;
     font-weight: 600;
+}
+
+.title > a, .github, .github:hover, .github:focus {
+    text-decoration: none;
 }
 
 .well {
@@ -99,12 +122,12 @@ hr {
         height: 70px;
     }
 
-    .icon{
+    .icon {
         max-width: 100%;
         max-height: 100%;
     }
 
-    input[type=checkbox],input[type=radio] {
+    input[type=checkbox], input[type=radio] {
         margin-left: -25px !important;
         -ms-transform: scale(4) !important; /* IE */
         -moz-transform: scale(4) !important; /* FF */
@@ -115,7 +138,7 @@ hr {
         margin-right: 25px;
     }
 
-    .page-links-active, .page-links-inactive{
+    .page-links-active, .page-links-inactive {
         font-size: 50px;
     }
 

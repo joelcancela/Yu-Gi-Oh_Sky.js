@@ -1,6 +1,6 @@
 /*
  * yugioh_sky.js
- * 1.2.0 (2017-12-02)
+ * 1.3.0 (2017-12-02)
  *
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
@@ -113,7 +113,7 @@ function edit_cards_data() {
         } else {
             cards_table[currentIteration][cards_table__key_picture_link] = IMG_API_URL + cards_table[currentIteration][cards_table__key_name].replace(/"/g, "_");// Creates the link to the card image
         }
-        cards_table[currentIteration][cards_table__key_name_fr_sort] = cleanUpSpecialChars(cards_table[currentIteration][cards_table__key_name_fr]);// Create name_fr_sorting TODO: Trad related
+        cards_table[currentIteration][cards_table__key_name_fr_sort] = cleanUpSpecialChars(cards_table[currentIteration][cards_table__key_name_fr]);// Create name_fr_sorting
     }
     cards_table_is_ready = true;
 }
@@ -624,7 +624,7 @@ function display_card_modal(card_fid) {
         html += "<strong>" + "DEF: " + "</strong>";
         html += "<span>" + card_modal[cards_table__key_def] + "</span><br><br>";
         html += "<strong>" + "Type(s): " + "</strong>";
-        html += "<span>" + card_modal[cards_table__key_monster_type].join("/") + "</span><br><br>";
+        html += "<span>" + traduce(card_modal[cards_table__key_monster_type]) + "</span><br><br>";
         html += "<strong>" + "Élement: " + "</strong>";
         html += "<span>" + traduce(card_modal[cards_table__key_family]) + " </span><img class='icon' src='img/attribute/" + card_modal[cards_table__key_family] + ".svg' onerror='this.src=''><br><br>";
         html += "<strong>" + "Texte: " + "</strong>";
@@ -632,7 +632,7 @@ function display_card_modal(card_fid) {
     } else if (card_modal[cards_table__key_card_type] !== "token") {//Spells and Traps
         html += "<img class='icon' src='img/card_type/" + card_modal[cards_table__key_card_type] + ".svg' onerror='this.src=''><br><br>";
         html += "<strong>" + "Propriété: " + "</strong>";
-        html += "<span>" + card_modal[cards_table__key_property] + " </span><img class='icon' src='img/property/" + card_modal[cards_table__key_property] + ".svg' onerror='this.src=''><br><br>";
+        html += "<span>" + traduce(card_modal[cards_table__key_property]) + " </span><img class='icon' src='img/property/" + card_modal[cards_table__key_property] + ".svg' onerror='this.src=''><br><br>";
         html += "<strong>" + "Texte: " + "</strong>";
         html += "<span>" + card_modal[cards_table__key_text] + "</span>";
     }
@@ -671,20 +671,80 @@ function imgError(image) {
     return true;
 }
 
-function traduce(element) {//TODO: Trad related
-    if (element === "monster") {
-        return "Monstre";
-    } else if (element === "spell") {
-        return "Magie";
-    }
-    else if (element === "trap") {
-        return "Piège";
-    } else if (element === "token") {
-        return "Jeton";
-    } else if (element === "earth") {
-        return "Terre";
+/**
+ * Traduction related stuff
+ */
+
+var traductionJson = {
+    "Aqua": "Aqua",
+    "Beast": "Bête",
+    "Beast-Warrior": "Bête-Guerrier",
+    "Continuous": "Continu",
+    "Counter": "Contre",
+    "Creator God": "Dieu Créateur",
+    "Cyberse": "Cyberse",
+    "Dinosaur": "Dinosaure",
+    "Divine-Beast": "Bête-Divine",
+    "Dragon": "Dragon",
+    "Effect": "Effet",
+    "Equip": "Équipement",
+    "Fairy": "Elfe",
+    "Field": "Terrain",
+    "Fiend": "Démon",
+    "Fish": "Poisson",
+    "Flip": "Flip",
+    "Fusion": "Fusion",
+    "Gemini": "Gémeau",
+    "Insect": "Insecte",
+    "Link": "Lien",
+    "Machine": "Machine",
+    "Normal": "Normal",
+    "Pendulum": "Pendule",
+    "Plant": "Plante",
+    "Psychic": "Psychique",
+    "Pyro": "Pyro",
+    "Quick-Play": "Jeu-Rapide",
+    "Reptile": "Reptile",
+    "Ritual": "Rituel",
+    "Rock": "Rocher",
+    "Sea Serpent": "Serpent de Mer",
+    "Spellcaster": "Magicien",
+    "Spirit": "Spirit",
+    "Synchro": "Synchro",
+    "Thunder": "Tonnerre",
+    "Toon": "Toon",
+    "Tuner": "Syntoniseur",
+    "Union": "Union",
+    "Warrior": "Guerrier",
+    "Winged Beast": "Bête Ailée",
+    "Wyrm": "Wyrm",
+    "XYZ": "XYZ",
+    "Zombie": "Zombie",
+    "dark": "Ténèbres",
+    "divine": "Divin",
+    "earth": "Terre",
+    "fire": "Feu",
+    "light": "Lumière",
+    "monster": "Monstre",
+    "spell": "Magie",
+    "token": "Jeton",
+    "trap": "Piège",
+    "water": "Eau",
+    "wind": "Vent"
+};
+
+function traduce(element) {
+    if ($.isArray(element)) {
+        var traduction = "";
+        for (var i = 0; i < element.length; i++) {
+            if (i !== 0) {
+                traduction += "/";
+            }
+            traduction += traduce(element[i]);
+        }
+        return traduction;
     } else {
-        return element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
+        return traductionJson[element] || element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
     }
 }
 

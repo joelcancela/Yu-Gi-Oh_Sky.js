@@ -26,8 +26,9 @@
     <div class="sidebar col-md-3 col-xs-12">
         <h1 class="title"><a href="">Yu-Gi-Oh_Sky.js</a></h1><br>
         <strong><i>Not affiliated with Konami</i></strong><br>
-        <span> v1.2.1 - © 2017-2018 </span><br>
-        <span><a href="https://github.com/joelcancela/Yu-Gi-Oh_Sky.js" onclick="window.open(this.href);return false"><i
+        <span> v1.3.0 - © 2017-2018 </span><br>
+        <span><a class="github" href="https://github.com/joelcancela/Yu-Gi-Oh_Sky.js"
+                 onclick="window.open(this.href);return false"><i
                 class="devicon-github-plain colored"></i></a> <a
                 href="mailto:joel.cancelavaz@gmail.com">Joël Cancela Vaz</a></span><br><br>
         <div>
@@ -554,7 +555,7 @@
         <div class="pagination">
             <div id="pagination"></div>
         </div>
-        <div class="pagination">
+        <div class="pagination_cards">
             <label for="per_page" class="label_card_pages semibold">Cartes par page:</label>
             <span id="per_page"></span>
         </div>
@@ -564,14 +565,13 @@
 <script id="card_template" type="text/html">
     <!--suppress HtmlUnknownTarget -->
     <div class="col-md-3 col-xs-6">
-            <img class="yugioh_card" src="<%= img_link %>"
-                 alt="<%= name_fr %>" title="<%= name_fr %>"
-                 onerror="imgError(this);" onclick="display_card_modal('<%= _fid %>')">
+        <img class="yugioh_card" src="<%= img_link %>"
+             alt="<%= name_fr %>" title="<%= name_fr %>"
+             onerror="imgError(this);" onclick="display_card_modal('<%= _fid %>')">
     </div>
 </script>
 <script id="pagination_template" type="text/html">
     <span class="page-links-container">
-  <strong class="semibold">Pages:</strong>
   <% if(currentPage > 1) { %>
   <a href="#" data-page="first"><<</a>
   <% } %>

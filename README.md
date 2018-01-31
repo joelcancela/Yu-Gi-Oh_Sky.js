@@ -21,6 +21,29 @@ This project uses the following libraries:
 
 The Yu-Gi-Oh! Cards information are provided via the [Yu-Gi-Oh! Prices](https://yugiohprices.com/) [Public API](http://docs.yugiohprices.apiary.io/#).
 
+## Notes
+
+The JSON Structure used as *"database"*
+
+```JSON
+[
+    {
+    "name_fr": "7",
+    "name": "7",
+    "card_type": "spell",
+    "quantity": "1",
+    "family": "",
+    "atk": "",
+    "def": "",
+    "level": "",
+    "text": "When there are 3 face-up \"7\" cards on your side of the field, draw 3 cards from your Deck. Then destroy all \"7\" cards. When this card is sent directly from the field to your Graveyard, increase your Life Points by 700 points.",
+    "property": "Continuous",
+    "decks": false,
+    "types": false
+    }
+]
+```
+
 ## License
 
 This is released under the MIT license.
