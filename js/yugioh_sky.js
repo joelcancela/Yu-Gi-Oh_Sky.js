@@ -610,7 +610,7 @@ function display_card_modal(card_fid) {
     html += '<div class="modal-content">';
     html += '<div class="modal-header">';
     html += '<a class="close" data-dismiss="modal">×</a>';
-    html += '<h4>' + card_modal[cards_table__key_name_fr] + '</h4>';
+    html += '<h3>' + card_modal[cards_table__key_name_fr] + '</h3>';
     html += '</div>';
     html += '<div class="modal-body">';
     html += '<div class="row center-block">';

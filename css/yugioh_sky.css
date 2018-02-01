@@ -24,6 +24,10 @@ hr {
     max-width: 17px;
 }
 
+.modal-header > h3 {
+    text-align: center;
+}
+
 .page-links-active {
     font-weight: 600;
     text-decoration: underline;
@@ -108,6 +112,10 @@ hr {
 
     body {
         font-size: 33px;
+    }
+
+    .btn, .modal-header > h3 {
+        font-size: 30px;
     }
 
     .checkbox, .radio {
