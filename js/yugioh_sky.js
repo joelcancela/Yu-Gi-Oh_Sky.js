@@ -573,12 +573,18 @@ function buildSortOptions(name) {
     }
 
     if (name === sorting__quantity_asc) {
-        sort[cards_table__key_quantity] = 'asc';
+        sort[cards_table__key_quantity] = 'custom';
+        sort['sort_function'] = function (a, b) {
+            return a[cards_table__key_quantity] - b[cards_table__key_quantity] || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+        };
         return sort;
     }
 
     if (name === sorting__quantity_desc) {
-        sort[cards_table__key_quantity] = 'desc';
+        sort[cards_table__key_quantity] = 'custom';
+        sort['sort_function'] = function (a, b) {
+            return b[cards_table__key_quantity] - a[cards_table__key_quantity] || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+        };
         return sort;
     }
 
