@@ -17,6 +17,7 @@
 // Card image API & Database links
 var DATABASE_CARDS = "https://www.joelcancela.fr/services/database_yugiohjs_json";
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
+var SUPPORT_CARDS_API_URL = "https://www.joelcancela.fr/services/yugioh_card_support_cards.php";
 var CARD_DESC_FR = "https://www.joelcancela.fr/services/yugioh_card_description.php";
 var img_card_404 = "./img/yugioh_404.png";
 var cards_table = [];
@@ -636,7 +637,10 @@ function display_card_modal(card_fid) {
     html += "<br><br><strong>" + "Texte: " + "</strong>";
     html += "<span id='description'>" + card_modal[cards_table__key_text] + "</span>";
     html += "<br><br><strong>" + "Quantité: " + "</strong>";
-    html += "<span>" + card_modal[cards_table__key_quantity] + "</span>";
+    html += "<span>" + card_modal[cards_table__key_quantity] + "</span><br><br>";
+    html += "<a href='#supportCards' class='btn btn-info' data-toggle='collapse'>Voir les cartes liées</a>";
+    html += "<div id='supportCards' class='collapse'>";
+    html += '</div>';
     html += '</div>'; // col 2
     html += '</div>'; // container
     html += '</div>'; // modal body
@@ -651,6 +655,7 @@ function display_card_modal(card_fid) {
     cardModalSelector.modal();
     cardModalSelector.modal('show');
     traductionCardText(card_modal[cards_table__key_name]);
+    getSupportCards(card_modal[cards_table__key_name]);
     cardModalSelector.on('hidden.bs.modal', function () {
         $(this).remove();
     });
@@ -762,3 +767,28 @@ function traductionCardText(card_name_en) {
     });
 }
 
+function getSupportCards(card_name_en) {
+    $.ajax({
+        async: true,
+        type: 'GET',
+        url: SUPPORT_CARDS_API_URL,
+        data: {'card_name': card_name_en},
+        success: function (data) {
+            var cards = "";
+            for (var i = 0; i < data.length; i++) {
+                if (i === 0) {
+                    cards += "<ul>";
+                }
+                cards += "<li><a target='_blank' href='http://yugioh.wikia.com/wiki/" + data[i] + "'>" + data[i]+ "</a></li>";
+                if (i === data.length - 1) {
+                    cards += "</ul>";
+                }
+            }
+            if (data.length > 0) {
+                $("#supportCards").html(cards);
+            } else {
+                $("#supportCards").html("Aucune carte liée");
+            }
+        }
+    });
+}
