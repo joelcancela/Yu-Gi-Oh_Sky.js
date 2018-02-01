@@ -1,577 +1,576 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Yu-Gi-Oh_Sky.js</title>
-    <!--CSS-->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet"
-          href="css/jquery-ui.min.css">
-    <link rel="stylesheet"
-          href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
-    <link rel="stylesheet" href="css/yugioh_sky.css">
-    <!--Scripts-->
-    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script type="text/javascript"
-            src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
-    <script type="text/javascript" src='js/jquery-ui.min.js'></script>
-    <script type="text/javascript" src='js/filter_custom.js'></script>
-    <script type="text/javascript" src="js/yugioh_sky.js"></script>
+	<meta charset="UTF-8">
+	<title>Yu-Gi-Oh_Sky.js</title>
+	<!--CSS-->
+	<link rel="stylesheet"
+	      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	<link rel="stylesheet"
+	      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet"
+	      href="css/jquery-ui.min.css">
+	<link rel="stylesheet"
+	      href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+	<link rel="stylesheet" href="css/yugioh_sky.css">
+	<!--Scripts-->
+	<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+	<script type="text/javascript"
+	        src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+	<script type="text/javascript" src='js/jquery-ui.min.js'></script>
+	<script type="text/javascript" src='js/filter_custom.js'></script>
+	<script type="text/javascript" src="js/yugioh_sky.js"></script>
 </head>
 <body>
 <div class="container">
-    <div class="sidebar col-md-3 col-xs-12">
-        <h1 class="title"><a href="">Yu-Gi-Oh_Sky.js</a></h1><br>
-        <strong><i>Not affiliated with Konami</i></strong><br>
-        <span> v1.3.0 - © 2017-2018 </span><br>
-        <span><a class="github" href="https://github.com/joelcancela/Yu-Gi-Oh_Sky.js"
-                 onclick="window.open(this.href);return false"><i
-                class="devicon-github-plain colored"></i></a> <a
-                href="mailto:joel.cancelavaz@gmail.com">Joël Cancela Vaz</a></span><br><br>
-        <div>
-            <h4>Cartes (<span id="cards_number">0</span>)</h4>
-        </div>
-        <div>
-            <label class="sr-only" for="searchbox">Rechercher une carte</label>
-            <input class="form-control" id="searchbox" placeholder="Rechercher une carte &hellip;" autofocus>
-            <span class="glyphicon glyphicon-search search-icon"></span>
-        </div>
-        <h4>Filtres</h4>
-        <div class="well">
-            <div>
-                <label class="well_legend" for="l-sort-by">Trier par:</label>
-                <select name="Sort_By" id="l-sort-by" class="corners">
-                    <option value="name_asc">Nom A&rarr;Z</option>
-                    <option value="name_desc">Nom Z&rarr;A</option>
-                    <option value="atk_desc">ATK &darr;</option>
-                    <option value="atk_asc">ATK &uarr;</option>
-                    <option value="def_desc">DEF &darr;</option>
-                    <option value="def_asc">DEF &uarr;</option>
-                    <option value="level_desc">Level &darr;</option>
-                    <option value="level_asc">Level &uarr;</option>
-                    <option value="quantity_desc">Nb d'exemplaires &darr;</option>
-                    <option value="quantity_asc">Nb d'exemplaires &uarr;</option>
-                    <option value="card_type">Type de carte</option>
-                </select>
-            </div>
-        </div>
-        <div class="well">
-            <fieldset id="deck_criteria">
-                <legend class="well_legend" data-toggle="collapse" data-target="#deck_wells">Decks <i
-                        class="pull-right glyphicon glyphicon glyphicon-menu-down"></i></legend>
-                <div id="deck_wells" class="collapse">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Deck Héros">
-                            <span>Deck Héros</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Deck Cyber Dragon">
-                            <span>Deck Cyber Dragon</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Jaden">
-                            <span>Jaden</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Zane">
-                            <span>Zane</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Aster">
-                            <span>Aster</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            <span>Pas de deck attribué</span>
-                        </label>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div class="well">
-            <fieldset id="card_type_criteria">
-                <legend class="well_legend" data-toggle="collapse" data-target="#card_type_wells">Types de cartes <i
-                        class="pull-right glyphicon glyphicon glyphicon-menu-down"></i></legend>
-                <div id="card_type_wells" class="collapse">
-                    <div class="radio">
-                        <label>
-                            <input id="all_types" type="radio" value="all" name="type">
-                            <span>Tous</span>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input id="monster" type="radio" value="monster" name="type">
-                            <span>Monstres</span>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input id="spell" type="radio" value="spell" name="type">
-                            <span>Magies </span><img class="icon" src="img/card_type/spell.svg" onerror="src=''">
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input id="trap" type="radio" value="trap" name="type">
-                            <span>Pièges </span><img class="icon" src="img/card_type/trap.svg" onerror="src=''">
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input id="token" type="radio" value="token" name="type">
-                            <span>Autres (Jeton)</span>
-                        </label>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div id="monster_type" class="well" style="display: none">
-            <fieldset id="type_criteria">
-                <legend class="well_legend" data-toggle="collapse" data-target="#monster_type_wells">Types de monstres
-                    <i class="pull-right glyphicon glyphicon glyphicon-menu-down"></i></legend>
-                <div id="monster_type_wells" class="collapse">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Normal">
-                            <span>Normal</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Effect">
-                            <span>Effet</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Flip">
-                            <span>Flip</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Fusion">
-                            <span>Fusion</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Gemini">
-                            <span>Gémeau</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Link">
-                            <span>Lien</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Pendulum">
-                            <span>Pendule</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Ritual">
-                            <span>Rituel</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Spirit">
-                            <span>Spirit</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Synchro">
-                            <span>Synchro</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Tuner">
-                            <span>Syntoniseur</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Toon">
-                            <span>Toon</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Union">
-                            <span>Union</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Xyz">
-                            <span>XYZ</span>
-                        </label>
-                    </div>
-                    <hr>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Aqua">
-                            <span>Aqua</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Beast">
-                            <span>Bête</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Winged Beast">
-                            <span>Bête Ailée</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Divine-Beast">
-                            <span>Bête-Divine</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Beast-Warrior">
-                            <span>Bête-Guerrier</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Cyberse">
-                            <span>Cyberse</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Fiend">
-                            <span>Démon</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Creator God">
-                            <span>Dieu Créateur</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Dinosaur">
-                            <span>Dinosaure</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Dragon">
-                            <span>Dragon</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Fairy">
-                            <span>Elfe</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Warrior">
-                            <span>Guerrier</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Insect">
-                            <span>Insecte</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Machine">
-                            <span>Machine</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Spellcaster">
-                            <span>Magicien</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Plant">
-                            <span>Plante</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Fish">
-                            <span>Poisson</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Psychic">
-                            <span>Psychique</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Pyro">
-                            <span>Pyro</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Reptile">
-                            <span>Reptile</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Rock">
-                            <span>Rocher</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Sea Serpent">
-                            <span>Serpent de Mer</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Thunder">
-                            <span>Tonnerre</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Wyrm">
-                            <span>Wyrm</span>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Zombie">
-                            <span>Zombie</span>
-                        </label>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div id="monster_family" class="well" style="display: none">
-            <fieldset id="family_criteria">
-                <legend class="well_legend" data-toggle="collapse" data-target="#family_wells">Élement <i
-                        class="pull-right glyphicon glyphicon glyphicon-menu-down"></i></legend>
-                <div id="family_wells" class="collapse">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="water">
-                            <span>Eau </span><img class="icon" src="img/attribute/water.svg"
-                                                  onerror="src='img/attribute/water.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="fire">
-                            <span>Feu </span><img class="icon" src="img/attribute/fire.svg"
-                                                  onerror="src='img/attribute/fire.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="light">
-                            <span>Lumière </span><img class="icon" src="img/attribute/light.svg"
-                                                      onerror="src='img/attribute/light.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="earth">
-                            <span>Terre </span><img class="icon" src="img/attribute/earth.svg"
-                                                    onerror="src='img/attribute/earth.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="dark">
-                            <span>Ténèbres </span><img class="icon" src="img/attribute/dark.svg"
-                                                       onerror="src='img/attribute/dark.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="wind">
-                            <span>Vent </span><img class="icon" src="img/attribute/wind.svg"
-                                                   onerror="src='img/attribute/wind.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="divine">
-                            <span>Divin </span><img class="icon" src="img/attribute/divine.svg"
-                                                    onerror="src='img/attribute/divine.png'">
-                        </label>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div id="monster_atk" class="well" style="display: none">
-            <fieldset id="atk_criteria">
-                <legend>ATK</legend>
-                <span id="atk_range_label" class="slider-label">0 - 16000 ATK</span>
-                <div id="atk_slider"
-                     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                     aria-disabled="false">
-                    <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0; width: 100%;"></div>
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0;"></a><a
-                        class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
-                <input type="hidden" id="atk_filter" value="0-16000">
-            </fieldset>
-        </div>
-        <div id="monster_def" class="well" style="display: none">
-            <fieldset id="def_criteria">
-                <legend>DEF</legend>
-                <span id="def_range_label" class="slider-label">0 - 16000 DEF</span>
-                <div id="def_slider"
-                     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                     aria-disabled="false">
-                    <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0; width: 100%;"></div>
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0;"></a><a
-                        class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
-                <input type="hidden" id="def_filter" value="0-16000">
-            </fieldset>
-        </div>
-        <div id="monster_level" class="well" style="display: none">
-            <fieldset id="level_criteria">
-                <legend>Niveau</legend>
-                <span id="level_range_label" class="slider-label">Niveau 0 - 12</span>
-                <img class="icon" src="img/level/level.svg" onerror="src='img/level/level.png'">
-                <div id="level_slider"
-                     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                     aria-disabled="false">
-                    <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0; width: 100%;"></div>
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0;"></a><a
-                        class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
-                <input type="hidden" id="level_filter" value="0-12">
-            </fieldset>
-        </div>
-        <div id="properties" class="well" style="display: none">
-            <fieldset id="property_criteria">
-                <legend class="well_legend" data-toggle="collapse" data-target="#property_wells">Propriétés <i
-                        class="pull-right glyphicon glyphicon glyphicon-menu-down"></i></legend>
-                <div id="property_wells" class="collapse">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Normal">
-                            <span>Normal </span><img class="icon" src="img/property/normal.svg" onerror="src=''">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Continuous">
-                            <span>Continu </span><img class="icon" src="img/property/continuous.svg"
-                                                      onerror="src='img/property/continuous.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Counter">
-                            <span>Contre </span><img class="icon" src="img/property/counter.svg"
-                                                     onerror="src='img/property/counter.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Quick-Play">
-                            <span>Jeu-Rapide </span><img class="icon" src="img/property/quick-play.svg"
-                                                         onerror="src='img/property/quick-play.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Ritual">
-                            <span>Rituel </span><img class="icon" src="img/property/ritual.svg"
-                                                     onerror="src='img/property/effect_icon_ritual.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Field">
-                            <span>Terrain </span><img class="icon" src="img/property/field.svg"
-                                                      onerror="src='img/property/effect_icon_field.png'">
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="Equip">
-                            <span>Équipement </span><img class="icon" src="img/property/equip.svg"
-                                                         onerror="src='img/property/effect_icon_equip.png'">
-                        </label>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div class="well">
-            <fieldset id="quantity_criteria">
-                <legend>Exemplaires</legend>
-                <span id="quantity_range_label" class="slider-label">1 - 10 Exemplaires</span>
-                <div id="quantity_slider"
-                     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                     aria-disabled="false">
-                    <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0; width: 100%;"></div>
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0;"></a><a
-                        class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
-                <input type="hidden" id="quantity_filter" value="1-10">
-            </fieldset>
-        </div>
-
-    </div>
-    <div class="col-md-9 col-xs-12">
-        <div class="pagination">
-            <div id="pagination"></div>
-        </div>
-        <div class="pagination_cards">
-            <label for="per_page" class="label_card_pages semibold">Cartes par page:</label>
-            <span id="per_page"></span>
-        </div>
-        <div class="content" id="cards_table"></div>
-    </div>
+	<div class="sidebar col-md-3 col-xs-12">
+		<h1 class="title"><a href="">Yu-Gi-Oh_Sky.js</a></h1><br>
+		<strong><i>Not affiliated with Konami</i></strong><br>
+		<span> v2.0 - © 2017-2018 </span><br>
+		<span><a class="github" href="https://github.com/joelcancela/Yu-Gi-Oh_Sky.js"
+		         onclick="window.open(this.href);return false"><i
+				class="devicon-github-plain colored"></i></a> <a
+				href="mailto:joel.cancelavaz@gmail.com">Joël Cancela Vaz</a></span><br><br>
+		<div>
+			<h4>Cartes (<span id="cards_number">0</span>)</h4>
+		</div>
+		<div>
+			<label class="sr-only" for="searchbox">Rechercher une carte</label>
+			<input class="form-control" id="searchbox" placeholder="Rechercher une carte &hellip;" autofocus>
+			<span class="glyphicon glyphicon-search search-icon"></span>
+		</div>
+		<h4>Filtres</h4>
+		<div class="well">
+			<div>
+				<label class="well_legend" for="l-sort-by">Trier par:</label>
+				<select name="Sort_By" id="l-sort-by" class="corners">
+					<option value="name_asc">Nom A&rarr;Z</option>
+					<option value="name_desc">Nom Z&rarr;A</option>
+					<option value="atk_desc">ATK &darr;</option>
+					<option value="atk_asc">ATK &uarr;</option>
+					<option value="def_desc">DEF &darr;</option>
+					<option value="def_asc">DEF &uarr;</option>
+					<option value="level_desc">Level &darr;</option>
+					<option value="level_asc">Level &uarr;</option>
+					<option value="quantity_desc">Nb d'exemplaires &darr;</option>
+					<option value="quantity_asc">Nb d'exemplaires &uarr;</option>
+					<option value="card_type">Type de carte</option>
+				</select>
+			</div>
+		</div>
+		<div class="well">
+			<fieldset id="deck_criteria">
+				<legend class="well_legend" data-toggle="collapse" data-target="#deck_wells">Decks <i
+						class="pull-right glyphicon glyphicon glyphicon-menu-down"></i></legend>
+				<div id="deck_wells" class="collapse">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Deck Héros">
+							<span>Deck Héros</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Deck Cyber Dragon">
+							<span>Deck Cyber Dragon</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Jaden">
+							<span>Jaden</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Zane">
+							<span>Zane</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Aster">
+							<span>Aster</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="">
+							<span>Pas de deck attribué</span>
+						</label>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div class="well">
+			<fieldset id="card_type_criteria">
+				<legend class="well_legend" data-toggle="collapse" data-target="#card_type_wells">Types de cartes <i
+						class="pull-right glyphicon glyphicon glyphicon-menu-down"></i></legend>
+				<div id="card_type_wells" class="collapse">
+					<div class="radio">
+						<label>
+							<input id="all_types" type="radio" value="all" name="type">
+							<span>Tous</span>
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input id="monster" type="radio" value="monster" name="type">
+							<span>Monstres</span>
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input id="spell" type="radio" value="spell" name="type">
+							<span>Magies </span><img class="icon" src="img/card_type/spell.svg" onerror="src=''">
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input id="trap" type="radio" value="trap" name="type">
+							<span>Pièges </span><img class="icon" src="img/card_type/trap.svg" onerror="src=''">
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input id="token" type="radio" value="token" name="type">
+							<span>Autres (Jeton)</span>
+						</label>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="monster_type" class="well" style="display: none">
+			<fieldset id="type_criteria">
+				<legend class="well_legend" data-toggle="collapse" data-target="#monster_type_wells">Types de monstres
+					<i class="pull-right glyphicon glyphicon glyphicon-menu-down"></i></legend>
+				<div id="monster_type_wells" class="collapse">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Normal">
+							<span>Normal</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Effect">
+							<span>Effet</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Flip">
+							<span>Flip</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Fusion">
+							<span>Fusion</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Gemini">
+							<span>Gémeau</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Link">
+							<span>Lien</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Pendulum">
+							<span>Pendule</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Ritual">
+							<span>Rituel</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Spirit">
+							<span>Spirit</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Synchro">
+							<span>Synchro</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Tuner">
+							<span>Syntoniseur</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Toon">
+							<span>Toon</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Union">
+							<span>Union</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Xyz">
+							<span>XYZ</span>
+						</label>
+					</div>
+					<hr>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Aqua">
+							<span>Aqua</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Beast">
+							<span>Bête</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Winged Beast">
+							<span>Bête Ailée</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Divine-Beast">
+							<span>Bête-Divine</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Beast-Warrior">
+							<span>Bête-Guerrier</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Cyberse">
+							<span>Cyberse</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Fiend">
+							<span>Démon</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Creator God">
+							<span>Dieu Créateur</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Dinosaur">
+							<span>Dinosaure</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Dragon">
+							<span>Dragon</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Fairy">
+							<span>Elfe</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Warrior">
+							<span>Guerrier</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Insect">
+							<span>Insecte</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Machine">
+							<span>Machine</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Spellcaster">
+							<span>Magicien</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Plant">
+							<span>Plante</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Fish">
+							<span>Poisson</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Psychic">
+							<span>Psychique</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Pyro">
+							<span>Pyro</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Reptile">
+							<span>Reptile</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Rock">
+							<span>Rocher</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Sea Serpent">
+							<span>Serpent de Mer</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Thunder">
+							<span>Tonnerre</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Wyrm">
+							<span>Wyrm</span>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Zombie">
+							<span>Zombie</span>
+						</label>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="monster_family" class="well" style="display: none">
+			<fieldset id="family_criteria">
+				<legend class="well_legend" data-toggle="collapse" data-target="#family_wells">Élement <i
+						class="pull-right glyphicon glyphicon glyphicon-menu-down"></i></legend>
+				<div id="family_wells" class="collapse">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="water">
+							<span>Eau </span><img class="icon" src="img/attribute/water.svg"
+							                      onerror="src='img/attribute/water.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="fire">
+							<span>Feu </span><img class="icon" src="img/attribute/fire.svg"
+							                      onerror="src='img/attribute/fire.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="light">
+							<span>Lumière </span><img class="icon" src="img/attribute/light.svg"
+							                          onerror="src='img/attribute/light.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="earth">
+							<span>Terre </span><img class="icon" src="img/attribute/earth.svg"
+							                        onerror="src='img/attribute/earth.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="dark">
+							<span>Ténèbres </span><img class="icon" src="img/attribute/dark.svg"
+							                           onerror="src='img/attribute/dark.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="wind">
+							<span>Vent </span><img class="icon" src="img/attribute/wind.svg"
+							                       onerror="src='img/attribute/wind.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="divine">
+							<span>Divin </span><img class="icon" src="img/attribute/divine.svg"
+							                        onerror="src='img/attribute/divine.png'">
+						</label>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="monster_atk" class="well" style="display: none">
+			<fieldset id="atk_criteria">
+				<legend>ATK</legend>
+				<span id="atk_range_label" class="slider-label">0 - 16000 ATK</span>
+				<div id="atk_slider"
+				     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+				     aria-disabled="false">
+					<div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0; width: 100%;"></div>
+					<a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0;"></a><a
+						class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
+				<input type="hidden" id="atk_filter" value="0-16000">
+			</fieldset>
+		</div>
+		<div id="monster_def" class="well" style="display: none">
+			<fieldset id="def_criteria">
+				<legend>DEF</legend>
+				<span id="def_range_label" class="slider-label">0 - 16000 DEF</span>
+				<div id="def_slider"
+				     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+				     aria-disabled="false">
+					<div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0; width: 100%;"></div>
+					<a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0;"></a><a
+						class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
+				<input type="hidden" id="def_filter" value="0-16000">
+			</fieldset>
+		</div>
+		<div id="monster_level" class="well" style="display: none">
+			<fieldset id="level_criteria">
+				<legend>Niveau</legend>
+				<span id="level_range_label" class="slider-label">Niveau 0 - 12</span>
+				<img class="icon" src="img/level/level.svg" onerror="src='img/level/level.png'">
+				<div id="level_slider"
+				     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+				     aria-disabled="false">
+					<div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0; width: 100%;"></div>
+					<a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0;"></a><a
+						class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
+				<input type="hidden" id="level_filter" value="0-12">
+			</fieldset>
+		</div>
+		<div id="properties" class="well" style="display: none">
+			<fieldset id="property_criteria">
+				<legend class="well_legend" data-toggle="collapse" data-target="#property_wells">Propriétés <i
+						class="pull-right glyphicon glyphicon glyphicon-menu-down"></i></legend>
+				<div id="property_wells" class="collapse">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Normal">
+							<span>Normal </span><img class="icon" src="img/property/normal.svg" onerror="src=''">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Continuous">
+							<span>Continu </span><img class="icon" src="img/property/continuous.svg"
+							                          onerror="src='img/property/continuous.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Counter">
+							<span>Contre </span><img class="icon" src="img/property/counter.svg"
+							                         onerror="src='img/property/counter.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Quick-Play">
+							<span>Jeu-Rapide </span><img class="icon" src="img/property/quick-play.svg"
+							                             onerror="src='img/property/quick-play.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Ritual">
+							<span>Rituel </span><img class="icon" src="img/property/ritual.svg"
+							                         onerror="src='img/property/effect_icon_ritual.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Field">
+							<span>Terrain </span><img class="icon" src="img/property/field.svg"
+							                          onerror="src='img/property/effect_icon_field.png'">
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="Equip">
+							<span>Équipement </span><img class="icon" src="img/property/equip.svg"
+							                             onerror="src='img/property/effect_icon_equip.png'">
+						</label>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div class="well">
+			<fieldset id="quantity_criteria">
+				<legend>Exemplaires</legend>
+				<span id="quantity_range_label" class="slider-label">1 - 10 Exemplaires</span>
+				<div id="quantity_slider"
+				     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+				     aria-disabled="false">
+					<div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0; width: 100%;"></div>
+					<a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0;"></a><a
+						class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
+				<input type="hidden" id="quantity_filter" value="1-10">
+			</fieldset>
+		</div>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<div class="pagination">
+			<div id="pagination"></div>
+		</div>
+		<div class="pagination_cards">
+			<label for="per_page" class="label_card_pages semibold">Cartes par page:</label>
+			<span id="per_page"></span>
+		</div>
+		<div class="content" id="cards_table"></div>
+	</div>
 </div>
 <script id="card_template" type="text/html">
-    <!--suppress HtmlUnknownTarget -->
-    <div class="col-md-3 col-xs-6">
-        <img class="yugioh_card" src="<%= img_link %>"
-             alt="<%= name_fr %>" title="<%= name_fr %>"
-             onerror="imgError(this);" onclick="display_card_modal('<%= _fid %>')">
-    </div>
+	<!--suppress HtmlUnknownTarget -->
+	<div class="col-md-3 col-xs-6">
+		<img class="yugioh_card" src="<%= img_link %>"
+		     alt="<%= name_fr %>" title="<%= name_fr %>"
+		     onerror="imgError(this);" onclick="display_card_modal('<%= _fid %>')">
+	</div>
 </script>
 <script id="pagination_template" type="text/html">
-    <span class="page-links-container">
+	<span class="page-links-container">
   <% if(currentPage > 1) { %>
   <a href="#" data-page="first"><<</a>
   <% } %>
