@@ -17,6 +17,7 @@
 // Card image API & Database links
 var DATABASE_CARDS = "https://www.joelcancela.fr/services/database_yugiohjs_json";
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
+var CARD_DESC_FR = "https://www.joelcancela.fr/services/yugioh_card_description.php";
 var img_card_404 = "./img/yugioh_404.png";
 var cards_table = [];
 // Events
@@ -626,16 +627,14 @@ function display_card_modal(card_fid) {
         html += "<strong>" + "Type(s): " + "</strong>";
         html += "<span>" + traduce(card_modal[cards_table__key_monster_type]) + "</span><br><br>";
         html += "<strong>" + "Élement: " + "</strong>";
-        html += "<span>" + traduce(card_modal[cards_table__key_family]) + " </span><img class='icon' src='img/attribute/" + card_modal[cards_table__key_family] + ".svg' onerror='this.src=''><br><br>";
-        html += "<strong>" + "Texte: " + "</strong>";
-        html += "<span>" + card_modal[cards_table__key_text] + "</span>";
+        html += "<span>" + traduce(card_modal[cards_table__key_family]) + " </span><img class='icon' src='img/attribute/" + card_modal[cards_table__key_family] + ".svg' onerror='this.src=''>";
     } else if (card_modal[cards_table__key_card_type] !== "token") {//Spells and Traps
         html += "<img class='icon' src='img/card_type/" + card_modal[cards_table__key_card_type] + ".svg' onerror='this.src=''><br><br>";
         html += "<strong>" + "Propriété: " + "</strong>";
-        html += "<span>" + traduce(card_modal[cards_table__key_property]) + " </span><img class='icon' src='img/property/" + card_modal[cards_table__key_property] + ".svg' onerror='this.src=''><br><br>";
-        html += "<strong>" + "Texte: " + "</strong>";
-        html += "<span>" + card_modal[cards_table__key_text] + "</span>";
+        html += "<span>" + traduce(card_modal[cards_table__key_property]) + " </span><img class='icon' src='img/property/" + card_modal[cards_table__key_property] + ".svg' onerror='this.src=''>";
     }
+    html += "<br><br><strong>" + "Texte: " + "</strong>";
+    html += "<span id='description'>" + card_modal[cards_table__key_text] + "</span>";
     html += "<br><br><strong>" + "Quantité: " + "</strong>";
     html += "<span>" + card_modal[cards_table__key_quantity] + "</span>";
     html += '</div>'; // col 2
@@ -651,6 +650,7 @@ function display_card_modal(card_fid) {
     var cardModalSelector = $("#cardModal");
     cardModalSelector.modal();
     cardModalSelector.modal('show');
+    traductionCardText(card_modal[cards_table__key_name]);
     cardModalSelector.on('hidden.bs.modal', function () {
         $(this).remove();
     });
@@ -746,5 +746,19 @@ function traduce(element) {
     } else {
         return traductionJson[element] || element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
     }
+}
+
+function traductionCardText(card_name_en) {
+    $.ajax({
+        async: true,
+        type: 'GET',
+        url: CARD_DESC_FR,
+        data: {'card_name': card_name_en},
+        success: function (data) {
+            if (data !== undefined) {
+                $("#description").text(data);
+            }
+        }
+    });
 }
 
