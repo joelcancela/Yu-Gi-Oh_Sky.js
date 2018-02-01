@@ -759,11 +759,11 @@ function traductionCardText(card_name_en) {
         type: 'GET',
         url: CARD_DESC_FR,
         data: {'card_name': card_name_en},
-        success: function (data) {
-            if (data !== undefined) {
+        success: [function (data) {
+            if (data !== "") {
                 $("#description").text(data);
             }
-        }
+        }]
     });
 }
 
@@ -773,13 +773,13 @@ function getSupportCards(card_name_en) {
         type: 'GET',
         url: SUPPORT_CARDS_API_URL,
         data: {'card_name': card_name_en},
-        success: function (data) {
+        success: [function (data) {
             var cards = "";
             for (var i = 0; i < data.length; i++) {
                 if (i === 0) {
                     cards += "<ul>";
                 }
-                cards += "<li><a target='_blank' href='http://yugioh.wikia.com/wiki/" + data[i] + "'>" + data[i]+ "</a></li>";
+                cards += "<li><a target='_blank' href='http://yugioh.wikia.com/wiki/" + data[i] + "'>" + data[i] + "</a></li>";
                 if (i === data.length - 1) {
                     cards += "</ul>";
                 }
@@ -789,6 +789,6 @@ function getSupportCards(card_name_en) {
             } else {
                 $("#supportCards").html("Aucune carte liée");
             }
-        }
+        }]
     });
 }
