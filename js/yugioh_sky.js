@@ -12,12 +12,15 @@
  */
 
 /************************************************** Globals **************************************************/
-// API links
-var DATABASE_CARDS = "https://www.joelcancela.fr/services/database_yugiohjs_json";
+//// API links
+// APIs Used with CORS
+var DATABASE_CARDS_URL = "http://www.joelcancela.fr/services/yugioh_sky.js/getCardsDatabase/";
+var SUPPORT_CARDS_URL = "http://www.joelcancela.fr/services/yugioh_sky.js/getSupportCards/";
+var CARD_DESCRIPTION_FR_URL = "http://www.joelcancela.fr/services/yugioh_sky.js/getCardDescription/";
+// External APIs
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
-var SUPPORT_CARDS_API_URL = "https://www.joelcancela.fr/services/yugioh_card_support_cards.php";
-var CARD_DESC_FR = "https://www.joelcancela.fr/services/yugioh_card_description.php";
 var WIKIA_LINK = "http://yugioh.wikia.com/wiki/";
+// Vars
 var img_card_404 = "./img/yugioh_404.png";
 var cards_table = [];
 // Events
@@ -79,7 +82,7 @@ function init() {
  * Retrieves cards data from database
  */
 function get_cards_data() {
-	$.getJSON(DATABASE_CARDS, function (data) {
+	$.getJSON(DATABASE_CARDS_URL, function (data) {
 		cards_table = data;
 		cards_table_is_created = true;
 	}).fail(function () {
@@ -791,7 +794,7 @@ function traductionCardText(card_name_en) {
 	$.ajax({
 		async: true,
 		type: 'GET',
-		url: CARD_DESC_FR,
+		url: CARD_DESCRIPTION_FR_URL,
 		data: {'card_name': card_name_en},
 		success: [function (data) {
 			if (data !== "") {
@@ -811,7 +814,7 @@ function getSupportCards(card_name_en) {
 	$.ajax({
 		async: true,
 		type: 'GET',
-		url: SUPPORT_CARDS_API_URL,
+		url: SUPPORT_CARDS_URL,
 		data: {'card_name': card_name_en},
 		success: [function (data) {
 			var cards = "";
