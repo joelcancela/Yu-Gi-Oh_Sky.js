@@ -14,9 +14,9 @@
 /************************************************** Globals **************************************************/
 //// API links
 // APIs Used with CORS
-var DATABASE_CARDS_URL = "http://www.joelcancela.fr/services/yugioh_sky.js/getCardsDatabase/";
-var SUPPORT_CARDS_URL = "http://www.joelcancela.fr/services/yugioh_sky.js/getSupportCards/";
-var CARD_DESCRIPTION_FR_URL = "http://www.joelcancela.fr/services/yugioh_sky.js/getCardDescription/";
+var DATABASE_CARDS_URL = "https://www.joelcancela.fr/services/yugioh_sky.js/getCardsDatabase/";
+var SUPPORT_CARDS_URL = "https://www.joelcancela.fr/services/yugioh_sky.js/getSupportCards/";
+var CARD_DESCRIPTION_FR_URL = "https://www.joelcancela.fr/services/yugioh_sky.js/getCardDescription/";
 // External APIs
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
 var WIKIA_LINK = "http://yugioh.wikia.com/wiki/";
