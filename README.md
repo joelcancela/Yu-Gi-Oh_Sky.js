@@ -4,6 +4,13 @@
 
 Yu-Gi-Oh_Sky.js is a JS script used to display the Yu-Gi-Oh! cards that I own listed on a MySQL database.
 
+## Features
+* Search a card by name (english or french) or description
+* Sort cards by name, ATK, DEF, level, quantity owned, card type
+* Filter cards by card type (monster, spell, trap), monster types, family, ATK, DEF, level, quantity and property
+* See the description of a card (in french)
+* See related cards for a card
+
 ## Disclaimer
 
 **Yu-Gi-Oh!** is a trademark of Kazuki Takahashi, Konami © 1996-2017.
