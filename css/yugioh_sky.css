@@ -4,8 +4,12 @@
  *  https://github.com/joelcancela/Yu-Gi-Oh_Sky.js
  */
 
-body {
-    font-family: "Open Sans", sans-serif;
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.card-text {
+    word-wrap: normal;
 }
 
 .checkbox {
@@ -14,6 +18,15 @@ body {
 
 .devicon-github-plain {
     font-size: 1.5em;
+}
+
+footer {
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+}
+
+footer p {
+    margin-bottom: .25rem;
 }
 
 hr {
@@ -30,21 +43,16 @@ hr {
     max-width: 17px;
 }
 
-.modal-header > h3 {
-    text-align: center;
+.jumbotron {
+    background-color: #fff;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .page-links-active {
     font-weight: 600;
     text-decoration: underline;
-}
-
-.pagination, .pagination_cards {
-    margin-left: 15px;
-}
-
-.pagination_cards, .page-links-container {
-    display: inline-block;
 }
 
 .page-links-container a {
@@ -62,18 +70,26 @@ hr {
     background-color: #ddd;
 }
 
-.search-icon {
-    position: relative;
-    margin-top: -25px;
+.pagination, .pagination_cards {
+    margin-left: 15px;
+}
+
+.pagination_cards, .page-links-container {
     display: inline-block;
-    width: 28px;
+}
+
+.search-icon {
+    background-color: transparent;
+    color: #222;
+    display: inline-block;
+    float: right;
+    font-size: 20px;
     height: 14px;
     line-height: 14px;
+    margin-top: -25px;
+    position: relative;
     vertical-align: middle;
-    background-color: transparent;
-    font-size: 20px;
-    color: #222;
-    float: right;
+    width: 28px;
 }
 
 .semibold {
@@ -87,6 +103,7 @@ hr {
 }
 
 .title > a, .github, .github:hover, .github:focus {
+    color: #fff;
     text-decoration: none;
 }
 
@@ -95,34 +112,46 @@ hr {
 }
 
 .well_legend {
-    display: block;
-    width: 100%;
-    padding: 0;
-    margin-bottom: 20px;
-    font-size: 21px;
-    line-height: inherit;
-    color: #333;
     border: 0;
     border-bottom: 1px solid #e5e5e5;
+    color: #333;
+    display: block;
+    font-size: 21px;
     font-weight: normal;
+    line-height: inherit;
+    margin-bottom: 20px;
+    padding: 0;
+    width: 100%;
 }
 
+/* Unused */
 .yugioh_card {
-    width: 177px;
     height: 260px;
-    object-fit: cover;
     margin-bottom: 10px;
+    width: 177px;
+    object-fit: cover;
+}
+
+@media (min-width: 768px) {
+    .jumbotron {
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
 }
 
 /************************************************** Mobile screens **************************************************/
 
 @media only screen and (max-device-width: 480px) {
     body {
-        font-size: 33px;
+        font-size: 30px;
     }
 
-    .btn, .modal-header > h3 {
+    .btn {
         font-size: 30px;
+    }
+
+    #card_type_wells, #monster_type_wells, #family_wells, #property_wells {
+        margin-left: 50px;
     }
 
     .checkbox, .radio {
@@ -138,8 +167,8 @@ hr {
     }
 
     .icon {
-        max-width: 100%;
         max-height: 100%;
+        max-width: 100%;
     }
 
     .icon_level {
@@ -148,61 +177,54 @@ hr {
     }
 
     input[type=checkbox], input[type=radio] {
-        margin-left: -25px !important;
-        -ms-transform: scale(4) !important; /* IE */
-        -moz-transform: scale(4) !important; /* FF */
-        -webkit-transform: scale(4) !important; /* Safari and Chrome */
-        -o-transform: scale(4) !important; /* Opera */
         bottom: 10px;
-        position: relative !important;
+        margin-left: -25px !important;
         margin-right: 25px;
+        position: relative !important;
+        -moz-transform: scale(4) !important; /* FF */
+        -ms-transform: scale(4) !important; /* IE */
+        -o-transform: scale(4) !important; /* Opera */
+        -webkit-transform: scale(4) !important; /* Safari and Chrome */
     }
 
     .page-links-active, .page-links-inactive {
         font-size: 50px;
     }
 
+    .search-icon {
+        background-color: transparent;
+        color: #222;
+        display: inline-block;
+        float: right;
+        font-size: 55px;
+        left: -30px;
+        line-height: 14px;
+        margin-top: -40px;
+        position: relative;
+        vertical-align: middle;
+    }
+
     select {
         /* Double-sized select */
-        -ms-transform: scale(2) !important; /* IE */
-        -moz-transform: scale(2) !important; /* FF */
-        -webkit-transform: scale(2) !important; /* Safari and Chrome */
-        -o-transform: scale(2) !important; /* Opera */
-        margin: 20px;
-    }
-
-    .search-icon {
-        position: relative;
-        margin-top: -40px;
-        display: inline-block;
-        line-height: 14px;
-        vertical-align: middle;
-        background-color: transparent;
-        font-size: 55px;
-        color: #222;
-        float: right;
-        left: -30px;
-    }
-
-    select {
-        margin-left: 80px;
         font-size: 17px;
-    }
-
-    .sidebar legend, .sidebar h4, .sidebar label {
-        font-size: 50px !important;
+        margin: 20px 20px 20px 80px;
+        -moz-transform: scale(2) !important; /* FF */
+        -ms-transform: scale(2) !important; /* IE */
+        -o-transform: scale(2) !important; /* Opera */
+        -webkit-transform: scale(2) !important; /* Safari and Chrome */
     }
 
     .title {
-        width: inherit;
         font-size: 70px;
+        width: inherit;
     }
 
+    /* Unused */
     .yugioh_card {
-        min-width: 345px;
-        min-height: 495px;
-        max-width: 345px;
         max-height: 495px;
+        max-width: 345px;
+        min-height: 495px;
+        min-width: 345px;
     }
 
 }
