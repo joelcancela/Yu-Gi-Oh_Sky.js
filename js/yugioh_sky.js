@@ -660,8 +660,15 @@ function display_card_modal(card_fid) {
 	html += "<span>" + traduce(card_modal[cards_table__key_card_type]) + " </span>";
 	if (card_modal[cards_table__key_card_type] === "monster") {//Monster
 		html += "<br><br><strong>" + "Niveau: " + "</strong>";
-		for (var i = 0; i < parseInt(card_modal[cards_table__key_level]); i++) {
-			html += "</span><img class='icon_level' src='/img/level/level.svg' onerror='this.src=''>";
+		var checkType = card_modal[cards_table__key_monster_type];
+		if (checkType.includes("Xyz")) {
+			for (var i = 0; i < parseInt(card_modal[cards_table__key_level]); i++) {
+				html += "</span><img class='icon_level' src='/img/level/level_xyz.svg' onerror='this.src=''>";
+			}
+		} else {
+			for (var i = 0; i < parseInt(card_modal[cards_table__key_level]); i++) {
+				html += "</span><img class='icon_level' src='/img/level/level.svg' onerror='this.src=''>";
+			}
 		}
 		html += "<br><br><strong>" + "ATK: " + "</strong>";
 		html += "<span>" + card_modal[cards_table__key_atk] + "</span><br><br>";
@@ -798,7 +805,7 @@ function traductionCardText(card_name_en) {
 		data: {'card_name': card_name_en},
 		success: [function (data) {
 			if (data !== "") {
-				$("#description").text(data);
+				$("#description").html(data.replace("\n", "<br>"));//To keep line breaks
 			}
 		}]
 	});
