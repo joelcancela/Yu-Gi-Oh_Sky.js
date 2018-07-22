@@ -10,6 +10,7 @@
 	      href="css/jquery-ui.min.css">
 	<link rel="stylesheet"
 	      href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/yugioh_sky.css">
 	<!--Scripts-->
 	<script
@@ -41,8 +42,10 @@
 					<ul class="list-unstyled">
 						<li><a class="github" href="https://github.com/joelcancela/Yu-Gi-Oh_Sky.js"
 						       onclick=" window.open(this.href);return false">
-							<i class="devicon-github-plain"></i></a>
-							<a class="text-white" href="mailto:joel.cancelavaz@gmail.com">Joël Cancela Vaz</a></li>
+							<i class="devicon-github-plain"></i> GitHub</a></li>
+						<li><a class="text-white" href="mailto:joel.cancelavaz@gmail.com"><i class="fa fa-at fa-lg"></i>
+							Joël
+							Cancela Vaz</a></li>
 					</ul>
 				</div>
 			</div>
@@ -69,13 +72,13 @@
 			<div class="container">
 				<label class="sr-only" for="searchbox">Rechercher une carte</label>
 				<input class="form-control" id="searchbox" placeholder="Rechercher une carte &hellip;" autofocus>
-				<span class="glyphicon glyphicon-search search-icon"></span>
+				<span class="glyphicon-search search-icon"></span>
 			</div>
 			<br>
 			<div>
 				<h4 class="text-center">Filtres</h4>
 				<div class="row justify-content-center">
-					<div class="col-lg-2 col-md-6 well">
+					<div class="col-lg-5 col-md-5 well">
 						<div>
 							<label class="well_legend" for="l-sort-by">Trier par:</label>
 							<select name="Sort_By" id="l-sort-by" class="corners">
@@ -96,7 +99,7 @@
 					<!--<div class="col-2 well">-->
 					<!--<fieldset id="deck_criteria">-->
 					<!--<legend class="well_legend" data-toggle="collapse" data-target="#deck_wells">Decks-->
-					<!--<i class="pull-right glyphicon glyphicon glyphicon-menu-down"></i>-->
+					<!--<i class="fa fa-caret-down"></i>-->
 					<!--</legend>-->
 					<!--<div id="deck_wells" class="collapse">-->
 					<!--<div class="checkbox">-->
@@ -138,11 +141,28 @@
 					<!--</div>-->
 					<!--</fieldset>-->
 					<!--</div>-->
+					<div class="col-lg-5 col-md-5 offset-lg-2 offset-md-2 well mb-4">
+						<fieldset id="quantity_criteria">
+							<legend>Exemplaires</legend>
+							<span id="quantity_range_label" class="slider-label">1 - 10 Exemplaires</span>
+							<div id="quantity_slider"
+							     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+							     aria-disabled="false">
+								<div class="ui-slider-range ui-widget-header ui-corner-all"
+								     style="left: 0; width: 100%;"></div>
+								<a class="ui-slider-handle ui-state-default ui-corner-all" href="#"
+								   style="left: 0;"></a>
+								<a class="ui-slider-handle ui-state-default ui-corner-all" href="#"
+								   style="left: 100%;"></a>
+							</div>
+							<input type="hidden" id="quantity_filter" value="1-10">
+						</fieldset>
+					</div>
 					<div class="col-lg-2 col-md-6 well">
 						<fieldset id="card_type_criteria">
 							<legend class="well_legend" data-toggle="collapse" data-target="#card_type_wells">Types de
 								cartes
-								<i class="pull-right glyphicon glyphicon glyphicon-menu-down"></i>
+								<i class="fa fa-caret-down"></i>
 							</legend>
 							<div id="card_type_wells" class="collapse">
 								<div class="radio">
@@ -185,7 +205,7 @@
 							<legend class="well_legend" data-toggle="collapse" data-target="#monster_type_wells">Types
 								de
 								monstres
-								<i class="pull-right glyphicon glyphicon glyphicon-menu-down"></i>
+								<i class="fa fa-caret-down"></i>
 							</legend>
 							<div id="monster_type_wells" class="collapse">
 								<div class="checkbox">
@@ -429,7 +449,7 @@
 					<div id="monster_family" class="col-lg-2 col-md-12 well" style="display: none">
 						<fieldset id="family_criteria">
 							<legend class="well_legend" data-toggle="collapse" data-target="#family_wells">Élement
-								<i class="pull-right glyphicon glyphicon glyphicon-menu-down"></i>
+								<i class="fa fa-caret-down"></i>
 							</legend>
 							<div id="family_wells" class="collapse">
 								<div class="checkbox">
@@ -546,7 +566,7 @@
 					<div id="properties" class="col-lg-2 col-md-12 well" style="display: none">
 						<fieldset id="property_criteria">
 							<legend class="well_legend" data-toggle="collapse" data-target="#property_wells">Propriétés
-								<i class="pull-right glyphicon glyphicon glyphicon-menu-down"></i>
+								<i class="fa fa-caret-down"></i>
 							</legend>
 							<div id="property_wells" class="collapse">
 								<div class="checkbox">
@@ -607,28 +627,11 @@
 							</div>
 						</fieldset>
 					</div>
-					<div class="col-lg-2 col-md-12 well">
-						<fieldset id="quantity_criteria">
-							<legend>Exemplaires</legend>
-							<span id="quantity_range_label" class="slider-label">1 - 10 Exemplaires</span>
-							<div id="quantity_slider"
-							     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-							     aria-disabled="false">
-								<div class="ui-slider-range ui-widget-header ui-corner-all"
-								     style="left: 0; width: 100%;"></div>
-								<a class="ui-slider-handle ui-state-default ui-corner-all" href="#"
-								   style="left: 0;"></a>
-								<a class="ui-slider-handle ui-state-default ui-corner-all" href="#"
-								   style="left: 100%;"></a>
-							</div>
-							<input type="hidden" id="quantity_filter" value="1-10">
-						</fieldset>
-					</div>
 				</div>
 			</div>
 		</div>
 		<br>
-		<div class="row justify-content-center">
+		<div class="row justify-content-center mt-4">
 			<div class="col-lg-4 col-md-8">
 				<div class="pagination">
 					<div id="pagination"></div>

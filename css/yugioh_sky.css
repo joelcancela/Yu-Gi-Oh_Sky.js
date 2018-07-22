@@ -78,6 +78,10 @@ hr {
     display: inline-block;
 }
 
+.pagination_cards {
+    margin-top: -30px;
+}
+
 .search-icon {
     background-color: transparent;
     color: #222;
@@ -167,8 +171,8 @@ hr {
     }
 
     .icon {
-        max-height: 100%;
-        max-width: 100%;
+        max-height: 60px;
+        max-width: 60px;
     }
 
     .icon_level {
