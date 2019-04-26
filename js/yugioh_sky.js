@@ -651,7 +651,7 @@ function display_card_modal(card_fid) {
 	html += '<div class="modal-body">';
 	html += '<div class="row center-block">';
 	html += '<div class="col-lg-6">';// col1
-	html += "<img class='img-responsive' src=\"" + card_modal[cards_table__key_picture_link] + "\"" + " onerror='imgError(this);'>";
+	html += "<img class='img-responsive yugioh_card' src=\"" + card_modal[cards_table__key_picture_link] + "\"" + " onerror='imgError(this);'>";
 	html += '</div>'; // col 1
 	html += '<div class="col-lg-6">'; //col 2
 	html += "<br><strong>" + "Nom anglais: " + "</strong>";

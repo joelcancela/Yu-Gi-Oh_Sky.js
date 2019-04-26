@@ -128,12 +128,9 @@ hr {
     width: 100%;
 }
 
-/* Unused */
 .yugioh_card {
-    height: 260px;
-    margin-bottom: 10px;
-    width: 177px;
-    object-fit: cover;
+    max-height: 500px;
+    max-width: 345px;
 }
 
 @media (min-width: 768px) {
@@ -221,14 +218,6 @@ hr {
     .title {
         font-size: 70px;
         width: inherit;
-    }
-
-    /* Unused */
-    .yugioh_card {
-        max-height: 495px;
-        max-width: 345px;
-        min-height: 495px;
-        min-width: 345px;
     }
 
 }
