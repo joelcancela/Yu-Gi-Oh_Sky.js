@@ -27,6 +27,8 @@ This project uses :
 * [filter.js](https://github.com/jiren/filter.js) by jiren (MIT License included) (slightly edited)
 * [Yu-Gi-Oh! Prices](https://yugiohprices.com/) [Public API](http://docs.yugiohprices.apiary.io/#) for most of the cards info.
 * [Yu-Gi-Oh! Wikia](http://yugioh.wikia.com) for the cards translation and for the support cards links.
+* [YGOPRODeck API](https://db.ygoprodeck.com/api-guide-v3/) for the TCG ban list status.
+
 ## Notes
 
 The JSON Structure used as *"database"*

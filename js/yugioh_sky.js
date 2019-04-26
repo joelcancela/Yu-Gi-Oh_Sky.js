@@ -17,6 +17,7 @@
 var DATABASE_CARDS_URL = "https://www.joelcancela.fr/services/yugioh_sky.js/getCardsDatabase/";
 var SUPPORT_CARDS_URL = "https://www.joelcancela.fr/services/yugioh_sky.js/getSupportCards/";
 var CARD_DESCRIPTION_FR_URL = "https://www.joelcancela.fr/services/yugioh_sky.js/getCardDescription/";
+var BANLIST_INFO_URL = "https://db.ygoprodeck.com/api/v3/cardinfo.php?name=";
 // External APIs
 var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
 var WIKIA_LINK = "http://yugioh.wikia.com/wiki/";
@@ -112,8 +113,7 @@ function edit_cards_data() {
 		}
 		if (!current_card_types) {
 			cards_table[currentIteration][cards_table__key_monster_type] = [""];//Replace false by an array with an empty string (FJS)
-		}
-		else {
+		} else {
 			cards_table[currentIteration][cards_table__key_monster_type] = cards_table[currentIteration][cards_table__key_monster_type].split(",");//Create an array of string being the monster types
 		}
 		if (cards_table[currentIteration][cards_table__key_name] === "Level Down!?") {//FIXME: YuGiOh Prices API doesn't like this card "Level Down?!" (request has to have the "!" removed)
@@ -686,7 +686,10 @@ function display_card_modal(card_fid) {
 	html += "<br><br><strong>" + "Texte: " + "</strong>";
 	html += "<span id='description'>" + card_modal[cards_table__key_text] + "</span>";
 	html += "<br><br><strong>" + "Quantité: " + "</strong>";
-	html += "<span>" + card_modal[cards_table__key_quantity] + "</span><br><br>";
+	html += "<span>" + card_modal[cards_table__key_quantity] + "</span>";
+	html += "<br><br><strong>" + "Statut TGC Avancé: " + "</strong>";
+	html += "<span id='tgc_format'>Illimitée</span>";
+	html += "<br><br>";
 	html += "<a href='#supportCards' class='btn btn-info' data-toggle='collapse'>Voir les cartes liées</a>";
 	html += "<div id='supportCards' class='collapse'>";
 	html += '</div>';
@@ -705,6 +708,7 @@ function display_card_modal(card_fid) {
 	cardModalSelector.modal('show');
 	traductionCardText(card_modal[cards_table__key_name]);
 	getSupportCards(card_modal[cards_table__key_name]);
+	getBanListStatuses(card_modal[cards_table__key_name]);
 	cardModalSelector.on('hidden.bs.modal', function () {
 		$(this).remove();
 	});
@@ -717,6 +721,7 @@ function display_card_modal(card_fid) {
  */
 var traductionJson = {
 	"Aqua": "Aqua",
+	"Banned": "Interdite",
 	"Beast": "Bête",
 	"Beast-Warrior": "Bête-Guerrier",
 	"Continuous": "Continu",
@@ -737,6 +742,7 @@ var traductionJson = {
 	"Gemini": "Gémeau",
 	"Insect": "Insecte",
 	"Link": "Lien",
+	"Limited": "Limitée",
 	"Machine": "Machine",
 	"Normal": "Normal",
 	"Pendulum": "Pendule",
@@ -748,6 +754,7 @@ var traductionJson = {
 	"Ritual": "Rituel",
 	"Rock": "Rocher",
 	"Sea Serpent": "Serpent de Mer",
+	"Semi-Limited": "Semi-Limitée",
 	"Spellcaster": "Magicien",
 	"Spirit": "Spirit",
 	"Synchro": "Synchro",
@@ -842,6 +849,25 @@ function getSupportCards(card_name_en) {
 		}],
 		error: [function () {
 			$("#supportCards").html("Aucune carte liée");
+		}]
+	});
+}
+
+/************************************************** Ban list status functions **************************************************/
+
+/**
+ * Retrieves the OGC/TCG status for a given card
+ * @param card_name_en the name of the card in english
+ */
+function getBanListStatuses(card_name_en) {
+	$.ajax({
+		async: true,
+		type: 'GET',
+		url: BANLIST_INFO_URL + card_name_en,
+		success: [function (data) {
+			if (data !== "") {
+				$("#tgc_format").html(traductionJson[data[0][0]['ban_tcg']]);//To keep line breaks
+			}
 		}]
 	});
 }
