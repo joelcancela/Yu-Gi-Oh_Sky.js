@@ -50,38 +50,6 @@ hr {
     padding-top: 10px;
 }
 
-.page-links-active {
-    font-weight: 600;
-    text-decoration: underline;
-}
-
-.page-links-container a {
-    color: black;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-.page-links-container a.page-links-active {
-    background-color: #009cdd;
-    color: white;
-}
-
-.page-links-container a:hover:not(.active) {
-    background-color: #ddd;
-}
-
-.pagination, .pagination_cards {
-    margin-left: 15px;
-}
-
-.pagination_cards, .page-links-container {
-    display: inline-block;
-}
-
-.pagination_cards {
-    margin-top: -30px;
-}
-
 .search-icon {
     background-color: transparent;
     color: #222;
@@ -159,7 +127,7 @@ hr {
         left: 25px;
     }
 
-    .checkbox label, input, .page-links-container, .label_card_pages {
+    .checkbox label, input, .label_card_pages {
         font-size: 35px !important;
     }
 
@@ -186,10 +154,6 @@ hr {
         -ms-transform: scale(4) !important; /* IE */
         -o-transform: scale(4) !important; /* Opera */
         -webkit-transform: scale(4) !important; /* Safari and Chrome */
-    }
-
-    .page-links-active, .page-links-inactive {
-        font-size: 50px;
     }
 
     .search-icon {

@@ -161,7 +161,7 @@ function create_filters() {
 		pagination: {
 			container: '#pagination',
 			paginationView: "#pagination_template",
-			visiblePages: 7,
+			visiblePages: 5,
 			perPage: {
 				values: [12, 24, 48, 'Toutes'],
 				container: '#per_page'
