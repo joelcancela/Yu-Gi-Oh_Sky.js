@@ -74,9 +74,13 @@ hr {
     font-weight: 600;
 }
 
-.title > a, .github, .github:hover, .github:focus {
+.title > a, .github {
     color: #fff;
     text-decoration: none;
+}
+
+.github:hover, .github:focus {
+    color: #fff;
 }
 
 .well {
