@@ -19,8 +19,8 @@ var SUPPORT_CARDS_URL = "https://www.joelcancela.fr/services/yugioh_sky.js/getSu
 var CARD_DESCRIPTION_FR_URL = "https://www.joelcancela.fr/services/yugioh_sky.js/getCardDescription/";
 var BANLIST_INFO_URL = "https://db.ygoprodeck.com/api/v3/cardinfo.php?name=";
 // External APIs
-var IMG_API_URL = "http://yugiohprices.com/api/card_image/";
-var WIKIA_LINK = "http://yugioh.wikia.com/wiki/";
+var IMG_API_URL = "https://yugiohprices.com/api/card_image/";
+var WIKIA_LINK = "https://yugioh.wikia.com/wiki/";
 // Vars
 var img_card_404 = "./img/yugioh_404.png";
 var cards_table = [];
@@ -77,6 +77,7 @@ function init() {
 	create_filters();//Create FJS instance with criterias
 	initEvents();//Init events on checkboxes and buttons for criterias
 	setCheckboxesStatus();//Set default checked buttons
+	rollCredits();
 }
 
 /**
@@ -894,4 +895,8 @@ function imgError(image) {
 	image.onerror = "";
 	image.src = img_card_404;
 	return true;
+}
+
+function rollCredits(){
+	document.getElementById("copyleft").innerHTML = "2018 - " + new Date().getFullYear() + " - Yu-Gi-Oh_Sky.js";
 }

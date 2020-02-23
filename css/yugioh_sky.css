@@ -84,7 +84,8 @@ hr {
 }
 
 .well {
-    padding: 10px !important;
+    padding: 0 10px 10px 10px;
+    margin-bottom: 1.5rem !important;
 }
 
 .well_legend {
@@ -95,7 +96,6 @@ hr {
     font-size: 21px;
     font-weight: normal;
     line-height: inherit;
-    margin-bottom: 20px;
     padding: 0;
     width: 100%;
 }
@@ -121,40 +121,20 @@ hr {
     }
 
     #card_type_wells, #monster_type_wells, #family_wells, #property_wells {
-        margin-left: 50px;
+        margin-left: 20px;
     }
 
     .checkbox, .radio {
         left: 25px;
     }
 
-    .checkbox label, input, .label_card_pages {
-        font-size: 35px !important;
-    }
-
     .form-control {
-        height: 70px;
-    }
-
-    .icon {
-        max-height: 60px;
-        max-width: 60px;
+        height: 40px;
     }
 
     .icon_level {
         max-height: 30px;
         max-width: 30px;
-    }
-
-    input[type=checkbox], input[type=radio] {
-        bottom: 10px;
-        margin-left: -25px !important;
-        margin-right: 25px;
-        position: relative !important;
-        -moz-transform: scale(4) !important; /* FF */
-        -ms-transform: scale(4) !important; /* IE */
-        -o-transform: scale(4) !important; /* Opera */
-        -webkit-transform: scale(4) !important; /* Safari and Chrome */
     }
 
     .search-icon {
@@ -168,16 +148,6 @@ hr {
         margin-top: -40px;
         position: relative;
         vertical-align: middle;
-    }
-
-    select {
-        /* Double-sized select */
-        font-size: 17px;
-        margin: 20px 20px 20px 80px;
-        -moz-transform: scale(2) !important; /* FF */
-        -ms-transform: scale(2) !important; /* IE */
-        -o-transform: scale(2) !important; /* Opera */
-        -webkit-transform: scale(2) !important; /* Safari and Chrome */
     }
 
     .title {
