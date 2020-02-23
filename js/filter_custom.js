@@ -1623,6 +1623,6 @@
     window.FilterJS = FilterJS;
 
     views['pagination'] = '<nav>  <ul class="pagination">    <% if(currentPage > 1) { %>      <li> <a href="#" data-page="first" aria-label="First"><span aria-hidden="true">First</span></a> </li>      <li><a href="#" data-page="prev" aria-label="Previous"><span aria-hidden="true">&larr; Previous</span></a></li>    <% } %>    <% for(var i = 0, l = pages.length; i < l; i++ ){ %>      <li class="<%= pages[i] == currentPage ? \'active\' : \'\' %>">        <a href="#" data-page="<%= pages[i] %>"><%= pages[i] %></a>      </li>    <% } %>    <% if( currentPage < totalPages ) { %>      <li><a href="#" data-page="next" aria-label="Next"><span aria-hidden="true">Next &rarr;</span></a></li>      <li><a href="#" data-page="last" aria-label="Last"><span aria-hidden="true">Last</span></a></li>    <% } %>  </ul></nav>';
-    views['per_page'] = '<select size="1" name="per_page" data-perpage="true" class="per-page">  <% for(var i = 0; i < values.length; i++ ){ %>    <option value="<%= values[i] %>"><%= values[i] %></option>  <% } %></select>';
+    views['per_page'] = '<select size="1" name="per_page" data-perpage="true" class="per-page form-control">  <% for(var i = 0; i < values.length; i++ ){ %>    <option value="<%= values[i] %>"><%= values[i] %></option>  <% } %></select>';
 
 })(jQuery, window, document);

@@ -82,6 +82,11 @@ hr {
     color: #fff;
 }
 
+.per-page {
+    width: auto;
+    display: inherit;
+}
+
 .well {
     padding: 0 10px 10px 10px;
     margin-bottom: 1.5rem !important;
@@ -115,10 +120,6 @@ hr {
 
 @media only screen and (max-device-width: 480px) {
 
-    .btn {
-        font-size: 30px;
-    }
-
     #card_type_wells, #monster_type_wells, #family_wells, #property_wells {
         margin-left: 20px;
     }
@@ -134,6 +135,14 @@ hr {
     .icon_level {
         max-height: 30px;
         max-width: 30px;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        -moz-transform: scale(2) !important; /* FF */
+        -ms-transform: scale(2) !important; /* IE */
+        -o-transform: scale(2) !important; /* Opera */
+        -webkit-transform: scale(2) !important; /* Safari and Chrome */
+        margin-right: 0.5rem;
     }
 
     .search-icon {
