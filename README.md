@@ -1,6 +1,6 @@
 # Yu-Gi-Oh_Sky.js
 
-[![Language](https://img.shields.io/badge/language-javascript-yellow.svg)]() [![Project Status](https://img.shields.io/badge/status-online-brightgreen.svg)]()
+[![Language](https://img.shields.io/badge/language-javascript-yellow.svg)]() [![Project Status](https://img.shields.io/badge/status-online-brightgreen.svg)](https://yugioh.joelcancela.fr)
 
 Yu-Gi-Oh_Sky.js is a JS script used to display the Yu-Gi-Oh! cards that I own listed on a MySQL database.
 
