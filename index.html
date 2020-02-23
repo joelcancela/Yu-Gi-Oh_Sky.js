@@ -25,12 +25,12 @@
 	<div class="collapse bg-dark" id="navbarHeader">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-8 col-md-7 py-4">
+				<div class="col-sm-8 col-md-7 py-1">
 					<h4 class="text-white">A propos de</h4>
 					<strong class="text-muted"><i>Not affiliated with Konami</i></strong><br>
-					<span class="text-muted"> v2.0 - © 2017-2018 </span><br>
+					<span class="text-muted" id="copyleft"></span><br>
 				</div>
-				<div class="col-sm-4 offset-md-1 py-4">
+				<div class="col-sm-4 offset-md-1 py-1">
 					<h4 class="text-white">Contact</h4>
 					<ul class="list-unstyled">
 						<li><a class="github" href="https://github.com/joelcancela/Yu-Gi-Oh_Sky.js"
@@ -91,51 +91,6 @@
 									</select>
 								</div>
 							</div>
-<!--							<div class="well">-->
-<!--							<fieldset id="deck_criteria">-->
-<!--							<legend class="well_legend" data-toggle="collapse" data-target="#deck_wells">Decks-->
-<!--							<i class="fa fa-caret-down"></i>-->
-<!--							</legend>-->
-<!--							<div id="deck_wells" class="collapse">-->
-<!--							<div class="checkbox">-->
-<!--							<label>-->
-<!--							<input type="checkbox" value="Deck Héros">-->
-<!--							<span>Deck Héros</span>-->
-<!--							</label>-->
-<!--							</div>-->
-<!--							<div class="checkbox">-->
-<!--							<label>-->
-<!--							<input type="checkbox" value="Deck Cyber Dragon">-->
-<!--							<span>Deck Cyber Dragon</span>-->
-<!--							</label>-->
-<!--							</div>-->
-<!--							<div class="checkbox">-->
-<!--							<label>-->
-<!--							<input type="checkbox" value="Jaden">-->
-<!--							<span>Jaden</span>-->
-<!--							</label>-->
-<!--							</div>-->
-<!--							<div class="checkbox">-->
-<!--							<label>-->
-<!--							<input type="checkbox" value="Zane">-->
-<!--							<span>Zane</span>-->
-<!--							</label>-->
-<!--							</div>-->
-<!--							<div class="checkbox">-->
-<!--							<label>-->
-<!--							<input type="checkbox" value="Aster">-->
-<!--							<span>Aster</span>-->
-<!--							</label>-->
-<!--							</div>-->
-<!--							<div class="checkbox">-->
-<!--							<label>-->
-<!--							<input type="checkbox" value="">-->
-<!--							<span>Pas de deck attribué</span>-->
-<!--							</label>-->
-<!--							</div>-->
-<!--							</div>-->
-<!--							</fieldset>-->
-<!--							</div>-->
 							<div class="well">
 								<fieldset id="quantity_criteria">
 									<legend class="well_legend">Exemplaires</legend>
@@ -645,15 +600,11 @@
 		</div>
 </main>
 <footer class="text-muted">
-	<div class="container">
-		<p class="float-right">
+		<p class="float-right mr-5">
 			<a href="#">Retourner en haut</a>
 		</p>
-		<p id="copyleft"></p>
-	</div>
 </footer>
 <script id="card_template" type="text/html">
-	<!--suppress HtmlUnknownTarget -->
 	<div class="col-6 col-sm-6 col-md-6 col-lg-2">
 		<div class="card mb-4 box-shadow">
 			<img class="card-img-top" src="<%= img_link %>"
