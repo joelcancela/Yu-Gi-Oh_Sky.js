@@ -17,7 +17,12 @@
 }
 
 .devicon-github-plain {
-    font-size: 1.5em;
+    font-size: 1.33333333em;
+}
+
+.email-icon {
+    display: inline;
+    vertical-align: 0;
 }
 
 footer {
@@ -88,7 +93,6 @@ hr {
 }
 
 .well {
-    padding: 0 10px 10px 10px;
     margin-bottom: 1.5rem !important;
 }
 
