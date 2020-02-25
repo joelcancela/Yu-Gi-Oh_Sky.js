@@ -88,7 +88,7 @@ function get_cards_data() {
 		cards_table = data;
 		cards_table_is_created = true;
 	}).fail(function () {
-		console.log("Can't retrieve JSON cards database");
+		console.error("Can't retrieve JSON cards database");
 	});
 }
 
@@ -200,6 +200,8 @@ function setCheckboxesStatus() {
  * Initiates all events for triggers and checkboxes
  */
 function initEvents() {
+	sortOptions = buildSortOptions($("#l-sort-by").val()); //Sorts cards according to selected sort
+
 	$("#all_types").change(function () {
 		if (this.checked) {
 			disable_monster_criterias();
@@ -897,6 +899,9 @@ function imgError(image) {
 	return true;
 }
 
+/**
+ * Prints dates in header
+ */
 function rollCredits(){
 	document.getElementById("copyleft").innerHTML = "2018 - " + new Date().getFullYear() + " - Yu-Gi-Oh_Sky.js";
 }
