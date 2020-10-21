@@ -17,7 +17,7 @@
 var DATABASE_CARDS_URL = "https://api.joelcancela.fr/yugioh_sky.js/cardsDatabase/";
 var SUPPORT_CARDS_URL = "https://api.joelcancela.fr/yugioh_sky.js/supportCards/";
 var CARD_DESCRIPTION_FR_URL = "https://api.joelcancela.fr/yugioh_sky.js/cardFrenchDescription/";
-var BANLIST_INFO_URL = "https://db.ygoprodeck.com/api/v3/cardinfo.php?name=";
+var BANLIST_INFO_URL = "https://db.ygoprodeck.com/api/cardinfo.php?name=";
 // External APIs
 var IMG_API_URL = "https://yugiohprices.com/api/card_image/";
 var WIKIA_LINK = "https://yugioh.wikia.com/wiki/";
