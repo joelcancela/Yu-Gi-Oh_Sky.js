@@ -14,9 +14,10 @@
 /************************************************** Globals **************************************************/
 //// API links
 // APIs Used with CORS
-var DATABASE_CARDS_URL = "https://api.joelcancela.fr/yugioh_sky.js/cardsDatabase/";
-var SUPPORT_CARDS_URL = "https://api.joelcancela.fr/yugioh_sky.js/supportCards/";
-var CARD_DESCRIPTION_FR_URL = "https://api.joelcancela.fr/yugioh_sky.js/cardFrenchDescription/";
+var DATABASE_SERVER_URL = "https://joelcancela.ddns.net/api/"
+var DATABASE_API_URL = DATABASE_SERVER_URL + "yugioh_sky.js/cardsDatabase";
+var SUPPORT_CARDS_API_URL = DATABASE_SERVER_URL + "yugioh_sky.js/supportCards";
+var CARD_DESCRIPTION_FR_API_URL = DATABASE_SERVER_URL + "yugioh_sky.js/cardFrenchDescription";
 var BANLIST_INFO_URL = "https://db.ygoprodeck.com/api/cardinfo.php?name=";
 // External APIs
 var IMG_API_URL = "https://yugiohprices.com/api/card_image/";
@@ -84,7 +85,7 @@ function init() {
  * Retrieves cards data from database
  */
 function get_cards_data() {
-	$.getJSON(DATABASE_CARDS_URL, function (data) {
+	$.getJSON(DATABASE_API_URL, function (data) {
 		cards_table = data;
 		cards_table_is_created = true;
 	}).fail(function () {
@@ -811,7 +812,7 @@ function traductionCardText(card_name_en) {
 	$.ajax({
 		async: true,
 		type: 'GET',
-		url: CARD_DESCRIPTION_FR_URL,
+		url: CARD_DESCRIPTION_FR_API_URL,
 		data: {'card_name': card_name_en},
 		success: [function (data) {
 			if (data !== "") {
@@ -831,7 +832,7 @@ function getSupportCards(card_name_en) {
 	$.ajax({
 		async: true,
 		type: 'GET',
-		url: SUPPORT_CARDS_URL,
+		url: SUPPORT_CARDS_API_URL,
 		data: {'card_name': card_name_en},
 		success: [function (data) {
 			var cards = "";
