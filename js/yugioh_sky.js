@@ -667,11 +667,11 @@ function display_card_modal(card_fid) {
 		var checkType = card_modal[cards_table__key_monster_type];
 		if (checkType.includes("Xyz")) {
 			for (var i = 0; i < parseInt(card_modal[cards_table__key_level]); i++) {
-				html += "</span><img class='icon_level' src='/img/level/level_xyz.svg' onerror='this.src=''>";
+				html += "</span><img class='icon_level' src='img/level/level_xyz.svg' onerror='this.src=''>";
 			}
 		} else {
 			for (var i = 0; i < parseInt(card_modal[cards_table__key_level]); i++) {
-				html += "</span><img class='icon_level' src='/img/level/level.svg' onerror='this.src=''>";
+				html += "</span><img class='icon_level' src='img/level/level.svg' onerror='this.src=''>";
 			}
 		}
 		html += "<br><br><strong>" + "ATK: " + "</strong>";
@@ -870,7 +870,7 @@ function getBanListStatuses(card_name_en) {
 		url: BANLIST_INFO_URL + card_name_en,
 		success: [function (data) {
 			if (data !== "") {
-				$("#tgc_format").html(traductionJson[data[0][0]['ban_tcg']]);//To keep line breaks
+				$("#tgc_format").html(traductionJson[data[0]['ban_tcg']]);//To keep line breaks
 			}
 		}]
 	});
