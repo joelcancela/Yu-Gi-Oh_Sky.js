@@ -134,6 +134,7 @@ function edit_cards_data() {
  */
 function update_cards_number(result) {
 	$('#cards_number').text(result.length);
+	$('#cards_number_unique').text(result.reduce(((accumulator, currentValue) => accumulator + currentValue.quantity),0));
 }
 
 /************************************************** Filter.js functions **************************************************/
