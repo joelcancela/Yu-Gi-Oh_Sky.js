@@ -685,7 +685,7 @@ function display_card_modal(card_fid) {
 	} else if (card_modal[cards_table__key_card_type] !== "token") {//Spells and Traps
 		html += "<img class='icon' src='img/card_type/" + card_modal[cards_table__key_card_type] + ".svg' onerror='this.src=''><br><br>";
 		html += "<strong>" + "Propriété: " + "</strong>";
-		html += "<span>" + traduce(card_modal[cards_table__key_property]) + " </span><img class='icon' src='img/property/" + card_modal[cards_table__key_property] + ".svg' onerror='this.src=''>";
+		html += "<span>" + traduce(card_modal[cards_table__key_property]) + " </span><img class='icon' src='img/property/" + card_modal[cards_table__key_property].toLowerCase() + ".svg' onerror='this.src=''>";
 	}
 	html += "<br><br><strong>" + "Texte: " + "</strong>";
 	html += "<span id='description'>" + card_modal[cards_table__key_text] + "</span>";
