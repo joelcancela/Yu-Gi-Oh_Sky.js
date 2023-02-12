@@ -64,6 +64,8 @@ var sorting__level_desc = "level_desc";
 var sorting__quantity_asc = "quantity_asc";
 var sorting__quantity_desc = "quantity_desc";
 var sorting__card_type = "card_type";
+// Images overrides
+const card_en_overrides = ["Cyberdark Impact!", "Cybernetic Horizon (card)"];
 
 /************************************************** Initialization **************************************************/
 window.addEventListener('DOMContentLoaded', init);
@@ -118,7 +120,9 @@ function edit_cards_data() {
 		} else {
 			cards_table[currentIteration][cards_table__key_monster_type] = cards_table[currentIteration][cards_table__key_monster_type].split(",");//Create an array of string being the monster types
 		}
-		if (cards_table[currentIteration][cards_table__key_name] === "Level Down!?") {//FIXME: YuGiOh Prices API doesn't like this card "Level Down?!" (request has to have the "!" removed)
+		if (card_en_overrides.includes(cards_table[currentIteration][cards_table__key_name])) {
+			cards_table[currentIteration][cards_table__key_picture_link] = "./img/_overrides/"+ cards_table[currentIteration][cards_table__key_name].replace(/"/g, "_") + ".jpg";
+		} else if (cards_table[currentIteration][cards_table__key_name] === "Level Down!?") {//FIXME: YuGiOh Prices API doesn't like this card "Level Down?!" (request has to have the "!" removed)
 			cards_table[currentIteration][cards_table__key_picture_link] = IMG_API_URL + "Level_Down_%3F";
 		} else {
 			cards_table[currentIteration][cards_table__key_picture_link] = IMG_API_URL + cards_table[currentIteration][cards_table__key_name].replace(/"/g, "_");// Creates the link to the card image
@@ -134,7 +138,7 @@ function edit_cards_data() {
  */
 function update_cards_number(result) {
 	$('#cards_number').text(result.length);
-	$('#cards_number_unique').text(result.reduce(((accumulator, currentValue) => accumulator + currentValue.quantity),0));
+	$('#cards_number_unique').text(result.reduce(((accumulator, currentValue) => accumulator + currentValue.quantity), 0));
 }
 
 /************************************************** Filter.js functions **************************************************/
@@ -158,9 +162,9 @@ function create_filters() {
 			start_length: 1
 		},
 		criterias: [
-			{field: cards_table__key_decks_array, ele: '#deck_criteria input:checkbox'},
-			{field: cards_table__key_card_type, ele: '#card_type_criteria input:radio', all: 'all'},
-			{field: cards_table__key_quantity, ele: '#quantity_filter', type: 'range'}],
+			{ field: cards_table__key_decks_array, ele: '#deck_criteria input:checkbox' },
+			{ field: cards_table__key_card_type, ele: '#card_type_criteria input:radio', all: 'all' },
+			{ field: cards_table__key_quantity, ele: '#quantity_filter', type: 'range' }],
 		pagination: {
 			container: '#pagination',
 			paginationView: "#pagination_template",
@@ -304,11 +308,11 @@ function initEvents() {
  * Enables filter criterias for monster cards
  */
 function enable_monster_criterias() {
-	FJS.addCriteria({field: cards_table__key_atk, ele: '#atk_filter', type: 'range'});
-	FJS.addCriteria({field: cards_table__key_def, ele: '#def_filter', type: 'range'});
-	FJS.addCriteria({field: cards_table__key_monster_type, ele: '#type_criteria input:checkbox'});
-	FJS.addCriteria({field: cards_table__key_family, ele: '#family_criteria input:checkbox'});
-	FJS.addCriteria({field: cards_table__key_level, ele: '#level_filter', type: 'range'});
+	FJS.addCriteria({ field: cards_table__key_atk, ele: '#atk_filter', type: 'range' });
+	FJS.addCriteria({ field: cards_table__key_def, ele: '#def_filter', type: 'range' });
+	FJS.addCriteria({ field: cards_table__key_monster_type, ele: '#type_criteria input:checkbox' });
+	FJS.addCriteria({ field: cards_table__key_family, ele: '#family_criteria input:checkbox' });
+	FJS.addCriteria({ field: cards_table__key_level, ele: '#level_filter', type: 'range' });
 	$('#monster_level').show();
 	$('#monster_def').show();
 	$('#monster_atk').show();
@@ -337,7 +341,7 @@ function disable_monster_criterias() {
  * Enables filter criterias for spell and trap cards
  */
 function enable_spell_traps_criterias() {
-	FJS.addCriteria({field: cards_table__key_property, ele: '#property_criteria input:checkbox'});
+	FJS.addCriteria({ field: cards_table__key_property, ele: '#property_criteria input:checkbox' });
 	$('#properties').show();
 }
 
@@ -660,7 +664,7 @@ function display_card_modal(card_fid) {
 	html += '</div>'; // col 1
 	html += '<div class="col-lg-6">'; //col 2
 	html += "<br><strong>" + "Nom anglais: " + "</strong>";
-	html += "<span>" + card_modal[cards_table__key_name] + "</span><br><br>";
+	html += "<span>" + card_modal[cards_table__key_name].replace(" (card)", "") + "</span><br><br>";
 	html += "<strong>" + "Type de carte: " + "</strong>";
 	html += "<span>" + traduce(card_modal[cards_table__key_card_type]) + " </span>";
 	if (card_modal[cards_table__key_card_type] === "monster") {//Monster
@@ -814,7 +818,7 @@ function traductionCardText(card_name_en) {
 		async: true,
 		type: 'GET',
 		url: CARD_DESCRIPTION_FR_API_URL,
-		data: {'card_name': card_name_en},
+		data: { 'card_name': card_name_en },
 		success: [function (data) {
 			if (data !== "") {
 				$("#description").html(data.replace("\n", "<br>"));//To keep line breaks
@@ -834,7 +838,7 @@ function getSupportCards(card_name_en) {
 		async: true,
 		type: 'GET',
 		url: SUPPORT_CARDS_API_URL,
-		data: {'card_name': card_name_en},
+		data: { 'card_name': card_name_en },
 		success: [function (data) {
 			var cards = "";
 			for (var i = 0; i < data.length; i++) {
@@ -904,6 +908,6 @@ function imgError(image) {
 /**
  * Prints dates in header
  */
-function rollCredits(){
+function rollCredits() {
 	document.getElementById("copyleft").innerHTML = "2018 - " + new Date().getFullYear() + " - Yu-Gi-Oh_Sky.js";
 }
