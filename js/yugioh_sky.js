@@ -65,7 +65,7 @@ var sorting__quantity_asc = "quantity_asc";
 var sorting__quantity_desc = "quantity_desc";
 var sorting__card_type = "card_type";
 // Images overrides
-const card_en_overrides = ["Cyberdark Impact!", "Cybernetic Horizon (card)"];
+const card_en_overrides = ["Cyberdark Impact!", "Cybernetic Horizon (card)", "Labyrinth of Nightmare (Card)"];
 
 /************************************************** Initialization **************************************************/
 window.addEventListener('DOMContentLoaded', init);
