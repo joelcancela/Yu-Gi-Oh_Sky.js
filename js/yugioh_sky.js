@@ -105,8 +105,8 @@ function edit_cards_data() {
 	}
 	for (var currentIteration = 0; currentIteration < cards_table.length; currentIteration++) {
 		cards_table[currentIteration][cards_table__key_quantity] = parseInt(cards_table[currentIteration][cards_table__key_quantity]);//Replace quantity by a number
-		cards_table[currentIteration][cards_table__key_atk] = parseInt(cards_table[currentIteration][cards_table__key_atk]);//Replace atk by a number
-		cards_table[currentIteration][cards_table__key_def] = parseInt(cards_table[currentIteration][cards_table__key_def]);//Replace def by a number
+		cards_table[currentIteration][cards_table__key_atk] = parseATKorDEFValue(cards_table[currentIteration][cards_table__key_atk]);//Replace atk by a number
+		cards_table[currentIteration][cards_table__key_def] = parseATKorDEFValue(cards_table[currentIteration][cards_table__key_def]);//Replace def by a number
 		cards_table[currentIteration][cards_table__key_level] = parseInt(cards_table[currentIteration][cards_table__key_level]);//Replace level by a number
 		var current_card_types = cards_table[currentIteration][cards_table__key_monster_type];
 		var current_card_decks = cards_table[currentIteration][cards_table__key_decks_array];
@@ -406,7 +406,9 @@ function buildSortOptions(name) {
 			//MONSTER
 			if (a[cards_table__key_card_type] === card_type__value_monster) {
 				if (b[cards_table__key_card_type] === card_type__value_monster) {
-					return b[cards_table__key_atk] - a[cards_table__key_atk] || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+					let atkA = a[cards_table__key_atk] == '?' ? 3000 : a[cards_table__key_atk];
+					let atkB = b[cards_table__key_atk] == '?' ? 3000 : b[cards_table__key_atk];
+					return atkB - atkA || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
 				} else {
 					return -1;
 				}
@@ -446,7 +448,9 @@ function buildSortOptions(name) {
 			//MONSTER
 			if (a[cards_table__key_card_type] === card_type__value_monster) {
 				if (b[cards_table__key_card_type] === card_type__value_monster) {
-					return a[cards_table__key_atk] - b[cards_table__key_atk] || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+					let atkA = a[cards_table__key_atk] == '?' ? 3000 : a[cards_table__key_atk];
+					let atkB = b[cards_table__key_atk] == '?' ? 3000 : b[cards_table__key_atk];
+					return atkA - atkB || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
 				} else {
 					return -1;
 				}
@@ -486,7 +490,9 @@ function buildSortOptions(name) {
 			//MONSTER
 			if (a[cards_table__key_card_type] === card_type__value_monster) {
 				if (b[cards_table__key_card_type] === card_type__value_monster) {
-					return b[cards_table__key_def] - a[cards_table__key_def] || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+					let defA = a[cards_table__key_def] == '?' ? 3000 : a[cards_table__key_def];
+					let defB = b[cards_table__key_def] == '?' ? 3000 : b[cards_table__key_def];
+					return defB - defA || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
 				} else {
 					return -1;
 				}
@@ -526,7 +532,9 @@ function buildSortOptions(name) {
 			//MONSTER
 			if (a[cards_table__key_card_type] === card_type__value_monster) {
 				if (b[cards_table__key_card_type] === card_type__value_monster) {
-					return a[cards_table__key_def] - b[cards_table__key_def] || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
+					let defA = a[cards_table__key_def] == '?' ? 3000 : a[cards_table__key_def];
+					let defB = b[cards_table__key_def] == '?' ? 3000 : b[cards_table__key_def];
+					return defA - defB || a[cards_table__key_name_fr].localeCompare(b[cards_table__key_name_fr]);
 				} else {
 					return -1;
 				}
@@ -910,4 +918,14 @@ function imgError(image) {
  */
 function rollCredits() {
 	document.getElementById("copyleft").innerHTML = "2018 - " + new Date().getFullYear() + " - Yu-Gi-Oh_Sky.js";
+}
+
+/**
+ * Converts atk or def values to numbers except '?'
+ */
+function parseATKorDEFValue(atkorDefValue) {
+	if (atkorDefValue == '?') {
+		return atkorDefValue;
+	}
+	return parseInt(atkorDefValue);
 }
