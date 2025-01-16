@@ -2,10 +2,10 @@
 -- version 5.0.4deb2+deb11u1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le : mer. 30 août 2023 à 21:46
--- Version du serveur :  10.5.19-MariaDB-0+deb11u2
--- Version de PHP : 7.4.33
+-- Host: localhost:3306
+-- Generation Time: Jan 16, 2025 at 10:12 AM
+-- Server version: 10.5.19-MariaDB-0+deb11u2
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `yugiohsky`
+-- Database: `yugiohsky`
 --
 
 DELIMITER $$
 --
--- Procédures
+-- Procedures
 --
 CREATE DEFINER=`sky`@`localhost` PROCEDURE `GetCard` (IN `@nameFr` VARCHAR(70), IN `@nameEn` VARCHAR(70), IN `@cardtype` VARCHAR(50), IN `@quantity` INT(2), IN `@family` VARCHAR(20), IN `@atk` VARCHAR(20), IN `@def` VARCHAR(20), IN `@level` VARCHAR(20), IN `@text` VARCHAR(600), IN `@property` VARCHAR(20), IN `@type0` VARCHAR(20), IN `@type1` VARCHAR(20), IN `@type2` VARCHAR(20), IN `@type3` VARCHAR(20), IN `@deck0` VARCHAR(20), IN `@deck1` VARCHAR(20), IN `@deck2` VARCHAR(20))  MODIFIES SQL DATA
 BEGIN
@@ -46,7 +46,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `CARDS`
+-- Table structure for table `CARDS`
 --
 
 CREATE TABLE `CARDS` (
@@ -70,7 +70,7 @@ CREATE TABLE `CARDS` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Déchargement des données de la table `CARDS`
+-- Dumping data for table `CARDS`
 --
 
 INSERT INTO `CARDS` (`name_fr`, `name`, `card_type`, `quantity`, `family`, `atk`, `def`, `level`, `text`, `property`, `type/0`, `type/1`, `type/2`, `type/3`, `deck/0`, `deck/1`, `deck/2`) VALUES
@@ -252,7 +252,7 @@ INSERT INTO `CARDS` (`name_fr`, `name`, `card_type`, `quantity`, `family`, `atk`
 ('Cyber Dragon Drei', 'Cyber Dragon Drei', 'monster', 5, 'light', '1800', '800', '4', 'When this card is Normal Summoned: You can make all \"Cyber Dragon\" you currently control become Level 5. You cannot Special Summon any monsters during the turn you activate this effect, except Machine monsters. If this card is banished: You can target 1 \"Cyber Dragon\" you control; it cannot be destroyed by battle or card effects this turn. This card\'s name becomes \"Cyber Dragon\" while on the field or in the GY.', '', 'Machine', 'Effect', '', '', NULL, NULL, NULL),
 ('Cyber Dragon Jumelé', 'Cyber Twin Dragon', 'monster', 2, 'light', '2800', '2100', '8', '\"Cyber Dragon\" + \"Cyber Dragon\"\n\nA Fusion Summon of this card can only be done with the above Fusion Materials. This card can make a second attack during each Battle Phase.', '', 'Machine', 'Fusion', 'Effect', '', NULL, NULL, NULL),
 ('Cyber Dragon Laser', 'Cyber Laser Dragon', 'monster', 1, 'light', '2400', '1800', '7', 'This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except with \"Photon Generator Unit\". Once per turn, you can destroy 1 monster with ATK or DEF equal to or higher than the ATK of this card.', '', 'Machine', 'Effect', '', '', NULL, NULL, NULL),
-('Cyber Dragon Nova', 'Cyber Dragon Nova', 'monster', 2, 'light', '2100', '1600', '5', '2 Level 5 Machine monsters\n\nOnce per turn: You can detach 1 material from this card, then target 1 \"Cyber Dragon\" in your GY; Special Summon that target. Once per turn (Quick Effect): You can banish 1 \"Cyber Dragon\" from your hand or face-up from your Monster Zone; this card gains 2100 ATK until the end of this turn. If this card in your possession is sent to your GY by your opponent\'s card effect: You can Special Summon 1 Machine Fusion Monster from your Extra Deck.', '', 'Machine', 'Xyz', 'Effect', '', NULL, NULL, NULL),
+('Cyber Dragon Nova', 'Cyber Dragon Nova', 'monster', 3, 'light', '2100', '1600', '5', '2 Level 5 Machine monsters\n\nOnce per turn: You can detach 1 material from this card, then target 1 \"Cyber Dragon\" in your GY; Special Summon that target. Once per turn (Quick Effect): You can banish 1 \"Cyber Dragon\" from your hand or face-up from your Monster Zone; this card gains 2100 ATK until the end of this turn. If this card in your possession is sent to your GY by your opponent\'s card effect: You can Special Summon 1 Machine Fusion Monster from your Extra Deck.', '', 'Machine', 'Xyz', 'Effect', '', NULL, NULL, NULL),
 ('Cyber Dragon Proto', 'Proto-Cyber Dragon', 'monster', 5, 'light', '1100', '600', '3', 'This card\'s name becomes \"Cyber Dragon\" while on the field.', '', 'Machine', 'Effect', '', '', NULL, NULL, NULL),
 ('Cyber Dragon Zwei', 'Cyber Dragon Zwei', 'monster', 7, 'light', '1500', '1000', '4', 'If this card attacks an opponent\'s monster, it gains 300 ATK during the Damage Step only. Once per turn: You can reveal 1 Spell in your hand; this card\'s name becomes \"Cyber Dragon\" until the End Phase. This card\'s name becomes \"Cyber Dragon\" while in the GY.', '', 'Machine', 'Effect', '', '', NULL, NULL, NULL),
 ('Cyber Eltanin', 'Cyber Eltanin', 'monster', 2, 'light', '?', '?', '10', 'Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by banishing all LIGHT Machine monsters from your field and GY. This card\'s ATK/DEF become the number of monsters banished for its Special Summon x 500. When this card is Special Summoned: Send all other face-up monsters on the field to the GY.', '', 'Machine', 'Effect', '', '', NULL, NULL, NULL),
@@ -929,14 +929,33 @@ INSERT INTO `CARDS` (`name_fr`, `name`, `card_type`, `quantity`, `family`, `atk`
 ('Minage des Ruines', 'Blasting the Ruins', 'trap', 1, NULL, NULL, NULL, NULL, 'You can only activate this card if there are 30 or more cards in your Graveyard. Inflict 3000 points of damage to your opponent\'s Life Points.', 'Normal', '', '', '', '', '', '', ''),
 ('Cuirasse de Verre', 'Armored Glass', 'trap', 1, NULL, NULL, NULL, NULL, 'You can activate this card when a monster is equipped with an Equip Card. Negate the effects of all Equip Cards on the field during the turn this card is activated.', 'Normal', '', '', '', '', '', '', ''),
 ('Guérisseur Angélique', 'Numinous Healer', 'trap', 1, NULL, NULL, NULL, NULL, 'You can only activate this card when you take damage to your Life Points. Increase your Life Points by 1000 points. Also, increase your Life Points by 500 points for each \"Numinous Healer\" card in your Graveyard.', 'Normal', '', '', '', '', '', '', ''),
-('Sonde Mystique', 'Mystic Probe', 'trap', 1, NULL, NULL, NULL, NULL, 'You can activate this card when a Continuous Spell Card is activated. Negate all Continuous Spell Cards during the turn this card is activated.', 'Normal', '', '', '', '', '', '', '');
+('Sonde Mystique', 'Mystic Probe', 'trap', 1, NULL, NULL, NULL, NULL, 'You can activate this card when a Continuous Spell Card is activated. Negate all Continuous Spell Cards during the turn this card is activated.', 'Normal', '', '', '', '', '', '', ''),
+('Kuriboh Ailé LV10', 'Winged Kuriboh LV10', 'monster', 1, 'light', '300', '200', '10', 'Cannot be Normal Summoned/Set. Must be Special Summoned with \"Transcendent Wings\". During your opponent\'s Battle Phase (Quick Effect): You can Tribute this face-up card; destroy as many Attack Position monsters your opponent controls as possible, and if you do, inflict damage to your opponent equal to the combined original ATK of those destroyed monster(s).', '', 'Fairy', 'Effect', '', '', '', '', ''),
+('Ailes Transcendantes', 'Transcendent Wings', 'spell', 1, '', '0', '0', '0', 'Send 1 face-up or face-down \"Winged Kuriboh\" you control and 2 cards from your hand to the GY; Special Summon 1 \"Winged Kuriboh LV10\" from your hand or Deck.', 'Quick-Play', '', '', '', '', '', '', ''),
+('Carnot la Machine Éternelle', 'Carnot the Eternal Machine', 'monster', 1, 'light', '3000', '2500', '10', 'Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand or GY) during a Duel in which your opponent has activated a monster effect in their hand or GY. You can only Special Summon \"Carnot the Eternal Machine\" once per turn. Once per turn, if your opponent activates a monster effect (except during the Damage Step): You can make this card gain 1000 ATK. If this card is sent to the GY, except from the hand or Deck: Shuffle this card into the Deck.', '', 'Machine', 'Effect', '', '', '', '', ''),
+('Nuit des Machines', 'Clockwork Night', 'spell', 1, '', '0', '0', '0', 'All face-up monsters on the field become Machine monsters. Machine monsters you control gain 500 ATK/DEF, also Machine monsters your opponent controls lose 500 ATK/DEF. You can banish this card from your GY, then discard 1 card; add 1 EARTH Machine monster from your Deck to your hand. You can only use this effect of \"Clockwork Night\" once per turn. You can only activate 1 \"Clockwork Night\" per turn.', 'Continuous', '', '', '', '', '', '', ''),
+('Électrum, HÉROS Élémentaire', 'Elemental HERO Electrum', 'monster', 1, 'light', '2900', '2600', '10', '\"Elemental HERO Avian\" + \"Elemental HERO Burstinatrix\" + \"Elemental HERO Clayman\" + \"Elemental HERO Bubbleman\"\r\n\r\nMust be Fusion Summoned. While face-up on the field, this card is also WIND, WATER, FIRE, and EARTH Attribute. When this card is Fusion Summoned: Shuffle all banished cards into the Deck(s). Gains 300 ATK for each monster your opponent controls with the same Attribute as this card.', '', 'Warrior', 'Fusion', 'Effect', '', '', '', ''),
+('Zone Cybernétique', 'Cybernetic Zone', 'spell', 3, '', '0', '0', '0', 'Select 1 face-up Machine-Type Fusion Monster you control and remove it from play until the End Phase of this turn. When that monster is returned to the field, double its ATK. During your next Standby Phase, destroy it.', 'Quick-Play', '', '', '', '', '', '', ''),
+('Retour Magnétique', 'Magnet Reverse', 'spell', 3, '', '0', '0', '0', 'Target 1 of your Machine or Rock monsters, that is banished or is in your GY, that cannot be Normal Summoned/Set; Special Summon it.', 'Quick-Play', '', '', '', '', '', '', ''),
+('Choix de la Renaissance', 'Rebirth Judgment', 'trap', 3, '', '0', '0', '0', 'Once per turn: You can declare 1 Monster Type; monsters in the GYs become that Type for the rest of this turn (even if this card leaves the field).', 'Continuous', '', '', '', '', '', '', ''),
+('Vitalité Arc-en-Ciel', 'Rainbow Life', 'trap', 3, '', '0', '0', '0', 'Discard 1 card; until the end of this turn, each time you would take damage, gain that amount of LP instead.', 'Normal', '', '', '', '', '', '', ''),
+('Gardna, Cyber Ombre', 'Cyber Shadow Gardna', 'trap', 3, '', '0', '0', '0', 'During your opponent\'s Main Phase: Special Summon this card as an Effect Monster (Machine/EARTH/Level 4/ATK ?/DEF ?). (This card is also still a Trap.) When an opponent\'s monster declares an attack that targets this card: The ATK/DEF of this card become the ATK/DEF of the attacking monster. Once per turn, during your opponent\'s End Phase: Set this card in its Spell & Trap Zone.', 'Continuous', '', '', '', '', '', '', ''),
+('Explosion Finale d\'Évolution', 'Evolution End Burst', 'spell', 3, '', '0', '0', '0', 'Add 1 \"Overload Fusion\" from your Deck to your hand. If you Fusion Summon a monster this turn with \"Overload Fusion\", using 6 or more monsters as material, that monster can attack a number of times each Battle Phase this turn, up to the number of monsters used as its Fusion Materials. For the rest of this turn after this card resolves, you cannot Special Summon monsters, except with Spell effects. You can only activate 1 \"Evolution End Burst\" per turn.', 'Normal', '', '', '', '', '', '', ''),
+('Cyber Dragon Ultime Corrompu', 'Malefic Cyber End Dragon', 'monster', 2, 'dark', '4000', '2800', '10', 'Cannot be Normal Summoned/Set. Must be Special Summoned (from your hand) by banishing 1 \"Cyber End Dragon\" from your Extra Deck. There can only be 1 \"Malefic\" monster on the field. Other monsters you control cannot declare an attack. If there is no face-up Field Spell on the field, destroy this card.', '', 'Machine', 'Effect', '', '', '', '', ''),
+('Homme-Oiseau de Feu, HÉROS Élémentaire', 'Elemental HERO Flame Wingman', 'monster', 1, 'wind', '2100', '1200', '6', '\"Elemental HERO Avian\" + \"Elemental HERO Burstinatrix\"\r\n\r\nMust be Fusion Summoned. When this card destroys a monster by battle and sends it to the GY: Inflict damage to your opponent equal to the ATK of the destroyed monster in the GY.', '', 'Warrior', 'Fusion', 'Effect', '', '', '', ''),
+('Darkbright, HÉROS Élémentaire', 'Elemental HERO Darkbright', 'monster', 1, 'dark', '2000', '1000', '6', '\"Elemental HERO Sparkman\" + \"Elemental HERO Necroshade\"\r\n\r\nMust be Fusion Summoned. If this card attacks a Defense Position monster, inflict piercing battle damage. If this card attacks, change it to Defense Position at the end of the Damage Step. If this card is destroyed: Target 1 monster your opponent controls; destroy that target.', '', 'Warrior', 'Fusion', 'Effect', '', '', '', ''),
+('Anti Plasma, Héros Élémentaire', 'Elemental HERO Plasma Vice', 'monster', 1, 'earth', '2600', '2300', '8', '\"Elemental HERO Sparkman\" + \"Elemental HERO Bladedge\"\r\n\r\nMust be Fusion Summoned. If this card attacks a Defense Position monster, inflict piercing battle damage. You can discard 1 card, then target 1 Attack Position monster your opponent controls; destroy that target.', '', 'Warrior', 'Fusion', 'Effect', '', '', '', ''),
+('Tempête, Héros Élémentaire', 'Elemental HERO Tempest', 'monster', 1, 'wind', '2800', '2800', '8', '\"Elemental HERO Avian\" + \"Elemental HERO Sparkman\" + \"Elemental HERO Bubbleman\"\r\n\r\nMust be Fusion Summoned. You can send 1 other card you control to the GY, then target 1 monster you control; while this card is face-up on the field, that monster cannot be destroyed by battle.', '', 'Warrior', 'Fusion', 'Effect', '', '', '', ''),
+('Homme-Oiseau à l\'Éclat Lumineux, HÉROS Élémentair', 'Elemental HERO Shining Flare Wingman', 'monster', 1, 'light', '2500', '2100', '8', '\"Elemental HERO Flame Wingman\" + \"Elemental HERO Sparkman\"\r\n\r\nMust be Fusion Summoned. Gains 300 ATK for each \"Elemental HERO\" card in your GY. If this card destroys a monster by battle and sends it to the GY: Inflict damage to your opponent equal to that monster\'s original ATK in the GY.', '', 'Warrior', 'Fusion', 'Effect', '', '', '', ''),
+('Escuridao, HÉROS Élémentaire', 'Elemental HERO Escuridao', 'monster', 1, 'dark', '2500', '2000', '8', '1 \"Elemental HERO\" monster + 1 DARK monster\r\n\r\nMust be Fusion Summoned. Gains 100 ATK for each \"Elemental HERO\" monster in your GY.', '', 'Warrior', 'Fusion', 'Effect', '', '', '', ''),
+('Héosvarog l\'Aube Mécanique', 'Heosvarog the Mechanical Dawn', 'monster', 3, 'light', '0', '2800', '7', '2 LIGHT Machine monsters\r\nIf this card is Fusion Summoned: You can activate this effect; during the Standby Phase of the next turn, add 1 card from your GY to your hand, with an effect that Fusion Summons a monster(s). When your opponent activates a Spell/Trap Card or effect (Quick Effect): You can banish 1 face-up LIGHT Machine monster you control or 2 LIGHT Machine monsters from your GY; negate the activation. You can only use each effect of \"Heosvarog the Mechanical Dawn\" once per turn.', '', 'Machine', 'Fusion', 'Effect', '', '', '', '');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `CARDS`
+-- Indexes for table `CARDS`
 --
 ALTER TABLE `CARDS`
   ADD PRIMARY KEY (`name_fr`);
