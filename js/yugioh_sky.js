@@ -63,8 +63,8 @@ var sorting__level_desc = "level_desc";
 var sorting__quantity_asc = "quantity_asc";
 var sorting__quantity_desc = "quantity_desc";
 var sorting__card_type = "card_type";
-// Images overrides
-const card_en_overrides = ["Cyberdark Impact!", "Cybernetic Horizon (card)", "Labyrinth of Nightmare (Card)"];
+// Images
+const cards_table__key_card_id = "ygoprodeckID";
 
 /************************************************** Initialization **************************************************/
 window.addEventListener('DOMContentLoaded', init);
@@ -119,14 +119,7 @@ function edit_cards_data() {
 		} else {
 			cards_table[currentIteration][cards_table__key_monster_type] = cards_table[currentIteration][cards_table__key_monster_type].split(",");//Create an array of string being the monster types
 		}
-		// TODO fix card img URL
-		if (card_en_overrides.includes(cards_table[currentIteration][cards_table__key_name])) {
-			cards_table[currentIteration][cards_table__key_picture_link] = "./img/_overrides/"+ cards_table[currentIteration][cards_table__key_name].replace(/"/g, "_") + ".jpg";
-		} else if (cards_table[currentIteration][cards_table__key_name] === "Level Down!?") {//FIXME: YuGiOh Prices API doesn't like this card "Level Down?!" (request has to have the "!" removed)
-			cards_table[currentIteration][cards_table__key_picture_link] = IMG_API_URL + "Level_Down_%3F";
-		} else {
-			cards_table[currentIteration][cards_table__key_picture_link] = IMG_API_URL + cards_table[currentIteration][cards_table__key_name].replace(/"/g, "_");// Creates the link to the card image
-		}
+		cards_table[currentIteration][cards_table__key_picture_link] = "./img/card/"+ cards_table[currentIteration][cards_table__key_card_id]+".jpg";
 		cards_table[currentIteration][cards_table__key_name_fr_sort] = cleanUpSpecialChars(cards_table[currentIteration][cards_table__key_name_fr]);// Create name_fr_sorting
 	}
 	cards_table_is_ready = true;
