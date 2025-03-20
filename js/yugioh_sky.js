@@ -119,6 +119,7 @@ function edit_cards_data() {
 		} else {
 			cards_table[currentIteration][cards_table__key_monster_type] = cards_table[currentIteration][cards_table__key_monster_type].split(",");//Create an array of string being the monster types
 		}
+		// TODO fix card img URL
 		if (card_en_overrides.includes(cards_table[currentIteration][cards_table__key_name])) {
 			cards_table[currentIteration][cards_table__key_picture_link] = "./img/_overrides/"+ cards_table[currentIteration][cards_table__key_name].replace(/"/g, "_") + ".jpg";
 		} else if (cards_table[currentIteration][cards_table__key_name] === "Level Down!?") {//FIXME: YuGiOh Prices API doesn't like this card "Level Down?!" (request has to have the "!" removed)

@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const data = require('./cardinfo-13598-20-03-25.json');
 
+// https://ygoprodeck.com/api-guide/
 function main() {
     console.log("Database length:" + data['data'].length);
     const cards = data['data'];
