@@ -16,7 +16,6 @@
 // APIs Used with CORS
 var DATABASE_SERVER_URL = "https://joelcancela.ddns.net/api/"
 var DATABASE_API_URL = DATABASE_SERVER_URL + "yugioh_sky.js/cardsDatabase";
-var SUPPORT_CARDS_API_URL = DATABASE_SERVER_URL + "yugioh_sky.js/supportCards";
 var CARD_DESCRIPTION_FR_API_URL = DATABASE_SERVER_URL + "yugioh_sky.js/cardFrenchDescription";
 var BANLIST_INFO_URL = "https://db.ygoprodeck.com/api/cardinfo.php?name=";
 // External APIs
@@ -707,9 +706,6 @@ function display_card_modal(card_fid) {
 	html += "<br><br><strong>" + "Statut TGC Avancé: " + "</strong>";
 	html += "<span id='tgc_format'>Illimitée</span>";
 	html += "<br><br>";
-	html += "<a href='#supportCards' class='btn btn-info' data-toggle='collapse'>Voir les cartes liées</a>";
-	html += "<div id='supportCards' class='collapse'>";
-	html += '</div>';
 	html += '</div>'; // col 2
 	html += '</div>'; // container
 	html += '</div>'; // modal body
@@ -724,7 +720,6 @@ function display_card_modal(card_fid) {
 	cardModalSelector.modal();
 	cardModalSelector.modal('show');
 	traductionCardText(card_modal[cards_table__key_name]);
-	getSupportCards(card_modal[cards_table__key_name]);
 	getBanListStatuses(card_modal[cards_table__key_name]);
 	cardModalSelector.on('hidden.bs.modal', function () {
 		$(this).remove();
@@ -831,41 +826,6 @@ function traductionCardText(card_name_en) {
 			if (data !== "") {
 				$("#description").html(data.replace("\n", "<br>"));//To keep line breaks
 			}
-		}]
-	});
-}
-
-/************************************************** Support cards functions for modals **************************************************/
-
-/**
- * Retrieves the list of support cards for a specific cards and creates the list for the card modal
- * @param card_name_en the name of card to get the support cards for
- */
-function getSupportCards(card_name_en) {
-	$.ajax({
-		async: true,
-		type: 'GET',
-		url: SUPPORT_CARDS_API_URL,
-		data: { 'card_name': card_name_en },
-		success: [function (data) {
-			var cards = "";
-			for (var i = 0; i < data.length; i++) {
-				if (i === 0) {
-					cards += "<ul>";
-				}
-				cards += "<li><a target='_blank' href='" + WIKIA_LINK + data[i] + "'>" + data[i] + "</a></li>";
-				if (i === data.length - 1) {
-					cards += "</ul>";
-				}
-			}
-			if (data.length > 0) {
-				$("#supportCards").html(cards);
-			} else {
-				$("#supportCards").html("Aucune carte liée");
-			}
-		}],
-		error: [function () {
-			$("#supportCards").html("Aucune carte liée");
 		}]
 	});
 }
