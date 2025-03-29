@@ -30,12 +30,12 @@ BEGIN
   SELECT * FROM CARDS WHERE name = `@nameEn`;
 END$$
 
-CREATE DEFINER=`sky`@`localhost` PROCEDURE `InsertCard` (IN `@nameFr` VARCHAR(70), IN `@nameEn` VARCHAR(70), IN `@cardtype` VARCHAR(50), IN `@quantity` INT(2), IN `@family` VARCHAR(20), IN `@atk` VARCHAR(20), IN `@def` VARCHAR(20), IN `@level` VARCHAR(20), IN `@text` VARCHAR(1000), IN `@property` VARCHAR(20), IN `@type0` VARCHAR(20), IN `@type1` VARCHAR(20), IN `@type2` VARCHAR(20), IN `@type3` VARCHAR(20), IN `@deck0` VARCHAR(20), IN `@deck1` VARCHAR(20), IN `@deck2` VARCHAR(20))  MODIFIES SQL DATA
+CREATE DEFINER=`sky`@`localhost` PROCEDURE `InsertCard` (IN `@nameFr` VARCHAR(70), IN `@nameEn` VARCHAR(70), IN `@cardtype` VARCHAR(50), IN `@quantity` INT(2), IN `@family` VARCHAR(20), IN `@atk` VARCHAR(20), IN `@def` VARCHAR(20), IN `@level` VARCHAR(20), IN `@text` VARCHAR(1000), IN `@property` VARCHAR(20), IN `@type0` VARCHAR(20), IN `@type1` VARCHAR(20), IN `@type2` VARCHAR(20), IN `@type3` VARCHAR(20), IN `@deck0` VARCHAR(20), IN `@deck1` VARCHAR(20), IN `@deck2` VARCHAR(20), IN `@ygoprodeckID` VARCHAR(15))  MODIFIES SQL DATA
 BEGIN
     DECLARE matchingRows INT DEFAULT 0;
   SET matchingRows=(SELECT COUNT(*) FROM CARDS WHERE name = `@nameEn`);
     IF matchingRows = 0 THEN
-        INSERT INTO CARDS (`name_fr`, `name`, `card_type`, `quantity`, `family`, `atk`, `def`, `level`, `text`, `property`, `type/0`, `type/1`, `type/2`, `type/3`, `deck/0`, `deck/1`, `deck/2`) VALUES (`@nameFr`,`@nameEn`,`@cardtype`,`@quantity`,`@family`,`@atk`,`@def`,`@level`,`@text`,`@property`,`@type0`,`@type1`,`@type2`,`@type3`,`@deck0`,`@deck1`, `@deck2`);
+        INSERT INTO CARDS (`name_fr`, `name`, `card_type`, `quantity`, `family`, `atk`, `def`, `level`, `text`, `property`, `type/0`, `type/1`, `type/2`, `type/3`, `deck/0`, `deck/1`, `deck/2`, `ygoprodeckID`) VALUES (`@nameFr`,`@nameEn`,`@cardtype`,`@quantity`,`@family`,`@atk`,`@def`,`@level`,`@text`,`@property`,`@type0`,`@type1`,`@type2`,`@type3`,`@deck0`,`@deck1`,`@deck2`,`@ygoprodeckID`);
   ELSE
         UPDATE CARDS SET quantity = quantity + `@quantity` WHERE name = `@nameEn`;
   END IF;
