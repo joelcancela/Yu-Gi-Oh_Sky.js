@@ -1,0 +1,8 @@
+[
+
+"Kuriboh Ailé,Winged Kuriboh,effect,1,light,300,200,1,Si cette carte sur le Terrain est détruite et envoyée au Cimetière : le reste de ce tour, vous ne recevez aucun dommage de combat.,Fairy,Fairy,Effect,undefined,NULL,NULL,NULL,NULL,57116033",
+
+"Gratte-Ciel 2 - Ville du Héros,Skyscraper 2 - Hero City,spell,1,undefined,undefined,undefined,undefined,Une fois par tour, durant votre Main Phase, vous pouvez Invoquer Spécialement depuis votre Cimetière 1 monstre \"HÉROS Élémentaire\" qui a été détruit au combat (seul le contrôleur de cette carte peut utiliser cet effet).,Field,undefined,undefined,undefined,NULL,NULL,NULL,NULL,47596607",
+
+"Paladin des Ténèbres,Dark Paladin,fusion,1,dark,2900,2400,8,\"Magicien Sombre\" + \"Buster Blader\"\nUniquement Invocable par Fusion. Lorsqu'une Carte Magie est activée (Effet Rapide) : vous pouvez défausser 1 carte ; annulez l'activation, et si vous le faites, détruisez-la. Cette carte doit être face recto sur le Terrain pour activer et résoudre cet effet. Gagne 500 ATK pour chaque monstre Dragon sur le Terrain et dans le Cimetière.,Spellcaster,Spellcaster,Fusion,Effect,NULL,NULL,NULL,NULL,98502113"
+]

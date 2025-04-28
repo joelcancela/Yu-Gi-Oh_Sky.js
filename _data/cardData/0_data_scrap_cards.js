@@ -7,7 +7,7 @@ const https = require('node:https');
 const cardData = [];
 
 async function main() {
-    const allFileContents = fs.readFileSync(__dirname + '/ids.raw', 'utf-8');
+    const allFileContents = fs.readFileSync(__dirname + '/ids.rawt', 'utf-8');
     const allLines = allFileContents.split(/\r?\n/);
     for (const line of allLines) {
         const URL = `https://db.ygoprodeck.com/api/v7/cardinfo.php?id=${line}`;
@@ -27,7 +27,7 @@ async function main() {
         }
         await new Promise(resolve => setTimeout(resolve, 200));
     }
-    fs.writeFileSync(__dirname + '/output/' + `output.raw`, JSON.stringify(cardData, null, '\n'));
+    fs.writeFileSync(__dirname + '/output/' + `output.rawt`, JSON.stringify(cardData, null, '\n'));
 }
 
 async function downloadCardData(URL, cardID) {

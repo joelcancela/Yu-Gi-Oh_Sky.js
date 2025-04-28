@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const https = require('node:https');
 
 async function main() {
-    const allFileContents = fs.readFileSync(__dirname + '/ids.raw', 'utf-8');
+    const allFileContents = fs.readFileSync(__dirname + '/ids.rawt', 'utf-8');
     const allLines = allFileContents.split(/\r?\n/);
     for (const line of allLines) {
         const URL = `https://images.ygoprodeck.com/images/cards/${line}.jpg`;
