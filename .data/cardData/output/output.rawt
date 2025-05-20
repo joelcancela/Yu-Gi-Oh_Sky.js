@@ -1,8 +1,9 @@
 [
 
-"Kuriboh Ailé,Winged Kuriboh,effect,1,light,300,200,1,Si cette carte sur le Terrain est détruite et envoyée au Cimetière : le reste de ce tour, vous ne recevez aucun dommage de combat.,Fairy,Fairy,Effect,undefined,NULL,NULL,NULL,NULL,57116033",
+"Cyber Jormungardr,Cyber Jormungardr,effect,1,light,1000,2100,5,Cannot be Normal Summoned/Set. Must be Special Summoned by card effect. If your opponent controls a monster: You can Special Summon this card from your hand, then take 1 \"Cyber Dragon\" from your Deck, and either Special Summon it or equip it to this card as an Equip Spell, also you cannot Special Summon for the rest of this turn, except Machine monsters. You can return 1 \"Cyber Dragon\" you control to the hand; add 1 \"Polymerization\" from your Deck or GY to your hand. You can only use each effect of \"Cyber Jormungardr\" once per turn.,Machine,Machine,Effect,undefined,NULL,NULL,NULL,NULL,19715246",
 
-"Gratte-Ciel 2 - Ville du Héros,Skyscraper 2 - Hero City,spell,1,undefined,undefined,undefined,undefined,Une fois par tour, durant votre Main Phase, vous pouvez Invoquer Spécialement depuis votre Cimetière 1 monstre \"HÉROS Élémentaire\" qui a été détruit au combat (seul le contrôleur de cette carte peut utiliser cet effet).,Field,undefined,undefined,undefined,NULL,NULL,NULL,NULL,47596607",
-
-"Paladin des Ténèbres,Dark Paladin,fusion,1,dark,2900,2400,8,\"Magicien Sombre\" + \"Buster Blader\"\nUniquement Invocable par Fusion. Lorsqu'une Carte Magie est activée (Effet Rapide) : vous pouvez défausser 1 carte ; annulez l'activation, et si vous le faites, détruisez-la. Cette carte doit être face recto sur le Terrain pour activer et résoudre cet effet. Gagne 500 ATK pour chaque monstre Dragon sur le Terrain et dans le Cimetière.,Spellcaster,Spellcaster,Fusion,Effect,NULL,NULL,NULL,NULL,98502113"
+"Cyberdark Wurm,Cyberdark Wurm,effect,1,dark,800,2100,5,This card's name becomes \"Cyber Dragon\" while on the field or in the GY. If this card is in your hand or GY, and you have another Machine \"Cyber\" monster in your field or GY: You can send 1 \"Cyber Dragon\" monster from your hand or Deck to the GY; Special Summon this card, then you can add 1 \"Cyber\" Spell/Trap from your GY to your hand. You can only use this effect of \"Cyberdark Wurm\" once per Duel.,Machine,Machine,Effect,undefined,NULL,NULL,NULL,NULL,56100345"
 ]
+
+CALL InsertCard('Cyber Jormungardr', 'Cyber Jormungardr', 'monster', 3, 'light', 1000, 2100, 5, 'text', NULL, 'Machine', 'Effect', NULL,NULL, NULL,NULL,NULL, '19715246')
+CALL InsertCard('Cyberdark Wurm', 'Cyberdark Wurm', 'monster', 3, 'light', 800, 2100, 5, 'text', NULL, 'Machine', 'Effect', NULL,NULL, NULL,NULL,NULL, '56100345')
