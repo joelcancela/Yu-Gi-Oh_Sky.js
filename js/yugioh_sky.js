@@ -1,21 +1,23 @@
 /*
  * yugioh_sky.js
- * 2.0 (2018-04-15)
+ * 2.1 (2026-05-14)
  *
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  * https://github.com/joelcancela/Yu-Gi-Oh_Sky.js
  *
- * Copyright 2018 Joël CANCELA VAZ[joel.cancelavaz@gmail.com]
+ * Copyright 2018-2026 Joël CANCELA VAZ[joel.cancelavaz@gmail.com]
  * This is not affiliated with Konami.
  */
 
 /************************************************** Globals **************************************************/
 //// API links
 // APIs Used with CORS
+var API_DEPLOYED = false; //Used to know if the API is deployed or not, to avoid calling it when not necessary
 var DATABASE_SERVER_URL = "https://joelcancela.ddns.net/api/"
 var DATABASE_API_URL = DATABASE_SERVER_URL + "yugioh_sky.js/cardsDatabase";
+var DATABASE_LOCAL_URL = './.data/yugiohsky.json';
 var CARD_DESCRIPTION_FR_API_URL = DATABASE_SERVER_URL + "yugioh_sky.js/cardFrenchDescription";
 var BANLIST_INFO_URL = "https://db.ygoprodeck.com/api/cardinfo.php?name=";
 // External APIs
@@ -86,7 +88,7 @@ function init() {
  * Retrieves cards data from database
  */
 function get_cards_data() {
-	$.getJSON(DATABASE_API_URL, function (data) {
+	$.getJSON(API_DEPLOYED ? DATABASE_API_URL : DATABASE_LOCAL_URL, function (data) {
 		cards_table = data;
 		cards_table_is_created = true;
 	}).fail(function () {
@@ -110,16 +112,16 @@ function edit_cards_data() {
 		var current_card_types = cards_table[currentIteration][cards_table__key_monster_type];
 		var current_card_decks = cards_table[currentIteration][cards_table__key_decks_array];
 		if (!current_card_decks) {
-			cards_table[currentIteration][cards_table__key_decks_array] = [""];//Replace false by an array with an empty string (FJS)
-		} else {
-			cards_table[currentIteration][cards_table__key_decks_array] = cards_table[currentIteration][cards_table__key_decks_array].split(",");//Create an array of string being the decks
+			current_card_decks = [""];//Replace false by an array with an empty string (FJS)
+		} else if (typeof current_card_decks === "string") {
+			current_card_decks = current_card_decks.split(",");//Create an array of string being the decks
 		}
 		if (!current_card_types) {
-			cards_table[currentIteration][cards_table__key_monster_type] = [""];//Replace false by an array with an empty string (FJS)
-		} else {
-			cards_table[currentIteration][cards_table__key_monster_type] = cards_table[currentIteration][cards_table__key_monster_type].split(",");//Create an array of string being the monster types
+			current_card_types = [""];//Replace false by an array with an empty string (FJS)
+		} else if (typeof current_card_types === "string") {
+			current_card_types = current_card_types.split(",");//Create an array of string being the monster types
 		}
-		cards_table[currentIteration][cards_table__key_picture_link] = "./img/card/"+ cards_table[currentIteration][cards_table__key_card_id]+".jpg";
+		cards_table[currentIteration][cards_table__key_picture_link] = "./img/card/" + cards_table[currentIteration][cards_table__key_card_id] + ".jpg";
 		cards_table[currentIteration][cards_table__key_name_fr_sort] = cleanUpSpecialChars(cards_table[currentIteration][cards_table__key_name_fr]);// Create name_fr_sorting
 	}
 	cards_table_is_ready = true;
@@ -667,7 +669,7 @@ function display_card_modal(card_fid) {
 	html += "<br><strong>" + "Nom anglais: " + "</strong>";
 	html += "<span>" + card_modal[cards_table__key_name].replace(" (card)", "") + "</span><br><br>";
 	html += "<strong>" + "Type de carte: " + "</strong>";
-	html += "<span>" + traduce(card_modal[cards_table__key_card_type]) + " </span>";
+	html += "<span>" + translate(card_modal[cards_table__key_card_type]) + " </span>";
 	if (card_modal[cards_table__key_card_type] === "monster") {//Monster
 		html += "<br><br><strong>" + "Niveau: " + "</strong>";
 		var checkType = card_modal[cards_table__key_monster_type];
@@ -685,13 +687,13 @@ function display_card_modal(card_fid) {
 		html += "<strong>" + "DEF: " + "</strong>";
 		html += "<span>" + card_modal[cards_table__key_def] + "</span><br><br>";
 		html += "<strong>" + "Type(s): " + "</strong>";
-		html += "<span>" + traduce(card_modal[cards_table__key_monster_type]) + "</span><br><br>";
+		html += "<span>" + translate(card_modal[cards_table__key_monster_type]) + "</span><br><br>";
 		html += "<strong>" + "Élement: " + "</strong>";
-		html += "<span>" + traduce(card_modal[cards_table__key_family]) + " </span><img class='icon' src='img/attribute/" + card_modal[cards_table__key_family] + ".svg' onerror='this.src=''>";
+		html += "<span>" + translate(card_modal[cards_table__key_family]) + " </span><img class='icon' src='img/attribute/" + card_modal[cards_table__key_family] + ".svg' onerror='this.src=''>";
 	} else if (card_modal[cards_table__key_card_type] !== "token") {//Spells and Traps
 		html += "<img class='icon' src='img/card_type/" + card_modal[cards_table__key_card_type] + ".svg' onerror='this.src=''><br><br>";
 		html += "<strong>" + "Propriété: " + "</strong>";
-		html += "<span>" + traduce(card_modal[cards_table__key_property]) + " </span><img class='icon' src='img/property/" + card_modal[cards_table__key_property].toLowerCase() + ".svg' onerror='this.src=''>";
+		html += "<span>" + translate(card_modal[cards_table__key_property]) + " </span><img class='icon' src='img/property/" + card_modal[cards_table__key_property].toLowerCase() + ".svg' onerror='this.src=''>";
 	}
 	html += "<br><br><strong>" + "Texte: " + "</strong>";
 	html += "<span id='description'>" + card_modal[cards_table__key_text] + "</span>";
@@ -713,7 +715,9 @@ function display_card_modal(card_fid) {
 	var cardModalSelector = $("#cardModal");
 	cardModalSelector.modal();
 	cardModalSelector.modal('show');
-	traductionCardText(card_modal[cards_table__key_name]);
+	if(API_DEPLOYED){
+		traductionCardText(card_modal[cards_table__key_name]);
+	}
 	getBanListStatuses(card_modal[cards_table__key_name]);
 	cardModalSelector.on('hidden.bs.modal', function () {
 		$(this).remove();
@@ -725,7 +729,7 @@ function display_card_modal(card_fid) {
 /**
  * JSON containing the french translation for some Yu-Gi-Oh! terms
  */
-var traductionJson = {
+var translationJson = {
 	"Aqua": "Aqua",
 	"Banned": "Interdite",
 	"Beast": "Bête",
@@ -791,18 +795,21 @@ var traductionJson = {
  * @param element a word or an array of words
  * @returns string french translation of the word(s) or itself if not found
  */
-function traduce(element) {
+function translate(element) {
 	if ($.isArray(element)) {
-		var traduction = "";
+		var translated = "";
 		for (var i = 0; i < element.length; i++) {
-			if (i !== 0) {
-				traduction += "/";
+			let elementTranslated = translate(element[i]);
+			if (i !== 0 && !!elementTranslated) {
+				translated += "/";
 			}
-			traduction += traduce(element[i]);
+			translated += elementTranslated;
 		}
-		return traduction;
+		return translated;
+	} else if(null != element){
+		return translationJson[element] || element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
 	} else {
-		return traductionJson[element] || element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
+		return "";
 	}
 }
 
@@ -837,7 +844,7 @@ function getBanListStatuses(card_name_en) {
 		url: BANLIST_INFO_URL + card_name_en,
 		success: [function (data) {
 			if (data !== "") {
-				$("#tgc_format").html(traductionJson[data[0]['ban_tcg']]);//To keep line breaks
+				$("#tgc_format").html(translationJson[data[0]['ban_tcg']]);//To keep line breaks
 			}
 		}]
 	});
