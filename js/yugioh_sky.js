@@ -17,7 +17,7 @@
 var API_DEPLOYED = false; //Used to know if the API is deployed or not, to avoid calling it when not necessary
 var DATABASE_SERVER_URL = "https://joelcancela.ddns.net/api/"
 var DATABASE_API_URL = DATABASE_SERVER_URL + "yugioh_sky.js/cardsDatabase";
-var DATABASE_LOCAL_URL = './.data/yugiohsky.json';
+var DATABASE_LOCAL_URL = './data/yugiohsky.json';
 var CARD_DESCRIPTION_FR_API_URL = DATABASE_SERVER_URL + "yugioh_sky.js/cardFrenchDescription";
 var BANLIST_INFO_URL = "https://db.ygoprodeck.com/api/cardinfo.php?name=";
 // External APIs
