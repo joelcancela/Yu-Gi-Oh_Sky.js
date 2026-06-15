@@ -14696,5 +14696,74 @@
       "Effect"
     ],
     "decks": []
+  },
+  {
+    "name_fr": "Magicienne des Ténèbres",
+    "name": "Dark Magician Girl",
+    "card_type": "monster",
+    "quantity": 1,
+    "family": "dark",
+    "atk": "2000",
+    "def": "1700",
+    "level": "6",
+    "text": "Gains 300 ATK for every \"Dark Magician\" or \"Magician of Black Chaos\" in the GY.",
+    "property": null,
+    "ygoprodeckID": "38033121",
+    "types": [
+      "Spellcaster",
+      "Effect"
+    ],
+    "decks": []
+  },
+  {
+    "name_fr": "Dragon Noir aux Yeux Rouges",
+    "name": "Red-Eyes Black Dragon",
+    "card_type": "monster",
+    "quantity": 1,
+    "family": "dark",
+    "atk": "2400",
+    "def": "2000",
+    "level": "7",
+    "text": "''A ferocious dragon with a deadly attack.''",
+    "property": null,
+    "ygoprodeckID": "74677422",
+    "types": [
+      "Dragon",
+      "Normal"
+    ],
+    "decks": []
+  },
+  {
+    "name_fr": "Sarcoughagus Dévorant",
+    "name": "Devouring Sarcoughagus",
+    "card_type": "monster",
+    "quantity": 1,
+    "family": "dark",
+    "atk": "0",
+    "def": "0",
+    "level": "4",
+    "text": "When this card is destroyed by battle with an opponent's monster: You can take control of that opponent's monster, and if you do, it becomes a Zombie monster, also its ATK/DEF become 0. When your Zombie monster is destroyed by battle with an opponent's monster, while this card is in your GY: You can banish this card; take control of that opponent's monster, and if you do, it becomes a Zombie monster, also its ATK/DEF become 0. You can only use this effect of \"Devouring Sarcoughagus\" once per turn.",
+    "property": null,
+    "ygoprodeckID": "30037118",
+    "types": [
+      "Zombie",
+      "Effect"
+    ],
+    "decks": []
+  },
+  {
+    "name_fr": "Jugement Oméga",
+    "name": "Omega Judgment",
+    "card_type": "trap",
+    "quantity": 1,
+    "family": null,
+    "atk": null,
+    "def": null,
+    "level": null,
+    "text": "Target 1 face-up Monster Card in your Spell & Trap Zone and 2 cards your opponent controls; destroy them.",
+    "property": "Normal",
+    "ygoprodeckID": "53923690",
+    "types": [],
+    "decks": []
   }
 ]
