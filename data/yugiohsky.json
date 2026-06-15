@@ -13477,7 +13477,7 @@
     "name_fr": "Dragon Noir aux Yeux Rouges",
     "name": "Red-Eyes Black Dragon",
     "card_type": "monster",
-    "quantity": 1,
+    "quantity": 2,
     "family": "dark",
     "atk": "2400",
     "def": "2000",
@@ -14712,24 +14712,6 @@
     "types": [
       "Spellcaster",
       "Effect"
-    ],
-    "decks": []
-  },
-  {
-    "name_fr": "Dragon Noir aux Yeux Rouges",
-    "name": "Red-Eyes Black Dragon",
-    "card_type": "monster",
-    "quantity": 1,
-    "family": "dark",
-    "atk": "2400",
-    "def": "2000",
-    "level": "7",
-    "text": "''A ferocious dragon with a deadly attack.''",
-    "property": null,
-    "ygoprodeckID": "74677422",
-    "types": [
-      "Dragon",
-      "Normal"
     ],
     "decks": []
   },
