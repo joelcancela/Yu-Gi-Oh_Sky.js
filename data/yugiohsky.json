@@ -12327,7 +12327,7 @@
     "name_fr": "Cyber Dragon Infini",
     "name": "Cyber Dragon Infinity",
     "card_type": "monster",
-    "quantity": 1,
+    "quantity": 2,
     "family": "light",
     "atk": "2100",
     "def": "1600",
@@ -14745,6 +14745,129 @@
     "text": "Target 1 face-up Monster Card in your Spell & Trap Zone and 2 cards your opponent controls; destroy them.",
     "property": "Normal",
     "ygoprodeckID": "53923690",
+    "types": [],
+    "decks": []
+  },
+  {
+    "name_fr": "Jinzo",
+    "name": "Jinzo",
+    "card_type": "monster",
+    "quantity": 1,
+    "family": "dark",
+    "atk": 2400,
+    "def": 1500,
+    "level": 6,
+    "text": "Trap Cards, and their effects on the field, cannot be activated. Negate all Trap effects on the field.",
+    "property": "Machine",
+    "ygoprodeckID": 77585513,
+    "types": [
+      "Machine",
+      "Effect"
+    ],
+    "decks": []
+  },
+  {
+    "name_fr": "Exodia l'Interdit",
+    "name": "Exodia the Forbidden One",
+    "card_type": "monster",
+    "quantity": 1,
+    "family": "dark",
+    "atk": 1000,
+    "def": 1000,
+    "level": 3,
+    "text": "If you have \"Right Leg of the Forbidden One\", \"Left Leg of the Forbidden One\", \"Right Arm of the Forbidden One\" and \"Left Arm of the Forbidden One\" in addition to this card in your hand, you win the Duel.",
+    "property": "Spellcaster",
+    "ygoprodeckID": 33396948,
+    "types": [
+      "Spellcaster",
+      "Effect"
+    ],
+    "decks": []
+  },
+  {
+    "name_fr": "Jambe Droite de l'Interdit",
+    "name": "Right Leg of the Forbidden One",
+    "card_type": "monster",
+    "quantity": 1,
+    "family": "dark",
+    "atk": 200,
+    "def": 300,
+    "level": 1,
+    "text": "A forbidden right leg sealed by magic. Whosoever breaks this seal will know infinite power.",
+    "property": "Spellcaster",
+    "ygoprodeckID": 8124921,
+    "types": [
+      "Spellcaster",
+      "Normal"
+    ],
+    "decks": []
+  },
+  {
+    "name_fr": "Jambe Gauche de l'Interdit",
+    "name": "Left Leg of the Forbidden One",
+    "card_type": "monster",
+    "quantity": 1,
+    "family": "dark",
+    "atk": 200,
+    "def": 300,
+    "level": 1,
+    "text": "A forbidden left leg sealed by magic. Whosoever breaks this seal will know infinite power.",
+    "property": "Spellcaster",
+    "ygoprodeckID": 44519536,
+    "types": [
+      "Spellcaster",
+      "Normal"
+    ],
+    "decks": []
+  },
+  {
+    "name_fr": "Bras Droit de l'Interdit",
+    "name": "Right Arm of the Forbidden One",
+    "card_type": "monster",
+    "quantity": 1,
+    "family": "dark",
+    "atk": 200,
+    "def": 300,
+    "level": 1,
+    "text": "A forbidden right arm sealed by magic. Whosoever breaks this seal will know infinite power.",
+    "property": "Spellcaster",
+    "ygoprodeckID": 70903634,
+    "types": [
+      "Spellcaster",
+      "Normal"
+    ],
+    "decks": []
+  },
+  {
+    "name_fr": "Bras Gauche de l'Interdit",
+    "name": "Left Arm of the Forbidden One",
+    "card_type": "monster",
+    "quantity": 1,
+    "family": "dark",
+    "atk": 200,
+    "def": 300,
+    "level": 1,
+    "text": "A forbidden left arm sealed by magic. Whosoever breaks this seal will know infinite power.",
+    "property": "Spellcaster",
+    "ygoprodeckID": 7902349,
+    "types": [
+      "Spellcaster",
+      "Normal"
+    ],
+    "decks": []
+  },
+  {
+    "name_fr": "Le Sceau d'Orichalque",
+    "name": "The Seal of Orichalcos",
+    "card_type": "spell",
+    "quantity": 1,
+    "family": null,
+    "atk": null,
+    "def": null,
+    "level": null,
+    "text": "All monsters you control gain 500 ATK. Once per turn, this card cannot be destroyed by card effects. While you control 2 or more face-up Attack Position monsters, your opponent cannot target your monster(s) with the lowest ATK for an attack. If this card is activated: Destroy all Special Summoned monsters you control. You cannot Special Summon monsters from the Extra Deck. You can only activate \"The Seal of Orichalcos\" once per Duel.",
+    "property": "Field",
+    "ygoprodeckID": 48179391,
     "types": [],
     "decks": []
   }
