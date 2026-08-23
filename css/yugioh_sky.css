@@ -1,0 +1,170 @@
+/**
+ *  CSS for Yu-Gi-Oh_Sky.js
+ *  @author Joël CANCELA VAZ[joel.cancelavaz@gmail.com]
+ *  https://github.com/joelcancela/Yu-Gi-Oh_Sky.js
+ */
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.card-text {
+    word-wrap: normal;
+}
+
+.checkbox {
+    margin-top: 0;
+}
+
+.devicon-github-plain {
+    font-size: 1.33333333em;
+}
+
+.email-icon {
+    display: inline;
+    vertical-align: 0;
+}
+
+footer {
+    padding-bottom: 3rem;
+}
+
+footer p {
+    margin-bottom: .25rem;
+}
+
+hr {
+    border-top: 1px solid #777;
+}
+
+.icon {
+    max-height: 25px;
+    max-width: 25px;
+}
+
+.icon_level {
+    max-height: 17px;
+    max-width: 17px;
+}
+
+.jumbotron {
+    background-color: #fff;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.search-icon {
+    background-color: transparent;
+    color: #222;
+    display: inline-block;
+    float: right;
+    font-size: 20px;
+    height: 14px;
+    line-height: 14px;
+    margin-top: -25px;
+    position: relative;
+    vertical-align: middle;
+    width: 28px;
+}
+
+.semibold {
+    font-weight: 600;
+}
+
+.title {
+    color: #222;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.title > a, .github {
+    color: #fff;
+    text-decoration: none;
+}
+
+.github:hover, .github:focus {
+    color: #fff;
+}
+
+.per-page {
+    width: auto;
+    display: inherit;
+}
+
+.well {
+    margin-bottom: 1.5rem !important;
+}
+
+.well_legend {
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+    color: #333;
+    display: block;
+    font-size: 21px;
+    font-weight: normal;
+    line-height: inherit;
+    padding: 0;
+    width: 100%;
+}
+
+.yugioh_card {
+    max-height: 500px;
+    max-width: 345px;
+}
+
+@media (min-width: 768px) {
+    .jumbotron {
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+}
+
+/************************************************** Mobile screens **************************************************/
+
+@media only screen and (max-device-width: 480px) {
+
+    #card_type_wells, #monster_type_wells, #family_wells, #property_wells {
+        margin-left: 20px;
+    }
+
+    .checkbox, .radio {
+        left: 25px;
+    }
+
+    .form-control {
+        height: 40px;
+    }
+
+    .icon_level {
+        max-height: 30px;
+        max-width: 30px;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        -moz-transform: scale(2) !important; /* FF */
+        -ms-transform: scale(2) !important; /* IE */
+        -o-transform: scale(2) !important; /* Opera */
+        -webkit-transform: scale(2) !important; /* Safari and Chrome */
+        margin-right: 0.5rem;
+    }
+
+    .search-icon {
+        background-color: transparent;
+        color: #222;
+        display: inline-block;
+        float: right;
+        font-size: 55px;
+        left: -30px;
+        line-height: 14px;
+        margin-top: -40px;
+        position: relative;
+        vertical-align: middle;
+    }
+
+    .title {
+        font-size: 70px;
+        width: inherit;
+    }
+
+}

@@ -1,0 +1,1 @@
+CALL InsertCard('nameFr','nameEn','monster','1','light','atk','def','level','text','Continuous','Beast','Effect','type2','type3','','','', 'ygoprodeckID like 67048711');
