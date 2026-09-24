@@ -269,7 +269,7 @@
             return regx.test(v)
         },
         bt: function (v1, v2) {
-            return (v1 >= v2[0] && v1 <= v2[1])
+            return (v1 === '?' ? Number(v2[0]) === 0 : (v1 >= v2[0] && v1 <= v2[1]))
         }
     };
 
