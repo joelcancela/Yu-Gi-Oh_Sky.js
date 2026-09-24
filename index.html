@@ -22,49 +22,24 @@
 </head>
 <body>
 <header>
-	<div class="collapse bg-dark" id="navbarHeader">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-8 col-md-7 py-1">
-					<h4 class="text-white">A propos de</h4>
-					<strong class="text-muted"><i>Not affiliated with Konami</i></strong><br>
-					<span class="text-muted" id="copyleft"></span><br>
-				</div>
-				<div class="col-sm-4 offset-md-1 py-1">
-					<h4 class="text-white">Contact</h4>
-					<ul class="list-unstyled">
-						<li><a class="github" href="https://github.com/joelcancela/Yu-Gi-Oh_Sky.js"
-						       onclick=" window.open(this.href);return false">
-							<i class="devicon-github-plain"></i> GitHub</a></li>
-						<li><a class="text-white" href="mailto:joel.cancelavaz@gmail.com"><i class="fa fa-at fa-lg email-icon"></i>
-							Joël
-							Cancela Vaz</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="navbar navbar-dark bg-dark shadow-sm">
+	<div class="navbar navbar-dark bg-dark shadow-sm collection-nav">
 		<div class="container-fluid d-flex justify-content-between">
 			<a href="/" class="navbar-brand">
-				<strong>Yu-Gi-Oh_Sky.js</strong>
+				<strong><span class="brand-accent">Yu-Gi-Oh!</span>Sky</strong>
 			</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
-			        aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
 		</div>
 	</div>
 </header>
 <main role="main">
-		<div class="row mx-0">
-			<div class="col-xs-12 col-sm-12 col-lg-3 px-5">
+		<div class="row mx-0 collection-layout">
+			<div class="col-xs-12 col-sm-12 col-lg-3 px-5 filters-panel">
 				<div>
-					<div class="text-center">
-						<h4>Cartes (<span id="cards_number">0</span>)</h4>
-						<h5>Cartes uniques (<span id="cards_number_unique">0</span>)</h5>
+					<div class="collection-summary">
+						<div class="summary-label">COLLECTION</div>
+						<div class="summary-count" id="cards_number_unique">0</div>
+						<div class="summary-meta"><span id="cards_number">0</span> cartes distinctes</div>
 					</div>
-					<div>
+					<div class="search-wrap">
 						<label class="sr-only" for="searchbox">Rechercher une carte</label>
 						<input class="form-control" id="searchbox" placeholder="Rechercher une carte &hellip;"
 						       autofocus>
@@ -594,16 +569,27 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-lg-9 album py-2 bg-light px-0">
+			<div class="col-xs-12 col-sm-12 col-lg-9 album py-2 bg-light px-0 results-panel">
 					<div class="row mx-0" id="cards_table">
 					</div>
 			</div>
 		</div>
 </main>
 <footer class="text-muted">
-		<p class="float-right mr-5">
-			<a href="#">Retourner en haut</a>
-		</p>
+	<div class="container-fluid footer-inner">
+		<div class="footer-about">
+			<h4>À propos</h4>
+			<strong><i>Not affiliated with Konami</i></strong>
+			<span id="copyleft"></span>
+		</div>
+		<div class="footer-contact">
+			<h4>Contact</h4>
+			<a class="github" href="https://github.com/joelcancela/Yu-Gi-Oh_Sky.js"
+			   onclick=" window.open(this.href);return false">
+				<i class="devicon-github-plain"></i> GitHub</a>
+		</div>
+		<a class="footer-top" href="#">Retourner en haut <span aria-hidden="true">↑</span></a>
+	</div>
 </footer>
 <script id="card_template" type="text/html">
 	<div class="col-4 col-sm-4 col-md-4 col-lg-2">
