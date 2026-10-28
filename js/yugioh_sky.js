@@ -673,15 +673,11 @@ function display_card_modal(card_fid) {
 	if (card_modal[cards_table__key_card_type] === "monster") {//Monster
 		html += "<br><br><strong>" + "Niveau: " + "</strong>";
 		var checkType = card_modal[cards_table__key_monster_type];
+		let levelIcon = "img/level/level.svg";
 		if (checkType.includes("Xyz")) {
-			for (var i = 0; i < parseInt(card_modal[cards_table__key_level]); i++) {
-				html += "</span><img class='icon_level' src='img/level/level_xyz.svg' onerror='this.src=''>";
-			}
-		} else {
-			for (var i = 0; i < parseInt(card_modal[cards_table__key_level]); i++) {
-				html += "</span><img class='icon_level' src='img/level/level.svg' onerror='this.src=''>";
-			}
+			levelIcon = "img/level/level_xyz.svg";
 		}
+		html += `</span><span>${parseInt(card_modal[cards_table__key_level])}</span>&nbsp;<img class='icon_level' src='${levelIcon}' onerror='this.src=''>`;
 		html += "<br><br><strong>" + "ATK: " + "</strong>";
 		html += "<span>" + card_modal[cards_table__key_atk] + "</span><br><br>";
 		html += "<strong>" + "DEF: " + "</strong>";
