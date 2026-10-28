@@ -246,8 +246,8 @@ function initEvents() {
 
 	$("#atk_slider").slider({
 		min: 0,
-		max: 4000,
-		values: [0, 4000],
+		max: 5000,
+		values: [0, 5000],
 		step: 100,
 		range: true,
 		slide: function (event, ui) {
@@ -258,8 +258,8 @@ function initEvents() {
 
 	$("#def_slider").slider({
 		min: 0,
-		max: 4000,
-		values: [0, 4000],
+		max: 5000,
+		values: [0, 5000],
 		step: 100,
 		range: true,
 		slide: function (event, ui) {
