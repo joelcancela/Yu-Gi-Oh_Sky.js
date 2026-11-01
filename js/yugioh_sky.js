@@ -33,10 +33,12 @@ var cards_table_is_created = false;
 var cards_table__key_atk = "atk";
 var cards_table__key_card_type = "card_type"; // Monster, Spell, Trap
 var cards_table__key_decks_array = "decks";
+var DEF_NA = -100;// DEF value standing for N/A (Link monsters)
 var cards_table__key_def = "def";
 var cards_table__key_family = "family"; // Monster family (Earth, Wind, Water, Fire, Dark, Light)
 var cards_table__key_picture_link = "img_link";
 var cards_table__key_level = "level";
+var cards_table__key_linkval = "linkval";
 var cards_table__key_name = "name";
 var cards_table__key_name_fr = "name_fr";
 var cards_table__key_name_fr_sort = "name_fr_sorting";
@@ -108,7 +110,11 @@ function edit_cards_data() {
 		cards_table[currentIteration][cards_table__key_quantity] = parseInt(cards_table[currentIteration][cards_table__key_quantity]);//Replace quantity by a number
 		cards_table[currentIteration][cards_table__key_atk] = parseATKorDEFValue(cards_table[currentIteration][cards_table__key_atk]);//Replace atk by a number
 		cards_table[currentIteration][cards_table__key_def] = parseATKorDEFValue(cards_table[currentIteration][cards_table__key_def]);//Replace def by a number
+		if (isNaN(cards_table[currentIteration][cards_table__key_def])) {
+			cards_table[currentIteration][cards_table__key_def] = DEF_NA;
+		}
 		cards_table[currentIteration][cards_table__key_level] = parseInt(cards_table[currentIteration][cards_table__key_level]);//Replace level by a number
+		cards_table[currentIteration][cards_table__key_linkval] = parseInt(cards_table[currentIteration][cards_table__key_linkval]) || 0;//0 = N/A (non-Link)
 		var current_card_types = cards_table[currentIteration][cards_table__key_monster_type];
 		var current_card_decks = cards_table[currentIteration][cards_table__key_decks_array];
 		if (!current_card_decks) {
@@ -257,14 +263,15 @@ function initEvents() {
 	});
 
 	$("#def_slider").slider({
-		min: 0,
+		min: DEF_NA,
 		max: 5000,
-		values: [0, 5000],
+		values: [DEF_NA, 5000],
 		step: 100,
 		range: true,
 		slide: function (event, ui) {
-			$("#def_range_label").html(ui.values[0] + ' - ' + ui.values[1] + ' DEF');
-			$('#def_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
+			var defLabel = ui.values[1] === DEF_NA ? 'N/A' : (ui.values[0] === DEF_NA ? 'N/A' : ui.values[0]) + ' - ' + ui.values[1];
+			$("#def_range_label").html(defLabel + ' DEF');
+			$('#def_filter').val(ui.values[0] + ':' + ui.values[1]).trigger('change');// ':' since values can be negative
 		}
 	});
 
@@ -277,6 +284,19 @@ function initEvents() {
 		slide: function (event, ui) {
 			$("#level_range_label").html('Niveau ' + ui.values[0] + ' - ' + ui.values[1]);
 			$('#level_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
+		}
+	});
+
+	$("#link_slider").slider({
+		min: 0,
+		max: 8,
+		values: [0, 8],
+		step: 1,
+		range: true,
+		slide: function (event, ui) {
+			var fmt = function (v) { return v === 0 ? 'N/A' : v; };
+			$("#link_range_label").html('Lien ' + (ui.values[1] === 0 ? 'N/A' : fmt(ui.values[0]) + ' - ' + ui.values[1]));
+			$('#link_filter').val(ui.values[0] + '-' + ui.values[1]).trigger('change');
 		}
 	});
 
@@ -304,10 +324,12 @@ function initEvents() {
  */
 function enable_monster_criterias() {
 	FJS.addCriteria({ field: cards_table__key_atk, ele: '#atk_filter', type: 'range' });
-	FJS.addCriteria({ field: cards_table__key_def, ele: '#def_filter', type: 'range' });
+	FJS.addCriteria({ field: cards_table__key_def, ele: '#def_filter', type: 'range', delimiter: ':' });
 	FJS.addCriteria({ field: cards_table__key_monster_type, ele: '#type_criteria input:checkbox' });
 	FJS.addCriteria({ field: cards_table__key_family, ele: '#family_criteria input:checkbox' });
 	FJS.addCriteria({ field: cards_table__key_level, ele: '#level_filter', type: 'range' });
+	FJS.addCriteria({ field: cards_table__key_linkval, ele: '#link_filter', type: 'range' });
+	$('#monster_link').show();
 	$('#monster_level').show();
 	$('#monster_def').show();
 	$('#monster_atk').show();
@@ -325,6 +347,8 @@ function disable_monster_criterias() {
 	FJS.removeCriteria(cards_table__key_monster_type);
 	FJS.removeCriteria(cards_table__key_family);
 	FJS.removeCriteria(cards_table__key_level);
+	FJS.removeCriteria(cards_table__key_linkval);
+	$('#monster_link').hide();
 	$('#monster_level').hide();
 	$('#monster_def').hide();
 	$('#monster_atk').hide();
@@ -671,17 +695,25 @@ function display_card_modal(card_fid) {
 	html += "<strong>" + "Type de carte: " + "</strong>";
 	html += "<span>" + translate(card_modal[cards_table__key_card_type]) + " </span>";
 	if (card_modal[cards_table__key_card_type] === "monster") {//Monster
-		html += "<br><br><strong>" + "Niveau: " + "</strong>";
 		var checkType = card_modal[cards_table__key_monster_type];
-		let levelIcon = "img/level/level.svg";
-		if (checkType.includes("Xyz")) {
-			levelIcon = "img/level/level_xyz.svg";
+		var isLink = checkType.includes("Link");
+		if (isLink) {
+			html += "<br><br><strong>" + "Valeur de Lien: " + "</strong>";
+			html += "<span>" + card_modal[cards_table__key_linkval] + "</span>";
+		} else {
+			html += "<br><br><strong>" + "Niveau: " + "</strong>";
+			let levelIcon = "img/level/level.svg";
+			if (checkType.includes("Xyz")) {
+				levelIcon = "img/level/level_xyz.svg";
+			}
+			html += `</span><span>${parseInt(card_modal[cards_table__key_level])}</span>&nbsp;<img class='icon_level' src='${levelIcon}' onerror='this.src=''>`;
 		}
-		html += `</span><span>${parseInt(card_modal[cards_table__key_level])}</span>&nbsp;<img class='icon_level' src='${levelIcon}' onerror='this.src=''>`;
 		html += "<br><br><strong>" + "ATK: " + "</strong>";
 		html += "<span>" + card_modal[cards_table__key_atk] + "</span><br><br>";
-		html += "<strong>" + "DEF: " + "</strong>";
-		html += "<span>" + card_modal[cards_table__key_def] + "</span><br><br>";
+		if (!isLink) {
+			html += "<strong>" + "DEF: " + "</strong>";
+			html += "<span>" + card_modal[cards_table__key_def] + "</span><br><br>";
+		}
 		html += "<strong>" + "Type(s): " + "</strong>";
 		html += "<span>" + translate(card_modal[cards_table__key_monster_type]) + "</span><br><br>";
 		html += "<strong>" + "Élement: " + "</strong>";
@@ -691,8 +723,10 @@ function display_card_modal(card_fid) {
 		html += "<strong>" + "Propriété: " + "</strong>";
 		html += "<span>" + translate(card_modal[cards_table__key_property]) + " </span><img class='icon' src='img/property/" + card_modal[cards_table__key_property].toLowerCase() + ".svg' onerror='this.src=''>";
 	}
-	html += "<br><br><strong>" + "Texte: " + "</strong>";
-	html += "<span id='description'>" + card_modal[cards_table__key_text] + "</span>";
+	if (card_modal[cards_table__key_card_type] !== "token") {
+		html += "<br><br><strong>" + "Texte: " + "</strong>";
+		html += "<span id='description'>" + card_modal[cards_table__key_text] + "</span>";
+	}
 	html += "<br><br><strong>" + "Quantité: " + "</strong>";
 	html += "<span>" + card_modal[cards_table__key_quantity] + "</span>";
 	html += "<br><br><strong>" + "Statut TGC Avancé: " + "</strong>";

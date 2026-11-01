@@ -463,7 +463,7 @@
 							<div id="monster_def" class="well" style="display: none">
 								<fieldset id="def_criteria">
 									<legend>DEF</legend>
-									<span id="def_range_label" class="slider-label">0 - 5000 DEF</span>
+									<span id="def_range_label" class="slider-label">N/A - 5000 DEF</span>
 									<div id="def_slider"
 									     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
 									     aria-disabled="false">
@@ -474,7 +474,7 @@
 										<a class="ui-slider-handle ui-state-default ui-corner-all" href="#"
 										   style="left: 100%;"></a>
 									</div>
-									<input type="hidden" id="def_filter" value="0-5000">
+									<input type="hidden" id="def_filter" value="-100:5000">
 								</fieldset>
 							</div>
 							<div id="monster_level" class="well" style="display: none">
@@ -493,6 +493,23 @@
 										   style="left: 100%;"></a>
 									</div>
 									<input type="hidden" id="level_filter" value="0-12">
+								</fieldset>
+							</div>
+							<div id="monster_link" class="well" style="display: none">
+								<fieldset id="link_criteria">
+									<legend>Lien</legend>
+									<span id="link_range_label" class="slider-label">Lien N/A - 8</span>
+									<div id="link_slider"
+									     class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+									     aria-disabled="false">
+										<div class="ui-slider-range ui-widget-header ui-corner-all"
+										     style="left: 0; width: 100%;"></div>
+										<a class="ui-slider-handle ui-state-default ui-corner-all" href="#"
+										   style="left: 0;"></a>
+										<a class="ui-slider-handle ui-state-default ui-corner-all" href="#"
+										   style="left: 100%;"></a>
+									</div>
+									<input type="hidden" id="link_filter" value="0-8">
 								</fieldset>
 							</div>
 							<div id="properties" class="well" style="display: none">
